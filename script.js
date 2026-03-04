@@ -48,7 +48,7 @@
 /* ===========================
    CONFIG / API
 =========================== */
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://artshop-backend.onrender.com";
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
