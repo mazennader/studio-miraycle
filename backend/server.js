@@ -30,8 +30,9 @@ const DEV_PRINT_LOGIN_CODE = false;
 /* ===========================
    MIDDLEWARE
 =========================== */
+app.set("trust proxy", 1);
+
 const allowedOrigins = [
-  "https://artshop-frontend.onrender.com",
   "https://artshop-frontend.onrender.com",
   "http://localhost:5500",
   "http://127.0.0.1:5500",
@@ -40,9 +41,9 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, cb) => {
-      if (!origin) return cb(null, true); // allow Postman / server-to-server
+      if (!origin) return cb(null, true);
       if (allowedOrigins.includes(origin)) return cb(null, true);
-      return cb(new Error("CORS blocked: " + origin));
+      return cb(null, false);
     },
     credentials: true,
   })
