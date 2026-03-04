@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="admin.css" />
+
+  <script>
+    // Block direct access unless a temporary flag was set by login
+    const ok = sessionStorage.getItem("admin_access_ok");
+    if (!ok) {
+      window.location.replace("/admin");
+    }
+  </script>
 </head>
 <body class="admin-body admin-dash-bg">
 
