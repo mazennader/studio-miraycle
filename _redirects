@@ -1,0 +1,17 @@
+# ---------- CLEAN URL REWRITES ----------
+/                 /index.html             200
+/about            /about-us.html          200
+/our-work         /our-projects.html      200
+/cart             /cart.html              200
+
+/studio           /index.html             200
+/studio-control   /admin-dashboard.html   200
+/admin            /admin-login.html       200
+/restoration       /art-restoration.html   200
+/painting          /painting.html          200
+/stained-glass     /stained-glass.html     200
+/ceramic           /ceramic-art.html          200
+/interior-design    /interior-design.html   200
+/mosaic-art            /mosaic-art.html            200
+/iconography              /iconography.html            200
+/workshops             /lessons.html                   200
