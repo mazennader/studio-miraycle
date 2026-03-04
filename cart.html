@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artisan Studio - Cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-inner">
+    <div class="loader-logo">
+      <img src="images/logo.jpeg" alt="">
+    </div>
+    <div class="loader-spinner"></div>
+  </div>
+</div>
+
+<!-- HEADER (FIXED – SAME AS HOME) -->
+<header class="site-header">
+  <div class="container header-row">
+
+    <a class="brand zoom-hover" href="Home.html">
+      <div class="brand-logo">
+        <img src="images/logo.jpeg" alt="Artisan Studio Logo">
+      </div>
+      <div class="brand-text">
+        <div class="top">Art  & Design</div>
+      </div>
+    </a>
+
+    <nav class="nav" id="desktopNav">
+      <a class="zoom-hover" href="Home.html" data-nav="1">Home</a>
+    
+      <a class="zoom-hover" href="about-us.html" data-nav="1">
+        About<br/>Us
+      </a>
+    
+      <a class="zoom-hover" href="our-projects.html" data-nav="1">
+        Our Work
+      </a>
+    
+      <!-- Dropdown -->
+      <div class="nav-dd" id="collectionsDD">
+        <button class="nav-dd-btn zoom-hover" type="button" aria-haspopup="true" aria-expanded="false">
+          Collections <span class="nav-dd-caret">▾</span>
+        </button>
+    
+        <div class="nav-dd-menu" role="menu">
+          <a role="menuitem" href="interior-design.html">Interior Design</a>
+          <a role="menuitem" href="stained-glass.html">Stained Glass</a>
+          <a role="menuitem" href="iconography.html">Sacred Art &amp; Iconography</a>
+          <a role="menuitem" href="painting.html">Painting</a>
+          <a role="menuitem" href="mosaic-art.html">Mosaic Art</a>
+          <a role="menuitem" href="ceramic-art.html">Ceramic Art</a>
+          <a role="menuitem" href="art-restoration.html">Restoration</a>
+    
+          <div class="nav-dd-sep"></div>
+    
+          <a role="menuitem" href="lessons.html">Workshops</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- RIGHT SIDE (Cart + Mobile Menu) -->
+    <div class="header-icons">
+      <a class="cart-link zoom-hover" href="cart.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 7h14l-1.5 8.5H8.2L7 7Z"/>
+          <path d="M7 7 6.2 4.5H3"/>
+          <path d="M9 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+          <path d="M18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+        </svg>
+        <div class="cart-badge" id="cartBadge">0</div>
+      </a>
+
+      <button class="nav-toggle zoom-hover" id="navToggle" type="button"
+              aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="nav-toggle-lines" aria-hidden="true"></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-backdrop" data-close="1"></div>
+  <div class="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-nav-head">
+      <div class="mobile-nav-title">Menu</div>
+      <button class="mobile-nav-close" type="button" aria-label="Close menu" data-close="1">×</button>
+    </div>
+    <div class="mobile-nav-links" id="mobileNavLinks"></div>
+  </div>
+</div>
+
+<!-- CART HERO -->
+<section class="cart-hero">
+  <div class="container">
+    <a class="backlink" href="our-projects.html">← Continue Shopping</a>
+
+    <div class="cart-title">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 7h14l-1.5 8.5H8.2L7 7Z"/>
+        <path d="M7 7 6.2 4.5H3"/>
+        <path d="M9 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+        <path d="M18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+      </svg>
+      <h1>Shopping Cart</h1>
+    </div>
+
+    <div class="cart-sub" id="cartCountText">0 items in your cart</div>
+  </div>
+</section>
+
+<!-- CART BODY -->
+<section class="cart-body">
+  <div class="container" id="cartMount"></div>
+</section>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="dot">✓</div>
+  <div id="toastText">Added</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+

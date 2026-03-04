@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-body admin-dash-bg">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Admin Dashboard</div>
+
+      <div class="top-actions">
+        <a class="pill pill-teal" href="home.html">
+          <span class="pill-ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10.5Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Back to Site
+        </a>
+
+        <button id="btnLogout" class="pill pill-maroon" type="button">
+          <span class="pill-ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M10 17l-1 0a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4h1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <path d="M15 7l5 5-5 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 12H10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tabs -->
+  <nav class="tabs" aria-label="Admin sections">
+    <div class="tabs-inner">
+      <button class="tab is-active" data-tab="products" type="button">
+        <span class="tab-ico">📦</span>
+        <span>Products (<span id="productsCount">0</span>)</span>
+      </button>
+
+      <button class="tab" data-tab="projects" type="button">
+        <span class="tab-ico">▦</span>
+        <span>Projects (<span id="projectsCount">0</span>)</span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="dash">
+
+    <!-- PRODUCTS -->
+    <section id="panel-products" class="panel is-visible">
+      <div class="panel-head">
+        <h2 class="panel-title">Manage Products</h2>
+        <button id="btnAddProduct" class="btn btn-gold" type="button">
+          <span class="btn-ico">＋</span>
+          Add Product
+        </button>
+      </div>
+
+      <div id="productsGrid" class="grid"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="panel-projects" class="panel">
+      <div class="panel-head">
+        <h2 class="panel-title">Manage Projects</h2>
+        <button id="btnAddProject" class="btn btn-gold" type="button">
+          <span class="btn-ico">＋</span>
+          Add Project
+        </button>
+      </div>
+
+      <div id="projectsGrid" class="grid"></div>
+    </section>
+
+  </main>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+      <button id="modalClose" class="modal-close" type="button">×</button>
+
+      <h3 id="modalTitle" class="modal-title">Add New Product</h3>
+
+      <form id="itemForm" class="modal-form" enctype="multipart/form-data">
+
+        <input type="hidden" id="itemType" value="product" />
+        <input type="hidden" id="itemId" value="" />
+
+        <!-- Name + Price -->
+        <div class="form-row">
+          <label class="field">
+            <span class="field-label">Name</span>
+            <input id="fName" class="input" type="text" required />
+          </label>
+
+          <label class="field" id="priceField">
+            <span class="field-label">Price</span>
+            <input id="fPrice" class="input" type="number" min="0" step="1" />
+          </label>
+        </div>
+
+        <!-- Category + Image -->
+        <div class="form-row">
+          <label class="field">
+            <span class="field-label">Category</span>
+            <select id="fCategory" class="input">
+              <option>Interior Design</option>
+              <option>Stained Glass</option>
+              <option>Iconography</option>
+              <option>Painting</option>
+              <option>Ceramic Art</option>
+              <option>Mosaic Art</option>
+              <option>Art Restoration</option>
+              <option>Lessons</option>
+              <option>Publications</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Image File</span>
+            <input id="fImage" class="input" type="file" accept="image/*" />
+            <small class="field-hint">PNG / JPG / WEBP</small>
+          </label>
+        </div>
+        <!-- ✅ Publications ONLY fields -->
+<div id="pubFields" style="display:none; margin-top:12px;">
+  <label class="field">
+    <span class="field-label">PDF File</span>
+    <input id="fPdf" class="input" type="file" accept="application/pdf" />
+    <small class="field-hint">Upload a PDF (optional)</small>
+  </label>
+
+  <label class="field">
+    <span class="field-label">PDF Link (if you already have one)</span>
+    <input id="fPdfUrl" class="input" type="url" placeholder="https://..." />
+    <small class="field-hint">Use this if you don’t upload a PDF</small>
+  </label>
+</div>
+        <!-- Description -->
+        <label class="field">
+          <span class="field-label">Description</span>
+          <textarea id="fDesc" class="input textarea" rows="4"></textarea>
+        </label>
+        <!-- Product-only checkboxes -->
+        <div class="checks" id="productChecks">
+          <label class="check">
+            <input id="fFeatured" type="checkbox" />
+            <span>Featured Product</span>
+          </label>
+
+          <label class="check">
+            <input id="fSoldOut" type="checkbox" />
+            <span>Out of stock</span>
+          </label>
+        </div>
+
+        <button id="btnSaveItem" class="btn btn-save" type="submit">
+          <span class="btn-ico">💾</span>
+          <span id="btnSaveText">Save</span>
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
+
+

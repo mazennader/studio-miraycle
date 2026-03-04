@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artisan Studio - Home</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css?v=999"/>
+  <link rel="preload" as="image" href="images/slide1.jpeg">
+<link rel="preload" as="image" href="images/slide2.jpeg">
+<link rel="preload" as="image" href="images/slide3.jpeg">
+
+</head>
+<body>
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <img src="images/logo.jpeg" alt="">
+      </div>
+      <div class="loader-spinner"></div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand zoom-hover" href="Home.html">
+        <div class="brand-logo">
+          <img src="images/logo.jpeg" alt="Artisan Studio Logo">
+        </div>
+
+        <div class="brand-text">
+          <div class="top">Art  & Design</div>
+        </div>
+      </a>
+
+      <nav class="nav">
+
+        <!-- Main links -->
+        <a class="active zoom-hover" href="Home.html" data-nav="1">Home</a>
+      
+        <a class="zoom-hover" href="about-us.html" data-nav="1">
+          About<br/>Us
+        </a>
+      
+        <a class="zoom-hover" href="our-projects.html" data-nav="1">
+          Our Work
+        </a>
+      
+        <!-- Dropdown -->
+        <div class="nav-dd">
+      
+          <button class="nav-dd-toggle zoom-hover" type="button">
+            Collections <span class="nav-dd-caret">▾</span>
+          </button>
+      
+          <div class="nav-dd-menu">
+      
+            <a class="zoom-hover" href="interior-design.html" data-nav="1">Interior Design</a>
+            <a class="zoom-hover" href="stained-glass.html" data-nav="1">Stained Glass</a>
+            <a class="zoom-hover" href="iconography.html" data-nav="1">Sacred Art &amp; Iconography</a>
+            <a class="zoom-hover" href="painting.html" data-nav="1">Painting</a>
+            <a class="zoom-hover" href="mosaic-art.html" data-nav="1">Mosaic Art</a>
+            <a class="zoom-hover" href="ceramic-art.html" data-nav="1">Ceramic Art</a>
+            <a class="zoom-hover" href="art-restoration.html" data-nav="1">Restoration</a>
+      
+            <div class="nav-dd-sep"></div>
+      
+            <a class="zoom-hover" href="lessons.html" data-nav="1">Workshops</a>
+      
+          </div>
+      
+        </div>
+      
+      </nav>
+      <!-- RIGHT SIDE (Mobile wants: Cart then Menu) -->
+      <div class="header-icons">
+        <a class="cart-link zoom-hover" href="cart.html" aria-label="Cart">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 7h14l-1.5 8.5H8.2L7 7Z"/>
+            <path d="M7 7 6.2 4.5H3"/>
+            <path d="M9 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+            <path d="M18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+          </svg>
+          <div class="cart-badge" id="cartBadge">0</div>
+        </a>
+
+        <!-- Mobile menu button (shows on phone via CSS) -->
+        <button class="nav-toggle zoom-hover" id="navToggle" type="button"
+                aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+          <span class="nav-toggle-lines" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu drawer -->
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mobile-nav-backdrop" data-close="1"></div>
+    <div class="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Menu">
+      <div class="mobile-nav-head">
+        <div class="mobile-nav-title">Menu</div>
+        <button class="mobile-nav-close" type="button" aria-label="Close menu" data-close="1">×</button>
+      </div>
+
+      <!-- JS will auto-copy your desktop nav links into here -->
+      <div class="mobile-nav-links" id="mobileNavLinks"></div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <!-- HERO SLIDER (HOME ONLY) -->
+<!-- HERO (same content, only background is now a slider) -->
+<section class="hero" id="homeHero">
+  <!-- Background slider images (ONLY this part is new) -->
+  <div class="hero-slider-bg" id="heroBg">
+    <div class="hero-bg-slide is-active" style="background-image:url('images/slide1.jpeg')"></div>
+    <div class="hero-bg-slide" style="background-image:url('images/slide2.jpeg')"></div>
+    <div class="hero-bg-slide" style="background-image:url('images/slide3.jpeg')"></div>
+  </div>
+
+  <!-- keep your existing overlay if you had one -->
+  <div class="hero-bg"></div>
+
+  <div class="container hero-inner">
+    <div class="hero-text-box">
+      <h1>
+        Every space holds the potential for a miracle, through art and design.
+        I transform that vision into reality.
+      </h1>
+    
+      <p>
+        What if your space could tell your story, quietly, beautifully, and forever?
+      </p>
+    
+      <div class="hero-actions">
+        <a class="btn btn-gold zoom-hover" href="our-projects.html">View Collections →</a>
+        <a class="btn btn-teal zoom-hover" href="lessons.html">🎓 Book a Lesson</a>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- COLLECTIONS -->
+  <section class="section collections">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Our Collections</h2>
+        <p>Explore our diverse range of artistic services and handcrafted<br/>creations</p>
+      </div>
+
+      <div class="grid-3">
+
+        <!-- Interior -->
+        <a class="card reveal zoom-hover card-link" href="interior-design.html">
+          <div class="card-img">
+            <img src="images/interior.jpeg" alt="Interior Design">
+            <div class="badge-circle zoom-hover" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 10 12 4l8 6v10H4V10Z"></path>
+                <path d="M9 20v-6h6v6"></path>
+              </svg>
+            </div>
+          </div>
+      
+          <div class="card-body">
+            <h3>Interior Design</h3>
+            <p>Transform your space with elegant and functional interior design solutions</p>
+            <span class="card-cta">Explore Projects→</span>
+          </div>
+        </a>
+      
+        <!-- Stained -->
+        <a class="card reveal zoom-hover card-link" href="stained-glass.html">
+          <div class="card-img">
+            <img src="images/glass.jpeg" alt="Stained Glass">
+            <div class="badge-circle zoom-hover" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3l7 7-7 11L5 10l7-7Z"/><path d="M12 3v18"/></svg>
+            </div>
+          </div>
+      
+          <div class="card-body">
+            <h3>Stained Glass</h3>
+            <p>Handcrafted stained glass art pieces that bring color and light to any space</p>
+            <span class="card-cta">Explore Collection→</span>
+          </div>
+        </a>
+      
+        <!-- Iconography -->
+        <a class="card reveal zoom-hover card-link" href="iconography.html">
+          <div class="card-img">
+            <img src="images/iconography.jpeg" alt="Iconography">
+            <div class="badge-circle zoom-hover" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 20V7l6-3 6 3v13"/><path d="M9 20v-8h6v8"/></svg>
+            </div>
+          </div>
+      
+          <div class="card-body">
+            <h3>Iconography</h3>
+            <p>Traditional religious icons painted with devotion and artistic mastery</p>
+            <span class="card-cta">Explore Collection→</span>
+          </div>
+        </a>
+      
+      </div>
+
+      <div style="height:26px"></div>
+
+      <div class="grid-3">
+
+        <!-- Painting -->
+        <a class="card reveal zoom-hover card-link" href="painting.html">
+          <div class="card-img">
+            <img src="images/painting.jpeg" alt="Painting">
+            <div class="badge-circle zoom-hover" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 17l10-10"/><path d="M14 7l3 3"/></svg>
+            </div>
+          </div>
+      
+          <div class="card-body">
+            <h3>Painting</h3>
+            <p>Original artwork and commissioned paintings in various styles and mediums</p>
+            <span class="card-cta">Explore Collection→</span>
+          </div>
+        </a>
+      
+        <!-- Ceramic -->
+        <a class="card reveal zoom-hover card-link" href="ceramic-art.html">
+          <div class="card-img">
+            <img src="images/ceramic.jpeg" alt="Ceramic Art">
+            <div class="badge-circle zoom-hover" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 8c0-3 10-3 10 0v7c0 3-10 3-10 0V8Z"/><path d="M9 5h6"/></svg>
+            </div>
+          </div>
+      
+          <div class="card-body">
+            <h3>Ceramic Art</h3>
+            <p>Unique handmade ceramic pieces combining functionality with artistic beauty</p>
+            <span class="card-cta">Explore Collection→</span>
+          </div>
+        </a>
+      
+        <!-- Mosaic -->
+        <a class="card reveal zoom-hover card-link" href="mosaic-art.html">
+          <div class="card-img">
+            <img src="images/mosaic.jpeg" alt="Mosaic Art">
+            <div class="badge-circle zoom-hover" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 10 12 4l8 6v10H4V10Z"></path>
+                <path d="M9 20v-6h6v6"></path>
+              </svg>
+            </div>
+          </div>
+      
+          <div class="card-body">
+            <h3>Mosaic Art</h3>
+            <p>Handcrafted mosaic artworks blending tradition and modern artistic expression.</p>
+            <span class="card-cta">Explore Projects →</span>
+          </div>
+        </a>
+      
+        <!-- Restoration -->
+        <a class="card reveal zoom-hover card-link" href="restoration.html">
+          <div class="card-img">
+            <img src="images/Restoration.jpeg" alt="Art Restoration">
+            <div class="badge-circle zoom-hover" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 10 12 4l8 6v10H4V10Z"></path>
+                <path d="M9 20v-6h6v6"></path>
+              </svg>
+            </div>
+          </div>
+      
+          <div class="card-body">
+            <h3>Art Restoration</h3>
+            <p>Professional conservation and restoration services preserving artistic heritage.</p>
+            <span class="card-cta">Explore Projects →</span>
+          </div>
+        </a>
+      
+        <!-- Workshops -->
+        <a class="card reveal zoom-hover card-link" href="lessons.html">
+          <div class="card-img">
+            <img src="images/workshop.jpeg" alt="workshop">
+            <div class="badge-circle zoom-hover" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 7l8-4 8 4-8 4-8-4Z"/><path d="M4 7v10l8 4 8-4V7"/></svg>
+            </div>
+          </div>
+      
+          <div class="card-body">
+            <h3>Workshops</h3>
+            <p>Learn from professional artists through our comprehensive art courses</p>
+            <span class="card-cta">Explore Collection→</span>
+          </div>
+        </a>
+      
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURED WORKS -->
+  <section class="section featured">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Featured Works</h2>
+        <p>Discover our most popular and beloved creations</p>
+      </div>
+
+      <div class="product-grid" id="featuredGrid"></div>
+
+      <div class="center-btn reveal">
+        <a class="btn btn-gold zoom-hover" href="our-projects.html">View All Projects →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + FOOTER -->
+  <section class="cta">
+    <div class="container cta-inner reveal">
+      <div class="cta-icon">🎨</div>
+      <h2>Ready to Create A Space Where Emphasis Meets Experience?</h2>
+      <p>Let's bring your artistic vision to life. Browse our collections or book a<br/>consultation today.</p>
+      <a class="btn btn-gold zoom-hover" href="our-projects.html">Get Started</a>
+    </div>
+  </section>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="foot">
+          <div class="foot-brand">
+            <img src="images/logo.jpeg" alt="Artisan Studio Logo">
+            Art  & Design
+          </div>
+          <p class="foot-text">Where creativity meets craftsmanship. Transforming spaces and creating timeless art pieces.</p>
+        </div>
+
+        <div class="foot">
+          <h4>Quick Links</h4>
+          <a class="zoom-hover" href="Home.html">Home</a>
+          <a class="zoom-hover" href="about-us.html">About Us</a>
+        
+          <a class="zoom-hover" href="interior-design.html">Interior Design</a>
+          <a class="zoom-hover" href="stained-glass.html">Stained Glass</a>
+          <a class="zoom-hover" href="iconography.html">Sacred Art &amp; Iconography</a>
+          <a class="zoom-hover" href="painting.html">Painting</a>
+          <a class="zoom-hover" href="mosaic-art.html">Mosaic Art</a>
+          <a class="zoom-hover" href="ceramic-art.html">Ceramic Art</a>
+          <a class="zoom-hover" href="art-restoration.html">Restoration</a>
+          <a class="zoom-hover" href="lessons.html">Workshops</a>
+        </div>
+        
+
+        <div class="foot">
+          <h4>Contact Us</h4>
+          <div style="display:grid;gap:10px;opacity:.92">
+            <div>💬 WhatsApp Us</div>
+            <div>✉️ info@artisanstudio.com</div>
+            <div>📞 +96170502710</div>
+          </div>
+        </div>
+
+        <div class="foot">
+          <h4>Follow Us</h4>
+        
+          <div class="social-row">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/studio_miraycle_art.and.design?igsh=cnkzcHl5amF0MXVo" target="_blank" rel="noopener"
+               class="social zoom-hover" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9z"/>
+                <path d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+                <path d="M17.6 6.4a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+              </svg>
+            </a>
+          
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/miray-haddad-phd-447893276/" target="_blank" rel="noopener"
+               class="social zoom-hover" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3V9zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21H9V9z"/>
+              </svg>
+            </a>
+          
+            <!-- Pinterest -->
+            <a href="https://www.pinterest.com/mirayhaddad1/?invite_code=ee10233af478495388c48fcc48058f7b&sender=758153055928886461" target="_blank" rel="noopener"
+               class="social zoom-hover" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2C6.5 2 3 5.6 3 10.4c0 3 1.7 4.7 3.2 4.7.5 0 .8-1.4.8-1.8 0-.5-1-1.2-1-2.8 0-3.4 2.6-5.8 6-5.8 2.9 0 5 1.7 5 4.7 0 2.2-1 6.3-3.9 6.3-1.1 0-2-1-1.7-2.1.4-1.4 1.2-2.9 1.2-3.9 0-.9-.5-1.7-1.5-1.7-1.2 0-2.1 1.2-2.1 2.8 0 1 .4 1.7.4 1.7L7.7 21.2c-.2.8-.1 2.1 0 2.8.8-.6 1.8-1.7 2-2.5l.8-2.9c.5 1 1.9 1.8 3.4 1.8 4.5 0 7.6-4.2 7.6-9.8C21.5 5.9 17.7 2 12 2z"/>
+              </svg>
+            </a>
+          </div>
+            <a class="wa-btn" href="https://wa.me/96170502710" target="_blank" class="wa-btn zoom-hover">
+              <span>💬</span>
+              <span>Chat on WhatsApp</span>
+            </a>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        © 2026 Artisan Studio. All rights reserved.<br/>
+        <a href="admin-login.html">
+          <button class="admin-btn zoom-hover" type="button">Admin Login</button>
+        </a>
+      </div>
+    </footer>
+  </section>
+  <div id="productModal" class="pmodal" aria-hidden="true">
+    <div class="pmodal-backdrop" data-close="1"></div>
+  
+    <div class="pmodal-card" role="dialog" aria-modal="true" tabindex="-1">
+      <button class="pmodal-close" type="button" data-close="1" aria-label="Close">×</button>
+  
+      <div class="pmodal-media">
+        <img id="prodModalImg" alt="" />
+      </div>
+  
+      <div class="pmodal-content">
+        <div id="prodModalCat" class="pmodal-cat"></div>
+        <h3 id="prodModalTitle" class="pmodal-title"></h3>
+        <div id="prodModalDesc" class="pmodal-desc"></div>
+  
+        <div id="prodModalPriceWrap" class="pmodal-price">
+          <span class="label">PRICE</span>
+          <span id="prodModalPrice" class="price"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <div class="dot">✓</div>
+    <div id="toastText">Added</div>
+  </div>
+  <script src="./script.js?v=1"></script>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+

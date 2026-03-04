@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iconography - Artisan Studio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body class="page-iconography">
+
+  <!-- PAGE LOADER -->
+  <div class="page-loader" id="pageLoader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <img src="images/logo.jpeg" alt="">
+      </div>
+      <div class="loader-spinner"></div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
+    <div class="dot">✓</div>
+    <div id="toastText">Added</div>
+  </div>
+
+  <!-- HEADER -->
+  <!-- HEADER (MATCH INTERIOR: Our Work + Collections dropdown) -->
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand zoom-hover" href="Home.html">
+      <div class="brand-logo">
+        <img src="images/logo.jpeg" alt="Artisan Studio Logo">
+      </div>
+      <div class="brand-text">
+        <div class="top">Art  & Design</div>
+      </div>
+    </a>
+
+    <nav class="nav" id="desktopNav">
+      <a class="zoom-hover" href="Home.html">Home</a>
+      <a class="zoom-hover" href="about-us.html">About<br>Us</a>
+      <a class="zoom-hover" href="our-projects.html">Our<br>Work</a>
+
+      <div class="nav-dd" id="collectionsDD">
+        <button class="nav-dd-btn zoom-hover" type="button" aria-haspopup="true" aria-expanded="false">
+          Collections <span class="nav-dd-caret">▾</span>
+        </button>
+
+        <div class="nav-dd-menu" role="menu">
+          <a role="menuitem" href="interior-design.html">Interior Design</a>
+          <a role="menuitem" href="stained-glass.html">Stained Glass</a>
+          <a class="active" role="menuitem" href="iconography.html">Sacred Art &amp; Iconography</a>
+          <a role="menuitem" href="painting.html">Painting</a>
+          <a role="menuitem" href="mosaic-art.html">Mosaic Art</a>
+          <a role="menuitem" href="ceramic-art.html">Ceramic Art</a>
+          <a role="menuitem" href="art-restoration.html">Restoration</a>
+        
+          <div class="nav-dd-sep"></div>
+        
+          <a role="menuitem" href="lessons.html">Workshops</a>
+        </div>
+        
+      </div>
+    </nav>
+
+    <!-- RIGHT SIDE (Currency → Cart → Menu) -->
+    <div class="header-icons">
+
+      <!-- Currency dropdown (kept) -->
+      <div class="currency-wrap">
+        <label class="sr-only" for="currencySelect">Currency</label>
+        <select class="currency-select" id="currencySelect" aria-label="Currency">
+          <option value="USD">USD</option>
+          <option value="LBP">LBP</option>
+          <option value="EUR">EUR</option>
+          <option value="GBP">GBP</option>
+        </select>
+      </div>
+
+      <a class="cart-link zoom-hover" href="cart.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 7h14l-1.5 8.5H8.2L7 7Z"/>
+          <path d="M7 7 6.2 4.5H3"/>
+          <path d="M9 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+          <path d="M18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+        </svg>
+        <div class="cart-badge" id="cartBadge">0</div>
+      </a>
+
+      <button class="nav-toggle zoom-hover" id="navToggle" type="button"
+              aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="nav-toggle-lines" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu drawer (same logic as interior) -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-backdrop" data-close="1"></div>
+  <div class="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-nav-head">
+      <div class="mobile-nav-title">Menu</div>
+      <button class="mobile-nav-close" type="button" aria-label="Close menu" data-close="1">×</button>
+    </div>
+    <div class="mobile-nav-links" id="mobileNavLinks"></div>
+  </div>
+</div>
+
+
+  <!-- HERO -->
+  <section class="page-hero page-hero--iconography">
+    <div class="container page-hero-inner reveal in">
+      <div class="page-hero-icon zoom-hover">
+        <img src="images/iconography.jpeg" alt="iconography Icon">
+      </div>
+
+      <h1 class="h-font">Sacred Art &amp; Iconography</h1>
+
+      <p>
+        Traditional Orthodox icons painted with reverence and artistic excellence. Each
+        icon is created following centuries-old techniques with natural pigments and gold leaf.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="page-products">
+    <div class="container">
+      <div
+        class="product-grid page-products-grid"
+        id="featuredGrid"
+        data-category="Iconography"
+        data-per-page="5"
+      ></div>
+
+      <div class="pager" id="featuredPager" aria-label="Products pagination"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-maroon">
+    <div class="container about-maroon-inner reveal">
+      <h2 class="h-font">About Our Icons</h2>
+
+      <p class="about-text">
+        Our iconographers follow the sacred Byzantine tradition, creating icons that serve as windows
+        to the divine. Each piece is painted on specially prepared wooden panels using traditional egg
+        tempera and adorned with gold leaf.
+      </p>
+
+      <div class="about-cards">
+        <div class="about-card zoom-hover reveal">
+          <h3 class="h-font">Traditional Methods</h3>
+          <p>Following ancient Byzantine techniques passed down through generations</p>
+        </div>
+
+        <div class="about-card zoom-hover reveal">
+          <h3 class="h-font">Natural Materials</h3>
+          <p>Using pure pigments, egg tempera, and genuine gold leaf</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <section class="cta">
+    <div class="container cta-inner reveal">
+      <div class="cta-icon">🏛</div>
+      <h2>Let Sacred Beauty Enter Your Home</h2>
+      <p>Each icon is written with reverence, tradition, and devotion.</p>
+      <a href="https://wa.me/96170502710" class="btn-gold" target="_blank">
+        Request an Icon
+      </a>
+    </div>
+  </section>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="foot">
+          <div class="foot-brand">
+            <img src="images/logo.jpeg" alt="Artisan Studio Logo">
+            Art  & Design
+          </div>
+          <p class="foot-text">Where creativity meets craftsmanship. Transforming spaces and creating timeless art pieces.</p>
+        </div>
+
+        <div class="foot">
+          <h4>Quick Links</h4>
+          <a class="zoom-hover" href="Home.html">Home</a>
+          <a class="zoom-hover" href="about-us.html">About Us</a>
+        
+          <a class="zoom-hover" href="interior-design.html">Interior Design</a>
+          <a class="zoom-hover" href="stained-glass.html">Stained Glass</a>
+          <a class="zoom-hover" href="iconography.html">Sacred Art &amp; Iconography</a>
+          <a class="zoom-hover" href="painting.html">Painting</a>
+          <a class="zoom-hover" href="mosaic-art.html">Mosaic Art</a>
+          <a class="zoom-hover" href="ceramic-art.html">Ceramic Art</a>
+          <a class="zoom-hover" href="art-restoration.html">Restoration</a>
+          <a class="zoom-hover" href="lessons.html">Workshops</a>
+        </div>
+        
+
+        <div class="foot">
+          <h4>Contact Us</h4>
+          <div style="display:grid;gap:10px;opacity:.92">
+            <div>💬 WhatsApp Us</div>
+            <div>✉️ info@artisanstudio.com</div>
+            <div>📞 +96170502710</div>
+          </div>
+        </div>
+
+        <div class="foot">
+          <h4>Follow Us</h4>
+        
+          <div class="social-row">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/studio_miraycle_art.and.design?igsh=cnkzcHl5amF0MXVo" target="_blank" rel="noopener"
+               class="social zoom-hover" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9z"/>
+                <path d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+                <path d="M17.6 6.4a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+              </svg>
+            </a>
+          
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/miray-haddad-phd-447893276/" target="_blank" rel="noopener"
+               class="social zoom-hover" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3V9zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21H9V9z"/>
+              </svg>
+            </a>
+          
+            <!-- Pinterest -->
+            <a href="https://www.pinterest.com/mirayhaddad1/?invite_code=ee10233af478495388c48fcc48058f7b&sender=758153055928886461" target="_blank" rel="noopener"
+               class="social zoom-hover" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2C6.5 2 3 5.6 3 10.4c0 3 1.7 4.7 3.2 4.7.5 0 .8-1.4.8-1.8 0-.5-1-1.2-1-2.8 0-3.4 2.6-5.8 6-5.8 2.9 0 5 1.7 5 4.7 0 2.2-1 6.3-3.9 6.3-1.1 0-2-1-1.7-2.1.4-1.4 1.2-2.9 1.2-3.9 0-.9-.5-1.7-1.5-1.7-1.2 0-2.1 1.2-2.1 2.8 0 1 .4 1.7.4 1.7L7.7 21.2c-.2.8-.1 2.1 0 2.8.8-.6 1.8-1.7 2-2.5l.8-2.9c.5 1 1.9 1.8 3.4 1.8 4.5 0 7.6-4.2 7.6-9.8C21.5 5.9 17.7 2 12 2z"/>
+              </svg>
+            </a>
+          </div>
+            <a class="wa-btn" href="https://wa.me/96170502710" target="_blank" class="wa-btn zoom-hover">
+              <span>💬</span>
+              <span>Chat on WhatsApp</span>
+            </a>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        © 2026 Artisan Studio. All rights reserved.<br/>
+        <a href="admin-login.html">
+          <button class="admin-btn zoom-hover" type="button">Admin Login</button>
+        </a>
+      </div>
+    </footer>
+  </section>
+  <!-- ✅ PRODUCT MODAL -->
+<div id="productModal" class="pmodal" aria-hidden="true">
+  <div class="pmodal-backdrop" data-close="1"></div>
+
+  <div class="pmodal-card" role="dialog" aria-modal="true" tabindex="-1">
+    <button class="pmodal-close" type="button" data-close="1" aria-label="Close">×</button>
+
+    <div class="pmodal-media">
+      <img id="prodModalImg" alt="" />
+    </div>
+
+    <div class="pmodal-content">
+      <div id="prodModalCat" class="pmodal-cat"></div>
+      <h3 id="prodModalTitle" class="pmodal-title"></h3>
+
+      <!-- ✅ new lines will work with CSS pre-line -->
+      <div id="prodModalDesc" class="pmodal-desc"></div>
+
+      <div id="prodModalPriceWrap" class="pmodal-price">
+        <span class="label">PRICE</span>
+        <span id="prodModalPrice" class="price"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

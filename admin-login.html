@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-body admin-login-bg">
+
+  <main class="admin-login-wrap">
+    <section class="admin-login-card" aria-label="Admin login">
+
+      <!-- ✅ Back button INSIDE card -->
+      <a href="home.html" class="back-in-card">
+        ← Go back to site
+      </a>
+
+      <div class="login-icon">
+        <!-- lock -->
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M17 11V8a5 5 0 0 0-10 0v3" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7 11h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2Z" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <h1 class="login-title">Admin Panel</h1>
+      <p class="login-sub">Sign in to manage your art studio</p>
+
+      <form id="adminLoginForm" class="login-form" autocomplete="on">
+        <label class="field">
+          <span class="field-label">Email</span>
+          <div class="field-input">
+            <span class="field-ico" aria-hidden="true">
+              <!-- user -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M20 21a8 8 0 0 0-16 0" stroke="#7d6b63" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Z" stroke="#7d6b63" stroke-width="2"/>
+              </svg>
+            </span>
+            <input id="adminEmail" type="email" placeholder="Enter email" required />
+          </div>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Password</span>
+          <div class="field-input">
+            <span class="field-ico" aria-hidden="true">
+              <!-- lock -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M17 11V8a5 5 0 0 0-10 0v3" stroke="#7d6b63" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 11h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2Z" stroke="#7d6b63" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <input id="adminPassword" type="password" placeholder="Enter password" required />
+          </div>
+        </label>
+
+        <button class="btn btn-primary btn-full" id="btnSendCode" type="submit">
+          <span class="btn-ico" aria-hidden="true">
+            <!-- arrow -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M10 17l5-5-5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Send Verification Code
+        </button>
+
+        <!-- ✅ appears after code is sent -->
+        <div id="codeWrap" style="display:none; margin-top:14px;">
+          <label class="field">
+            <span class="field-label">Verification Code</span>
+            <div class="field-input">
+              <span class="field-ico" aria-hidden="true">
+                <!-- key icon -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 10h-6l-2 2h-3l-2 2H6l-2 2" stroke="#7d6b63" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="17" cy="10" r="3" stroke="#7d6b63" stroke-width="2"/>
+                </svg>
+              </span>
+              <input id="adminCode" type="text" inputmode="numeric" maxlength="6" placeholder="6-digit code" />
+            </div>
+          </label>
+
+          <button class="btn btn-primary btn-full" id="btnVerify" type="button">
+            Verify & Login
+          </button>
+        </div>
+
+        <p class="login-note" id="loginNote" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="admin-login.js"></script>
+</body>
+</html>
+

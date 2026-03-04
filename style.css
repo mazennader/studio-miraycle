@@ -1,0 +1,7229 @@
+/* =========================================
+   ARTISAN STUDIO - MATCHING YOUR SCREENSHOT
+========================================= */
+
+:root{
+  --pink:#A88F5F;
+  --pink-dark:#A88F5F;
+  --sage:#E3E0DB;
+  --teal:#E3E0DB;
+  --ivory:#DCDAD6;  /* ✅ exact color from image */
+  --gold:#d8b15f;
+  --rosebtn:#A88F5F;
+  --text:#2b2623;
+  --muted:#6b605b;
+
+
+  --radius-lg:22px;
+  --radius-md:16px;
+  --shadow: 0 14px 30px rgba(0,0,0,.14);
+  --shadow-soft: 0 10px 22px rgba(0,0,0,.10);
+
+  --container: 1200px;
+  --font-art: "Cinzel", serif;
+  --font-title: "Cormorant Garamond", serif;
+  --font-body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html, body{
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+html,body{margin:0;padding:0}
+body{
+  font-family: "Inter", system-ui, Arial, sans-serif;
+  color: var(--text);
+  background: url("./images/ivory.png") center/cover no-repeat fixed !important;
+}
+
+
+
+a{color:inherit}
+img{max-width:100%;display:block}
+
+/* ===== fonts ===== */
+.h-font{
+  font-family: "Playfair Display", serif;
+}
+
+/* ===== container ===== */
+.container{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* =========================================
+   HEADER (exact vibe: pink bar + shadow)
+========================================= */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: var(--pink);
+  box-shadow: var(--shadow-soft);
+}
+
+.header-row{
+  height: 92px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  text-decoration:none;
+  color: #f4efe6;
+  user-select:none;
+}
+
+.brand-logo{
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+
+  background: #ffffff;                 /* ✅ white background */
+  border: 1px solid rgba(0,0,0,.10);    /* ✅ clean edge on pink header */
+
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 16px rgba(0,0,0,.10);
+  overflow: hidden;                    /* ✅ keeps logo corners clean */
+}
+
+
+.brand-logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+
+.brand-text{
+  line-height: 1.0;
+}
+.brand-text .top,
+.brand-text .bottom{
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+/* nav links */
+.nav{
+  display:flex;
+  align-items:center;
+  gap: 26px;
+}
+
+.nav a{
+  text-decoration:none;
+  color: rgba(244,239,230,.95);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 10px;
+  border-radius: 12px;
+  position: relative;
+  transition: transform .16s ease, filter .16s ease;
+}
+
+.nav a:hover{
+  transform: scale(1.05);
+  filter: brightness(1.05);
+}
+
+/* active underline + small dot (like your Home link) */
+.nav a.active::after{
+  content:"";
+  position:absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 6px;
+  width: 34px;
+  height: 2px;
+  background: rgba(216,177,95,.95);
+  border-radius: 999px;
+}
+.nav a.active::before{
+  content:"";
+  position:absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2px;
+  width: 6px;
+  height: 6px;
+  background: rgba(216,177,95,.95);
+  border-radius: 999px;
+}
+
+.nav .break{
+  line-height: 1.05;
+  text-align:center;
+}
+
+/* cart icon right */
+.cart-link{
+  position:relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  transition: transform .16s ease;
+}
+.cart-link:hover{transform: scale(1.06)}
+.cart-link svg{
+  width: 28px;height: 28px;
+  fill:none;
+  stroke:#f4efe6;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cart-badge{
+  position:absolute;
+  top: -4px;
+  right: -3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display:grid;
+  place-items:center;
+  font-size: 12px;
+  font-weight: 900;
+  color:#fff;
+  background: rgba(43,38,35,.35);
+  border: 1px solid rgba(255,255,255,.18);
+}
+
+/* =========================================
+   HERO (Home)
+========================================= */
+.hero{
+  position: relative;
+  height: 560px;
+  overflow:hidden;
+}
+
+.hero-bg{
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
+    url("https://img.freepik.com/free-vector/watercolor-oil-painting-background_52683-106454.jpg");
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
+}
+
+.hero-inner{
+  position:relative;
+  height: 100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color: #f4efe6;
+}
+
+.hero h1{
+  font-family:"Playfair Display", serif;
+  font-weight: 700;
+  font-size: 64px;
+  margin: 0 0 12px 0;
+  text-shadow: 0 14px 34px rgba(0,0,0,.25);
+}
+
+.hero p{
+  margin: 0 auto 22px auto;
+  max-width: 760px;
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: .95;
+}
+
+.hero-actions{
+  display:flex;
+  gap: 16px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border: none;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  font-weight: 900;
+  border-radius: 18px;
+  padding: 16px 30px;
+  box-shadow: var(--shadow);
+  transition: transform .16s ease, filter .16s ease;
+}
+.btn:hover{transform: scale(1.05); filter: brightness(1.03);}
+.btn:active{transform: scale(.99);}
+
+.btn-gold{background: var(--gold); color: #2b2623;}
+.btn-teal {
+  background: #8F9B86;        /* chalk green */
+  color: #2b2623;             /* elegant dark brown text */
+  border: none;
+}
+
+.btn-teal:hover {
+  background: #7E8A75;        /* slightly darker green */
+  color: #2b2623;
+}
+
+.hero-mouse{
+  margin: 26px auto 0 auto;
+  width: 32px;
+  height: 52px;
+  border-radius: 20px;
+  border: 1px solid rgba(244,239,230,.55);
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top: 10px;
+  background: rgba(0,0,0,.12);
+}
+.hero-mouse span{
+  width: 7px;height: 12px;border-radius: 999px;
+  background: rgba(244,239,230,.95);
+  animation: scrollDot 1.15s ease-in-out infinite;
+}
+@keyframes scrollDot{
+  0%{transform: translateY(0); opacity:.65}
+  50%{transform: translateY(16px); opacity:1}
+  100%{transform: translateY(0); opacity:.65}
+}
+/* ===== SOFT PREMIUM HOVER ZOOM ===== */
+.zoom-hover{
+  transition: 
+    transform 0.28s cubic-bezier(.2,.8,.2,1),
+    box-shadow 0.28s cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
+}
+
+.zoom-hover:hover{
+  transform: translateY(-4px) scale(1.035);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+}
+
+.zoom-hover:active{
+  transform: translateY(-1px) scale(1.01);
+}
+
+
+/* =========================================
+   SECTION TITLES
+========================================= */
+.section{
+  padding: 62px 0;
+}
+.section-title{
+  text-align:center;
+  margin-bottom: 30px;
+}
+.section-title h2{
+  font-family:"Playfair Display", serif;
+  font-size: 58px;
+  margin: 0 0 10px 0;
+  color: #3b2d28;
+}
+.section-title p{
+  margin:0;
+  font-size: 18px;
+  color: rgba(43,38,35,.70);
+  line-height: 1.55;
+}
+
+/* =========================================
+   COLLECTIONS (matches your 2 rows of 3)
+========================================= */
+.collections{
+  background: var(--sage);
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.card{
+  background: var(--ivory);
+  border-radius: var(--radius-lg);
+  overflow:hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,.06);
+  transition: transform .16s ease, filter .16s ease;
+}
+.card:hover{
+  transform: scale(1.03);
+  filter: brightness(1.01);
+}
+
+.card-img{
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  position:relative;
+}
+
+.badge-circle{
+  position:absolute;
+  top: 18px;
+  right: 18px;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  background: rgba(216,177,95,.88);
+  display:grid;
+  place-items:center;
+  box-shadow: 0 10px 18px rgba(0,0,0,.12);
+  transition: transform .16s ease;
+}
+.card:hover .badge-circle{transform: scale(1.05);}
+
+.badge-circle svg{
+  width: 24px;height: 24px;
+  stroke: rgba(255,255,255,.95);
+  fill:none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .95;
+}
+
+.card-body{
+  padding: 18px 18px 22px 18px;
+}
+.card-body h3{
+  font-family:"Playfair Display", serif;
+  font-size: 26px;
+  margin: 0 0 10px 0;
+}
+.card-body p{
+  margin: 0 0 14px 0;
+  color: rgba(43,38,35,.72);
+  line-height: 1.55;
+}
+.card-body a{
+  color: var(--pink-dark);
+  font-weight: 800;
+  text-decoration:none;
+}
+.card-body a:hover{text-decoration: underline; text-underline-offset: 4px;}
+
+/* =========================================
+   FEATURED WORKS (teal section + product cards)
+========================================= */
+.featured{
+  background: var(--teal);
+  color: var(--text);
+}
+
+.featured .section-title h2{
+  color: var(--text);
+}
+
+.featured .section-title p{
+  color: var(--text);
+}
+
+
+.product-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.pcard{
+  background: var(--ivory);
+  color: var(--text);
+  border-radius: var(--radius-lg);
+  overflow:hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,.06);
+  transition: transform .16s ease;
+}
+.pcard:hover{transform: scale(1.03);}
+
+.pimg{
+  height: 210px;
+  background-size: cover;
+  background-position: center;
+  position:relative;
+}
+
+.pill{
+  position:absolute;
+  top: 14px; left: 14px;
+  background: rgba(216,177,95,.92);
+  color: #2b2623;
+  font-weight: 900;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  box-shadow: 0 10px 18px rgba(0,0,0,.10);
+}
+
+.pbody{padding: 16px 16px 18px 16px;}
+.pname{
+  font-family:"Playfair Display", serif;
+  font-size: 22px;
+  margin: 0 0 8px 0;
+}
+.pdesc{
+  margin:0 0 12px 0;
+  color: rgba(43,38,35,.72);
+  line-height: 1.55;
+  font-size: 13px;
+}
+
+.label{
+  font-size: 12px;
+  letter-spacing:.04em;
+  text-transform: uppercase;
+  color: rgba(43,38,35,.60);
+}
+.price{
+  font-family:"Playfair Display", serif;
+  font-size: 34px;
+  color: var(--pink-dark);
+  margin: 6px 0 10px 0;
+}
+
+.qty-row{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  margin: 8px 0 14px 0;
+}
+.qty-row strong{font-weight:800;}
+.qty{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+.qbtn{
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border:none;
+  cursor:pointer;
+  background: rgba(184,116,106,.35);
+  color: #2b2623;
+  font-weight: 900;
+  transition: transform .15s ease;
+}
+.qbtn:hover{transform: scale(1.06);}
+.qnum{
+  width: 28px;
+  text-align:center;
+  font-weight: 900;
+}
+
+.addbtn{
+  width: 100%;
+  height: 54px;
+  border-radius: 18px;
+  border:none;
+  cursor:pointer;
+  background: var(--rosebtn);
+  color: #f4efe6;
+  font-weight: 900;
+  font-size: 16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  box-shadow: 0 12px 22px rgba(0,0,0,.14);
+  transition: transform .16s ease;
+}
+.addbtn:hover{transform: scale(1.03);}
+.addbtn svg{width: 20px;height:20px; stroke:#f4efe6; fill:none; stroke-width:2;}
+
+.center-btn{
+  display:flex;
+  justify-content:center;
+  margin-top: 24px;
+}
+
+/* =========================================
+   CTA + FOOTER (burgundy section like screenshot)
+========================================= */
+.cta{
+  background: #6c2f31;
+  color: #f4efe6;
+  padding: 70px 0 0 0;
+}
+
+.cta-inner{
+  text-align:center;
+  padding-bottom: 50px;
+}
+
+.cta-icon{
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: rgba(0,0,0,.18);
+  display:grid;
+  place-items:center;
+  margin: 0 auto 14px auto;
+  border: 1px solid rgba(255,255,255,.14);
+}
+.cta-inner h2{
+  font-family:"Playfair Display", serif;
+  font-size: 60px;
+  margin: 10px 0 12px 0;
+}
+.cta-inner p{
+  margin: 0 0 22px 0;
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: .90;
+}
+
+.footer{
+  background: #5e2728;
+  padding: 34px 0 22px 0;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 26px;
+  align-items:start;
+}
+
+.foot-brand{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: rgba(216,177,95,.95);
+  font-weight: 900;
+  font-family:"Playfair Display", serif;
+  font-size: 26px;
+}
+.foot-brand .mini{
+  width: 44px;height: 44px;border-radius: 14px;
+  background: rgba(216,177,95,.85);
+  display:grid;place-items:center;
+}
+.foot-text{
+  margin:0;
+  opacity:.88;
+  line-height:1.7;
+}
+
+.foot h4{
+  margin: 0 0 12px 0;
+  color: rgba(216,177,95,.95);
+  font-family:"Playfair Display", serif;
+  font-size: 22px;
+}
+.foot a{
+  display:block;
+  text-decoration:none;
+  margin: 10px 0;
+  opacity:.92;
+}
+.foot a:hover{text-decoration: underline; text-underline-offset: 4px;}
+
+.social-row{
+  display:flex;
+  gap: 12px;
+  margin: 12px 0 16px 0;
+}
+.social{
+  width: 44px;height:44px;border-radius: 14px;
+  border:none;
+  cursor:pointer;
+  background: rgba(0,0,0,.18);
+  color:#f4efe6;
+  font-weight:900;
+  transition: transform .16s ease;
+}
+.social:hover{transform: scale(1.06);}
+
+.wa-btn{
+  border:none;
+  cursor:pointer;
+  background: rgba(216,177,95,.92);
+  color:#2b2623;
+  font-weight: 900;
+  border-radius: 999px;
+  padding: 14px 18px;
+  display:inline-flex;
+  gap: 10px;
+  align-items:center;
+  transition: transform .16s ease;
+}
+.wa-btn:hover{transform: scale(1.05);}
+
+.footer-bottom{
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  text-align:center;
+  opacity:.92;
+}
+.admin-btn{
+  margin-top: 10px;
+  background: transparent;
+  border: none;
+  color: rgba(244,239,230,.92);
+  font-weight: 800;
+  cursor:pointer;
+  transition: transform .16s ease;
+}
+.admin-btn:hover{transform: scale(1.05); text-decoration: underline; text-underline-offset: 4px;}
+
+/* =========================================
+   TOAST (green "Added ..." exactly vibe)
+========================================= */
+.toast{
+  position: fixed;
+  top: 105px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: #e9fff0;
+  color: #0e6b2b;
+  border: 1px solid rgba(14,107,43,.18);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  pointer-events:none;
+  transition: .20s ease;
+  z-index: 99999;
+}
+.toast.show{opacity:1; transform: translateX(-50%) translateY(0);}
+.toast .dot{
+  width: 18px;height:18px;border-radius:999px;
+  background:#0e6b2b;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+/* =========================================
+   CART PAGE (matches your screenshots)
+========================================= */
+.cart-hero{
+  background: var(--pink);
+  padding: 48px 0 56px 0;
+  color: #f4efe6;
+  box-shadow: var(--shadow-soft);
+}
+
+.backlink{
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+  text-decoration:none;
+  opacity:.92;
+  font-weight: 800;
+  transition: transform .16s ease;
+}
+.backlink:hover{transform: scale(1.03);}
+
+.cart-title{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  margin-top: 12px;
+}
+.cart-title h1{
+  font-family:"Playfair Display", serif;
+  font-size: 60px;
+  margin: 0;
+}
+.cart-title svg{width: 54px;height:54px; stroke:#f4efe6; fill:none; stroke-width:2;}
+.cart-sub{
+  margin-top: 8px;
+  opacity:.9;
+  font-weight: 700;
+}
+
+.cart-body{
+  background: #f7f4ee;
+  padding: 58px 0 72px 0;
+}
+
+.empty{
+  max-width: 900px;
+  margin: 0 auto;
+  background: #f7f4ee;
+  text-align:center;
+  padding: 70px 18px 10px;
+}
+
+.empty svg{width: 80px;height:80px; stroke: rgba(184,116,106,.55); fill:none; stroke-width:2;}
+.empty h2{
+  font-family:"Playfair Display", serif;
+  font-size: 52px;
+  margin: 16px 0 8px 0;
+}
+.empty p{margin:0; color: rgba(43,38,35,.70);}
+
+.cart-layout{
+  display:grid;
+  grid-template-columns: 1.35fr .8fr;
+  gap: 22px;
+  align-items:start;
+}
+
+.cart-item{
+  background: #f5f0e7;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 22px;
+  display:flex;
+  gap: 18px;
+  align-items:center;
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.cart-item img{
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.cart-item h3{
+  font-family:"Playfair Display", serif;
+  margin:0 0 8px 0;
+  font-size: 28px;
+}
+.cart-item .desc{
+  margin:0 0 10px 0;
+  color: rgba(43,38,35,.70);
+}
+.cart-item .price{
+  margin:0;
+  font-size: 34px;
+  color: var(--pink-dark);
+}
+
+.cart-controls{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+
+.iconbtn{
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border:none;
+  cursor:pointer;
+  background: rgba(184,116,106,.25);
+  transition: transform .16s ease;
+  display:grid;
+  place-items:center;
+  font-weight: 900;
+  font-size: 18px;
+}
+.iconbtn:hover{transform: scale(1.06);}
+
+.trash{
+  background: rgba(184,116,106,.18);
+}
+.trash svg{width: 20px;height:20px; stroke: var(--pink-dark); fill:none; stroke-width:2;}
+
+.summary{
+  background: #5aa3a3;
+  color: #f4efe6;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.summary h3{
+  font-family:"Playfair Display", serif;
+  font-size: 42px;
+  margin: 0 0 18px 0;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 10px 0;
+  font-weight: 800;
+}
+
+.hr{
+  height:1px;
+  background: rgba(255,255,255,.18);
+  margin: 10px 0 14px 0;
+}
+
+.total{
+  font-family:"Playfair Display", serif;
+  font-size: 36px;
+  color: rgba(216,177,95,.95);
+}
+
+.checkout{
+  margin-top: 18px;
+  width: 100%;
+  height: 56px;
+  border-radius: 18px;
+  border:none;
+  cursor:pointer;
+  background: rgba(216,177,95,.92);
+  color:#2b2623;
+  font-weight: 900;
+  font-size: 16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  transition: transform .16s ease;
+}
+.checkout:hover{transform: scale(1.03);}
+
+.smallnote{
+  margin-top: 14px;
+  opacity:.9;
+  font-size: 13px;
+  text-align:center;
+}
+
+/* =========================================
+   simple reveal animation (scroll)
+========================================= */
+.reveal{
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.in{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================
+   responsive
+========================================= */
+@media (max-width: 1050px){
+  .nav{gap: 18px;}
+  .nav a{font-size: 14px;}
+  .grid-3{grid-template-columns: repeat(2, 1fr);}
+  .product-grid{grid-template-columns: repeat(2, 1fr);}
+  .footer-grid{grid-template-columns: 1fr 1fr;}
+  .cart-layout{grid-template-columns: 1fr;}
+}
+@media (max-width: 620px){
+  .nav{display:none;} /* keep simple for now */
+  .hero h1{font-size: 46px;}
+  .grid-3,.product-grid{grid-template-columns: 1fr;}
+  .cart-title h1{font-size: 44px;}
+}
+/* ===== FORCE PREMIUM HOVER (OVERRIDE ALL OTHER HOVERS) ===== */
+.nav a.zoom-hover:hover,
+.btn.zoom-hover:hover,
+.card.zoom-hover:hover,
+.pcard.zoom-hover:hover,
+.cart-link.zoom-hover:hover,
+.badge-circle.zoom-hover:hover,
+.wa-btn.zoom-hover:hover,
+.social.zoom-hover:hover,
+.admin-btn.zoom-hover:hover{
+transform: translateY(-4px) scale(1.035) !important;
+box-shadow: 0 18px 40px rgba(0,0,0,0.18) !important;
+}
+
+.nav a.zoom-hover:active,
+.btn.zoom-hover:active,
+.card.zoom-hover:active,
+.pcard.zoom-hover:active,
+.cart-link.zoom-hover:active{
+transform: translateY(-1px) scale(1.01) !important;
+}
+/* ===========================
+ INTERIOR DESIGN PAGE
+=========================== */
+
+/* Hero like your screenshot */
+.page-hero{
+  background: var(--pink);
+  padding: 110px 0 120px 0;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(closest-side, rgba(255,255,255,.10), rgba(0,0,0,0) 70%);
+  pointer-events:none;
+}
+
+.page-hero-inner{
+  text-align:center;
+  color:#f4efe6;
+  max-width: 980px;
+}
+
+.page-hero-icon{
+  width: 74px;
+  height: 74px;
+  border-radius: 18px;
+  background: rgba(216,177,95,.85);
+  display:grid;
+  place-items:center;
+  margin: 0 auto 26px auto;
+  box-shadow: 0 18px 30px rgba(0,0,0,.18);
+}
+
+.page-hero-icon svg{
+  width: 34px;
+  height: 34px;
+  stroke: rgba(255,255,255,.95);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.page-hero h1{
+  font-family:"Playfair Display", serif;
+  font-size: 74px;
+  margin: 0 0 18px 0;
+  text-shadow: 0 16px 38px rgba(0,0,0,.24);
+}
+
+.page-hero p{
+  margin: 0 auto;
+  max-width: 900px;
+  font-size: 22px;
+  line-height: 1.8;
+  opacity: .92;
+}
+
+/* products section spacing */
+.page-products{
+  background: #f7f4ee;
+  padding: 52px 0 72px 0;
+}
+
+.page-products-grid{
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+/* Make the featured product cards match your screenshot better */
+.page-products .pcard{
+  border-radius: 22px;
+  box-shadow: 0 16px 32px rgba(0,0,0,.12);
+}
+
+/* burgundy reasons section */
+.reasons{
+  background: #6c2f31;
+  padding: 90px 0 110px 0;
+  color:#f4efe6;
+}
+
+.reasons h2{
+  text-align:center;
+  font-size: 58px;
+  margin: 0 0 55px 0;
+}
+
+.reasons-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+
+.reason-card{
+  background: #f2ede3;
+  color: #2b2623;
+  border-radius: 22px;
+  padding: 38px 28px;
+  text-align:center;
+  box-shadow: 0 22px 42px rgba(0,0,0,.25);
+}
+
+.reason-icon{
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: rgba(216,177,95,.90);
+  display:grid;
+  place-items:center;
+  margin: 0 auto 18px auto;
+  font-size: 22px;
+}
+
+.reason-card h3{
+  font-size: 28px;
+  margin: 10px 0 12px 0;
+}
+
+.reason-card p{
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.7;
+  opacity: .85;
+}
+
+/* responsive */
+@media (max-width: 1050px){
+  .page-hero h1{font-size: 56px;}
+  .page-hero p{font-size: 18px;}
+  .page-products-grid{grid-template-columns: repeat(2, 1fr);}
+  .reasons-grid{grid-template-columns: 1fr; gap: 22px;}
+}
+@media (max-width: 620px){
+  .page-hero{padding: 82px 0 92px 0;}
+  .page-hero h1{font-size: 44px;}
+  .page-products-grid{grid-template-columns: 1fr;}
+}
+/* ===========================
+ STAINED GLASS PAGE
+=========================== */
+
+
+.page-hero--teal{
+background: linear-gradient(
+  180deg,
+  #5ca0a1 0%,
+  #4f8f91 100%
+);
+}
+
+
+.page-hero--teal::after{
+content:"";
+position:absolute;
+inset:0;
+background: radial-gradient(closest-side, rgba(255,255,255,.10), rgba(0,0,0,0) 70%);
+pointer-events:none;
+}
+
+.page-hero--teal .page-hero-inner{
+color:#f4efe6;
+}
+
+.page-hero--teal .page-hero-icon{
+background: rgba(216,177,95,.85);
+}
+
+.page-hero--teal .page-hero-icon svg{
+stroke: rgba(255,255,255,.95);
+}
+
+.process{
+background: var(--sage);
+padding: 92px 0 110px 0;
+}
+
+.process h2{
+text-align:center;
+font-size: 58px;
+margin: 0 0 55px 0;
+color: #3b2d28;
+}
+
+.process-grid{
+display:grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 30px;
+}
+
+.process-card{
+background: var(--ivory);
+border-radius: 22px;
+padding: 38px 28px;
+text-align:center;
+box-shadow: 0 22px 42px rgba(0,0,0,.16);
+}
+
+.process-card .step{
+width: 72px;
+height: 72px;
+border-radius: 999px;
+background: rgba(184,116,106,.95);
+color: #fff;
+display:grid;
+place-items:center;
+margin: 0 auto 22px auto;
+font-family:"Playfair Display", serif;
+font-size: 28px;
+box-shadow: 0 18px 30px rgba(0,0,0,.18);
+}
+
+.process-card h3{
+font-size: 28px;
+margin: 12px 0 10px 0;
+color: #2b2623;
+}
+
+.process-card p{
+margin: 0;
+font-size: 18px;
+line-height: 1.7;
+opacity: .75;
+color: #2b2623;
+}
+
+/* responsive */
+@media (max-width: 1050px){
+.process-grid{grid-template-columns: repeat(2, 1fr);}
+}
+@media (max-width: 620px){
+.process-grid{grid-template-columns: 1fr;}
+}
+/* ✅ IMPORTANT: fix hover override on featured product cards */
+.pcard.zoom-hover:hover{
+transform: translateY(-4px) scale(1.035);
+box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+}
+
+/* ===========================
+ PAGE HERO (for category pages)
+=========================== */
+.page-hero{
+padding: 88px 0 96px;
+color: #f4efe6;
+background: var(--pink);
+}
+.page-hero-inner{
+text-align:center;
+max-width: 980px;
+margin: 0 auto;
+}
+.page-hero-badge{
+width: 76px;
+height: 76px;
+border-radius: 18px;
+background: rgba(216,177,95,.88);
+display:grid;
+place-items:center;
+margin: 0 auto 22px auto;
+box-shadow: 0 14px 28px rgba(0,0,0,.15);
+}
+.page-hero-badge svg{
+width: 36px;
+height: 36px;
+stroke: rgba(255,255,255,.95);
+fill: none;
+stroke-width: 2;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+.page-hero h1{
+font-size: 76px;
+margin: 0 0 18px;
+text-shadow: 0 16px 34px rgba(0,0,0,.18);
+}
+.page-hero p{
+margin: 0 auto;
+max-width: 860px;
+font-size: 22px;
+line-height: 1.75;
+opacity: .92;
+}
+
+/* iconography hero color (pink like screenshot) */
+.page-hero--iconography{
+background: linear-gradient(180deg, rgba(183,116,104,.95), rgba(183,116,104,.88));
+}
+
+/* products section spacing (cream background like screenshot) */
+.featured-page-products{
+background: #f7f4ee;
+padding: 56px 0 76px;
+}
+
+/* ===========================
+ ABOUT MAROON SECTION (exact look)
+=========================== */
+.about-maroon{
+background: radial-gradient(circle at 50% 20%, rgba(255,255,255,.06), transparent 55%),
+            #5b2326;
+color: #f4efe6;
+padding: 78px 0 86px;
+}
+.about-maroon-inner{
+text-align:center;
+}
+.about-maroon h2{
+font-size: 64px;
+margin: 0 0 18px;
+}
+.about-text{
+max-width: 1000px;
+margin: 0 auto 42px;
+font-size: 18px;
+line-height: 1.7;
+opacity: .93;
+}
+
+.about-cards{
+display:grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 26px;
+max-width: 980px;
+margin: 0 auto;
+}
+.about-card{
+background: #f2ede3;
+color: var(--text);
+border-radius: var(--radius-lg);
+padding: 34px 30px;
+box-shadow: var(--shadow);
+border: 1px solid rgba(0,0,0,.05);
+text-align:left;
+}
+.about-card h3{
+font-size: 28px;
+margin: 0 0 10px;
+}
+.about-card p{
+margin: 0;
+color: rgba(43,38,35,.72);
+line-height: 1.6;
+}
+
+/* responsive */
+@media (max-width: 900px){
+.page-hero h1{font-size: 56px;}
+.about-cards{grid-template-columns: 1fr;}
+}
+.hero-icon{
+width:70px;
+height:70px;
+background:#d6b25e;
+border-radius:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0 auto 22px auto;
+box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.hero-icon img{
+width:34px;
+height:34px;
+object-fit:contain;
+filter:brightness(0) invert(1); /* makes logo white like your screenshot */
+}
+/* ===========================
+ FOOTER TEXT COLOR FIX
+=========================== */
+
+.footer,
+.footer * {
+color: #f4efe6 !important;
+}
+
+.footer a {
+color: #f4efe6 !important;
+}
+
+.footer h4 {
+color: #d8b15f !important; /* keep titles gold */
+}
+
+.footer-bottom {
+color: #f4efe6 !important;
+}
+/* ✅ FORCE stained glass hero color (must be last) */
+.page-hero.page-hero--teal{
+background: linear-gradient(180deg, #5ca0a1 0%, #4f8f91 100%) !important;
+}
+/* ===========================
+ PAINTING HERO (GOLD)
+=========================== */
+.page-hero--painting{
+background: linear-gradient(180deg, #d6b15f 0%, #caa451 100%) !important;
+}
+
+.painting-hero-badge{
+width: 74px;
+height: 74px;
+border-radius: 18px;
+background: rgba(108,47,49,.92);
+display:grid;
+place-items:center;
+margin: 0 auto 26px auto;
+box-shadow: 0 18px 30px rgba(0,0,0,.18);
+}
+
+.painting-hero-badge svg{
+width: 34px;
+height: 34px;
+stroke: rgba(255,255,255,.95);
+fill: none;
+stroke-width: 2;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+
+/* ===========================
+ PAINTING STYLES SECTION
+=========================== */
+.painting-styles{
+background: var(--sage);
+padding: 92px 0 110px 0;
+}
+
+.painting-styles h2{
+text-align:center;
+font-size: 58px;
+margin: 0 0 55px 0;
+color: #3b2d28;
+}
+
+.painting-style-grid{
+display:grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 36px;
+}
+
+.painting-style-card{
+background: var(--ivory);
+border-radius: 22px;
+padding: 44px 30px;
+text-align:center;
+box-shadow: 0 22px 42px rgba(0,0,0,.16);
+border: 1px solid rgba(0,0,0,.05);
+}
+
+.painting-style-card .style-icon{
+width: 74px;
+height: 74px;
+border-radius: 999px;
+background: rgba(183,116,104,.95);
+color: #fff;
+display:grid;
+place-items:center;
+margin: 0 auto 18px auto;
+font-size: 26px;
+box-shadow: 0 18px 30px rgba(0,0,0,.18);
+}
+
+.painting-style-card h3{
+font-size: 30px;
+margin: 10px 0 12px 0;
+color: #2b2623;
+}
+
+.painting-style-card p{
+margin: 0;
+font-size: 18px;
+line-height: 1.7;
+color: rgba(43,38,35,.75);
+}
+
+/* responsive */
+@media (max-width: 1050px){
+.painting-style-grid{grid-template-columns: 1fr; gap: 22px;}
+}
+/* ===========================
+ CERAMIC HERO (teal)
+=========================== */
+.page-hero--ceramic{
+background: linear-gradient(180deg, #5ca0a1 0%, #4f8f91 100%);
+}
+
+/* ===========================
+ CERAMIC COLLECTIONS (beige section)
+=========================== */
+.ceramic-collections{
+background: radial-gradient(circle at 50% 15%, rgba(255,255,255,.25), rgba(0,0,0,0) 60%),
+            linear-gradient(180deg, #d9c1b2 0%, #cfae9c 100%);
+padding: 86px 0 96px;
+}
+
+.ceramic-collections-inner{
+text-align:center;
+}
+
+.ceramic-collections h2{
+font-size: 64px;
+margin: 0 0 48px;
+color: #3b2d28;
+}
+
+.ceramic-collections-grid{
+display:grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 28px;
+}
+
+.collection-card{
+background: var(--ivory);
+border-radius: 22px;
+padding: 44px 26px;
+box-shadow: 0 18px 34px rgba(0,0,0,.16);
+border: 1px solid rgba(0,0,0,.06);
+}
+
+.collection-icon{
+width: 68px;
+height: 68px;
+border-radius: 999px;
+background: rgba(184,116,106,.92);
+display:grid;
+place-items:center;
+margin: 0 auto 20px;
+font-size: 26px;
+}
+
+.collection-card h3{
+font-size: 30px;
+margin: 10px 0 10px;
+color: #2b2623;
+}
+
+.collection-card p{
+margin: 0;
+font-size: 18px;
+line-height: 1.65;
+color: rgba(43,38,35,.70);
+}
+
+/* responsive */
+@media (max-width: 1050px){
+.ceramic-collections-grid{grid-template-columns: 1fr; max-width: 820px; margin: 0 auto;}
+.ceramic-collections h2{font-size: 54px;}
+}
+/* ===========================
+ LESSONS PAGE (MATCH SCREENSHOT)
+=========================== */
+.page-hero--lessons{
+background: linear-gradient(180deg, #8fa17f 0%, #7f926f 100%) !important;
+}
+
+.page-hero--lessons .page-hero-inner{
+color:#3b2d28 !important;
+}
+
+.page-hero--lessons h1{
+color:#3b2d28 !important;
+text-shadow:none !important;
+}
+
+.page-hero--lessons p{
+color: rgba(59,45,40,.78) !important;
+}
+
+.page-hero--lessons .page-hero-icon{
+background: rgba(216,177,95,.90) !important;
+}
+
+.page-hero--lessons .page-hero-icon svg{
+stroke: rgba(255,255,255,.95) !important;
+fill: none !important;
+stroke-width: 2 !important;
+}
+
+/* Maroon section like screenshot */
+.learn-why{
+background: radial-gradient(circle at 50% 20%, rgba(255,255,255,.06), transparent 55%),
+            #5b2326;
+color:#f4efe6;
+padding: 86px 0 96px;
+}
+
+.learn-why h2{
+text-align:center;
+font-size: 64px;
+margin: 0 0 50px;
+color:#f4efe6;
+}
+
+.learn-grid{
+display:grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 26px;
+}
+
+.learn-card{
+background: #f2ede3;
+color: #2b2623;
+border-radius: 22px;
+padding: 34px 26px;
+text-align:center;
+box-shadow: 0 22px 42px rgba(0,0,0,.18);
+border: 1px solid rgba(0,0,0,.06);
+}
+
+.learn-icon{
+width: 70px;
+height: 70px;
+border-radius: 999px;
+background: rgba(216,177,95,.92);
+display:grid;
+place-items:center;
+margin: 0 auto 18px;
+font-size: 26px;
+box-shadow: 0 18px 30px rgba(0,0,0,.18);
+}
+
+.learn-card h3{
+margin: 8px 0 12px;
+font-size: 26px;
+}
+
+.learn-card p{
+margin: 0;
+font-size: 16px;
+line-height: 1.7;
+opacity: .78;
+}
+
+/* responsive */
+@media (max-width: 1050px){
+.learn-grid{grid-template-columns: repeat(2, 1fr);}
+}
+@media (max-width: 620px){
+.learn-grid{grid-template-columns: 1fr;}
+}
+/* ===========================
+ OUR PROJECTS PAGE
+=========================== */
+
+.projects-hero{
+background: radial-gradient(circle at 50% 20%, rgba(255,255,255,.07), transparent 55%),
+            linear-gradient(180deg, #6c2f31 0%, #5e2728 100%);
+color: #f4efe6;
+padding: 92px 0 84px;
+box-shadow: var(--shadow-soft);
+}
+
+.projects-hero-inner{
+text-align:center;
+max-width: 980px;
+}
+
+.projects-hero h1{
+font-size: 78px;
+margin: 0 0 16px;
+text-shadow: 0 16px 36px rgba(0,0,0,.22);
+}
+
+.projects-hero p{
+margin: 0 auto;
+max-width: 980px;
+font-size: 22px;
+line-height: 1.75;
+opacity: .92;
+}
+
+/* filter strip */
+.projects-filter{
+background: var(--pink);
+padding: 26px 0;
+box-shadow: 0 12px 26px rgba(0,0,0,.12);
+}
+
+.projects-filter-inner{
+  display:flex;
+  align-items:center;
+  justify-content:center;   /* CENTER EVERYTHING */
+  gap:40px;
+}
+
+
+
+.filter-left{
+display:flex;
+align-items:center;
+gap: 12px;
+color: rgba(244,239,230,.92);
+font-weight: 900;
+}
+
+.filter-icon{
+width: 34px; height: 34px;
+border-radius: 12px;
+display:grid; place-items:center;
+background: rgba(0,0,0,.10);
+border: 1px solid rgba(255,255,255,.14);
+}
+
+.filter-icon svg{
+width: 18px; height: 18px;
+fill:none;
+stroke: rgba(244,239,230,.95);
+stroke-width: 2;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+
+.filter-label{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* pills */
+.filter-pills{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+}
+
+.pill-btn{
+border: none;
+cursor: pointer;
+background: rgba(244,239,230,.95);
+color: #2b2623;
+font-weight: 800;
+border-radius: 999px;
+padding: 12px 20px;
+box-shadow: 0 10px 22px rgba(0,0,0,.10);
+transition: transform .16s ease, filter .16s ease;
+}
+
+.pill-btn:hover{ transform: translateY(-2px) scale(1.03); }
+.pill-btn.is-active{
+background: rgba(216,177,95,.95);
+outline: 2px solid rgba(43,38,35,.85);
+outline-offset: -2px;
+}
+
+/* grid section */
+.projects-wrap{
+background: #f7f4ee;
+padding: 44px 0 76px;
+}
+
+/* Masonry look using columns (matches your screenshot vibe) */
+.projects-grid{
+column-count: 3;
+column-gap: 26px;
+}
+
+.project-card{
+break-inside: avoid;
+margin: 0 0 26px;
+border-radius: 22px;
+overflow:hidden;
+box-shadow: 0 16px 32px rgba(0,0,0,.12);
+border: 1px solid rgba(0,0,0,.06);
+background: #fff;
+transform: translateY(0);
+transition: transform .18s ease, filter .18s ease;
+}
+
+.project-card:hover{
+transform: translateY(-4px);
+filter: brightness(1.02);
+}
+
+.project-card img{
+width: 100%;
+height: auto;
+display:block;
+}
+
+/* responsive */
+@media (max-width: 1050px){
+.projects-hero h1{ font-size: 56px; }
+.projects-hero p{ font-size: 18px; }
+.projects-grid{ column-count: 2; }
+}
+
+@media (max-width: 620px){
+.projects-grid{ column-count: 1; }
+}
+/* ===========================
+ ABOUT US PAGE (MATCH YOUR THEME)
+=========================== */
+
+/* HERO (green) */
+.about-hero{
+background: var(--sage);
+padding: 120px 0 120px;
+box-shadow: var(--shadow-soft);
+position: relative;
+overflow: hidden;
+}
+.about-hero::after{
+content:"";
+position:absolute;
+inset:0;
+background: radial-gradient(circle at 50% 35%, rgba(255,255,255,.10), rgba(0,0,0,0) 60%);
+pointer-events:none;
+}
+.about-hero-inner{
+text-align:center;
+color:#f4efe6;
+max-width: 980px;
+}
+.about-hero-badge{
+width: 78px;
+height: 78px;
+border-radius: 18px;
+background: rgba(216,177,95,.88);
+display:grid;
+place-items:center;
+margin: 0 auto 26px;
+box-shadow: 0 18px 30px rgba(0,0,0,.18);
+}
+.about-hero-badge svg{
+width: 36px;
+height: 36px;
+fill: none;
+stroke: rgba(255,255,255,.95);
+stroke-width: 2;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+.about-hero h1{
+font-family:"Playfair Display", serif;
+font-size: 92px;
+margin: 0 0 14px;
+text-shadow: 0 16px 38px rgba(0,0,0,.22);
+}
+.about-hero p{
+margin: 0 auto;
+max-width: 980px;
+font-size: 22px;
+line-height: 1.7;
+opacity: .92;
+}
+
+/* BEGIN (cream) */
+.about-begin{
+background: #f7f4ee;
+padding: 70px 0 86px;
+}
+.about-begin-inner{
+display:grid;
+grid-template-columns: 1.05fr 1.2fr;
+gap: 52px;
+align-items:start;
+}
+.about-begin-media{
+border-radius: 22px;
+overflow:hidden;
+box-shadow: 0 22px 44px rgba(0,0,0,.18);
+}
+.about-begin-media img{
+width:100%;
+height:auto;
+display:block;
+}
+.begin-title{
+display:flex;
+align-items:center;
+gap: 16px;
+margin-bottom: 12px;
+}
+.begin-icon{
+width: 44px;
+height: 44px;
+border-radius: 14px;
+display:grid;
+place-items:center;
+color: rgba(183,116,104,.95);
+}
+.begin-icon svg{
+width: 34px;
+height: 34px;
+fill:none;
+stroke: rgba(183,116,104,.95);
+stroke-width: 2;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+.about-begin-text h2{
+font-family:"Playfair Display", serif;
+font-size: 58px;
+margin: 0;
+color: #3b2d28;
+}
+.about-begin-text p{
+margin: 0 0 22px;
+font-size: 18px;
+line-height: 1.9;
+color: rgba(43,38,35,.76);
+}
+
+/* JOURNEY */
+.about-journey{
+background: #f7f4ee;
+padding: 64px 0 78px;
+}
+.journey-inner{
+text-align:center;
+}
+.about-journey h2{
+font-family:"Playfair Display", serif;
+font-size: 78px;
+margin: 0 0 6px;
+color: #3b2d28;
+}
+.journey-sub{
+margin: 0 0 50px;
+font-size: 22px;
+color: rgba(43,38,35,.70);
+}
+.timeline{
+max-width: 1120px;
+margin: 0 auto;
+display:grid;
+gap: 34px;
+}
+.t-row{
+display:grid;
+grid-template-columns: 170px 1fr;
+gap: 26px;
+align-items:start;
+}
+.t-left{
+display:flex;
+flex-direction:column;
+align-items:center;
+padding-top: 6px;
+}
+.t-year{
+background: rgba(216,177,95,.92);
+color: #2b2623;
+font-weight: 900;
+font-size: 22px;
+padding: 14px 18px;
+border-radius: 18px;
+min-width: 96px;
+text-align:center;
+box-shadow: 0 14px 28px rgba(0,0,0,.12);
+}
+.t-line{
+width: 2px;
+height: 58px;
+background: rgba(108,47,49,.35);
+margin-top: 20px;
+border-radius: 999px;
+}
+.t-line--end{ height: 30px; }
+
+.t-card{
+background: rgba(242,237,227,.92);
+border-radius: 20px;
+padding: 28px 28px 26px;
+box-shadow: 0 18px 38px rgba(0,0,0,.10);
+border: 1px solid rgba(0,0,0,.05);
+text-align:left;
+position: relative;
+}
+.t-card-top{
+position:absolute;
+inset: 0;
+border-radius: 20px;
+pointer-events:none;
+box-shadow: inset 0 0 0 2px rgba(216,177,95,.25);
+}
+.t-card h3{
+font-family:"Playfair Display", serif;
+margin: 0 0 10px;
+font-size: 34px;
+color: rgba(183,116,104,.95);
+}
+.t-card p{
+margin: 0;
+font-size: 18px;
+line-height: 1.75;
+color: rgba(43,38,35,.72);
+}
+
+/* BELIEFS */
+.about-beliefs{
+background: #f7f4ee;
+padding: 74px 0 86px;
+text-align:center;
+}
+.about-beliefs h2{
+font-family:"Playfair Display", serif;
+font-size: 78px;
+margin: 0 0 6px;
+color: #3b2d28;
+}
+.beliefs-sub{
+margin: 0 0 54px;
+font-size: 22px;
+color: rgba(43,38,35,.70);
+line-height: 1.6;
+}
+.beliefs-grid{
+display:grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 28px;
+max-width: 1120px;
+margin: 0 auto;
+}
+.belief-card{
+background: rgba(242,237,227,.92);
+border-radius: 22px;
+padding: 40px 34px;
+box-shadow: 0 18px 38px rgba(0,0,0,.10);
+border: 1px solid rgba(0,0,0,.05);
+text-align:left;
+}
+.belief-icon{
+width: 54px;
+height: 54px;
+border-radius: 16px;
+background: rgba(183,116,104,.95);
+color: #f4efe6;
+display:grid;
+place-items:center;
+font-weight: 900;
+font-size: 22px;
+box-shadow: 0 14px 28px rgba(0,0,0,.12);
+margin-bottom: 18px;
+}
+.belief-card h3{
+font-family:"Playfair Display", serif;
+margin: 0 0 10px;
+font-size: 34px;
+color: #3b2d28;
+}
+.belief-card p{
+margin: 0;
+font-size: 18px;
+line-height: 1.75;
+color: rgba(43,38,35,.72);
+}
+
+/* TEAL SECTION */
+.about-artisans{
+background: linear-gradient(180deg, #5ca0a1 0%, #4f8f91 100%);
+color: #f4efe6;
+padding: 110px 0 110px;
+text-align:center;
+}
+.about-artisans h2{
+font-family:"Playfair Display", serif;
+margin: 0 0 22px;
+font-size: 86px;
+text-shadow: 0 16px 34px rgba(0,0,0,.18);
+}
+.about-artisans p{
+margin: 0 auto 26px;
+max-width: 980px;
+font-size: 22px;
+line-height: 1.85;
+opacity: .92;
+}
+.artisans-note{
+margin-top: 18px;
+opacity: .88;
+font-size: 18px !important;
+}
+
+/* MAROON CTA */
+.about-join{
+background: radial-gradient(circle at 50% 30%, rgba(255,255,255,.08), transparent 55%),
+            #6c2f31;
+color: #f4efe6;
+padding: 110px 0 110px;
+text-align:center;
+}
+.join-heart{
+width: 84px;
+height: 84px;
+margin: 0 auto 24px;
+display:grid;
+place-items:center;
+opacity: .95;
+}
+.join-heart svg{
+width: 60px;
+height: 60px;
+fill:none;
+stroke: rgba(216,177,95,.95);
+stroke-width: 2.2;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+.about-join h2{
+font-family:"Playfair Display", serif;
+margin: 0 0 16px;
+font-size: 86px;
+text-shadow: 0 16px 34px rgba(0,0,0,.18);
+}
+.about-join p{
+margin: 0 auto 34px;
+max-width: 980px;
+font-size: 22px;
+line-height: 1.85;
+opacity: .92;
+}
+.join-actions{
+display:flex;
+gap: 18px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1050px){
+.about-hero h1{font-size: 64px;}
+.about-hero p{font-size: 18px;}
+.about-begin-inner{grid-template-columns: 1fr; gap: 26px;}
+.t-row{grid-template-columns: 130px 1fr;}
+.beliefs-grid{grid-template-columns: 1fr;}
+.about-artisans h2{font-size: 58px;}
+.about-join h2{font-size: 58px;}
+}
+@media (max-width: 620px){
+.about-hero{padding: 92px 0;}
+.about-hero h1{font-size: 48px;}
+.about-hero p{font-size: 16px;}
+.t-row{grid-template-columns: 1fr; gap: 14px;}
+.t-left{flex-direction:row; justify-content:flex-start; gap: 14px;}
+.t-line{display:none;}
+}
+/* ================================
+ ABOUT - BIGGER "WHERE IT ALL BEGAN" IMAGE
+ (paste this at the VERY BOTTOM)
+================================ */
+
+/* give more space to the image column */
+.about-begin-inner{
+grid-template-columns: 1.6fr 1fr !important;
+gap: 56px !important;
+align-items: center !important;
+}
+
+/* make the image box bigger */
+.about-begin-media{
+border-radius: 28px !important;
+overflow: hidden !important;
+}
+
+/* force big image height (cropped clean) */
+.about-begin-media img{
+width: 100% !important;
+height: 560px !important;     /* change 560 to 600/650 if you want bigger */
+object-fit: cover !important;
+display: block !important;
+}
+
+/* =========================================
+ ✅ ADMIN IMAGE NORMALIZER (ADD ONLY)
+ - Makes ALL uploaded images same size
+ - No cutting (no crop) using object-fit: contain
+ - Works for project images + cards + logos
+ - Paste this at the VERY BOTTOM
+========================================= */
+
+:root{
+--img-fit: contain;         /* contain = no cut, cover = crop */
+--img-bg: rgba(0,0,0,.06);  /* background behind transparent/empty areas */
+--img-radius: 22px;
+}
+
+/* 1) PROJECTS page images (admin uploads) */
+.project-card img{
+width: 100%;
+height: 340px;              /* SAME height for all projects */
+object-fit: var(--img-fit);
+background: var(--img-bg);
+}
+
+/* 2) Collection cards (if you switch from background-image to <img>) */
+.card img{
+width: 100%;
+height: 250px;
+object-fit: var(--img-fit);
+background: var(--img-bg);
+}
+
+/* 3) Featured product cards (if you switch from background-image to <img>) */
+.pcard img{
+width: 100%;
+height: 210px;
+object-fit: var(--img-fit);
+background: var(--img-bg);
+}
+
+/* 4) Brand logo safety (if admin uploads a different logo ratio) */
+.brand-logo img{
+width: 100%;
+height: 100%;
+object-fit: contain;        /* always safe for logos */
+background: transparent;
+}
+/* ===========================
+   PAGE LOADER + SMOOTH REVEAL
+   (paste at VERY BOTTOM)
+=========================== */
+
+body{
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+body.is-ready{
+  opacity: 1;
+}
+
+.page-loader{
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: grid;
+  place-items: center;
+  background: rgba(242,237,227,.92); /* matches your ivory vibe */
+  backdrop-filter: blur(6px);
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity .25s ease;
+}
+
+.page-loader.hide{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-inner{
+  display: grid;
+  gap: 16px;
+  place-items: center;
+}
+
+.loader-logo{
+  width: 78px;
+  height: 78px;
+  border-radius: 22px;
+  background: rgba(216,177,95,.90);
+  box-shadow: 0 18px 30px rgba(0,0,0,.18);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.loader-logo img{
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+.loader-spinner{
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 4px solid rgba(183,116,104,.25);
+  border-top-color: rgba(183,116,104,.95);
+  animation: spin .85s linear infinite;
+}
+
+@keyframes spin{
+  to{ transform: rotate(360deg); }
+}
+.pimg{ position:relative; overflow:hidden; }
+.pimg img{
+  width:100%;
+  height:100%;
+  object-fit:cover;   /* same look as before */
+  display:block;
+}
+
+/* ===========================
+   PAGER (5 PER PAGE)
+=========================== */
+.pager{
+  margin-top: 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pager .pbtn{
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.08);
+  cursor:pointer;
+  background: rgba(242,237,227,.92);
+  box-shadow: 0 10px 18px rgba(0,0,0,.08);
+  font-weight: 900;
+}
+
+.pager .pbtn:disabled{
+  opacity: .55;
+  cursor:not-allowed;
+}
+
+.pager .pinfo{
+  font-weight: 900;
+  color: rgba(43,38,35,.72);
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(242,237,227,.75);
+  border: 1px solid rgba(0,0,0,.06);
+}
+/* ===========================
+   MOBILE MENU (FINAL + CLEAN)
+   - menu button ONLY on phone
+   - drawer exactly like your pic
+   - links clickable (fix)
+   - no white glow (fix)
+=========================== */
+
+/* Desktop default */
+.nav-toggle{ display:none !important; }
+
+/* Remove the white glow / outline */
+.nav-toggle:focus,
+.nav-toggle:focus-visible,
+.mobile-nav-close:focus,
+.mobile-nav-close:focus-visible{
+  outline: none !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,.12) !important; /* keep your normal shadow */
+}
+
+/* Button style (same look you want) */
+.nav-toggle{
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 2px solid rgba(244,239,230,.70);
+  background: rgba(0,0,0,.10);
+  cursor: pointer;
+  place-items:center;
+  box-shadow: 0 10px 22px rgba(0,0,0,.12);
+}
+.nav-toggle:active{
+  transform: scale(.98);
+}
+
+.nav-toggle-lines{
+  width: 18px;
+  height: 2px;
+  background: rgba(244,239,230,.95);
+  border-radius: 999px;
+  position: relative;
+  display:block;
+}
+.nav-toggle-lines::before,
+.nav-toggle-lines::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width: 18px;
+  height: 2px;
+  background: rgba(244,239,230,.95);
+  border-radius: 999px;
+}
+.nav-toggle-lines::before{ top: -6px; }
+.nav-toggle-lines::after{ top: 6px; }
+
+/* Drawer wrapper */
+.mobile-nav{
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: none;
+}
+.mobile-nav.is-open{ display:block; }
+
+/* Backdrop behind drawer (clickable to close) */
+.mobile-nav-backdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.25);
+  z-index: 0;
+}
+
+/* Drawer panel (above backdrop) */
+.mobile-nav-panel{
+  position:absolute;
+  top: 0;
+  right: 0;
+  width: min(92vw, 420px);
+  height: 100%;
+  background: linear-gradient(180deg, rgba(183,116,104,.98), rgba(169,101,90,.98));
+  padding: 18px 16px;
+  box-shadow: -18px 0 40px rgba(0,0,0,.25);
+  border-left: 1px solid rgba(255,255,255,.14);
+  z-index: 1; /* ✅ IMPORTANT so links are clickable */
+}
+
+.mobile-nav-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 6px 2px 14px;
+}
+
+.mobile-nav-title{
+  color: rgba(244,239,230,.95);
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.mobile-nav-close{
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 2px solid rgba(244,239,230,.70);
+  background: rgba(0,0,0,.10);
+  color: rgba(244,239,230,.95);
+  cursor:pointer;
+  font-size: 22px;
+  line-height: 1;
+  display:grid;
+  place-items:center;
+}
+
+/* Links */
+.mobile-nav-links{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  padding: 6px 2px;
+}
+
+.mobile-nav-links a{
+  text-decoration:none;
+  color: rgba(244,239,230,.95);
+  font-weight: 800;
+  font-size: 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.mobile-nav-links a.is-active{
+  background: rgba(242,237,227,.92);
+  color: rgba(169,101,90,.98);
+}
+
+/* Responsive switch */
+@media (max-width: 620px){
+  .nav{ display:none !important; }      /* desktop nav hidden on phone */
+  .header-row{ height: 78px; }
+}
+/* Align cart + menu perfectly on mobile */
+.header-icons{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Make cart icon same visual size as menu button */
+.cart-link{
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+}
+/* ===========================
+   FOOTER – MOBILE SAME AS DESKTOP STYLE
+=========================== */
+@media (max-width: 620px){
+
+  .footer{
+    padding: 36px 16px 24px;
+  }
+
+  .footer-grid{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    text-align: left;
+  }
+
+  .foot{
+    width: 100%;
+  }
+
+  /* Brand + text */
+  .foot-brand{
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .foot-text{
+    max-width: 100%;
+    opacity: .9;
+  }
+
+  /* Links */
+  .foot a{
+    display: block;
+    padding: 6px 0;
+  }
+
+  /* Contact section */
+  .foot h4{
+    margin-bottom: 10px;
+  }
+
+  /* Social buttons */
+  .social-row{
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  /* WhatsApp button full width */
+  .wa-btn{
+    width: 100%;
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  /* Bottom copyright */
+  .footer-bottom{
+    margin-top: 26px;
+    padding-top: 18px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .footer-bottom a{
+    display: inline-block;
+    margin-top: 6px;
+  }
+}
+/* ===========================
+   HEADER FIX (mobile)
+=========================== */
+.header-row{
+  flex-wrap: nowrap !important;
+}
+
+.header-icons{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ===========================
+   REMOVE GLOW
+=========================== */
+.nav-toggle,
+.cart-link{
+  box-shadow: none !important;
+}
+
+.nav-toggle:focus,
+.nav-toggle:focus-visible,
+.cart-link:focus,
+.cart-link:focus-visible{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ===========================
+   MOBILE MENU BUTTON
+=========================== */
+.nav-toggle{
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 2px solid rgba(244,239,230,.7);
+  background: rgba(0,0,0,.10);
+  place-items: center;
+}
+
+.nav-toggle-lines{
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  position: relative;
+}
+.nav-toggle-lines::before,
+.nav-toggle-lines::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:18px;
+  height:2px;
+  background:#fff;
+}
+.nav-toggle-lines::before{ top:-6px }
+.nav-toggle-lines::after{ top:6px }
+
+/* ===========================
+   MOBILE NAV DRAWER
+=========================== */
+.mobile-nav{ display:none; position:fixed; inset:0; z-index:9999; }
+.mobile-nav.is-open{ display:block; }
+
+.mobile-nav-backdrop{
+  position:absolute; inset:0;
+  background: rgba(0,0,0,.25);
+}
+
+.mobile-nav-panel{
+  position:absolute;
+  top:0; right:0;
+  width:min(92vw,420px);
+  height:100%;
+  background: linear-gradient(180deg,#b77468,#a9655a);
+  padding:18px;
+}
+
+.mobile-nav-links a{
+  color:#fff;
+  font-weight:800;
+  padding:12px 14px;
+  border-radius:12px;
+}
+
+.mobile-nav-links a.is-active{
+  background:#f2ede3;
+  color:#a9655a;
+}
+
+/* ===========================
+   FOOTER MOBILE
+=========================== */
+@media (max-width:620px){
+  .nav{ display:none !important; }
+
+  .footer-grid{
+    grid-template-columns: 1fr !important;
+    gap:22px;
+  }
+
+  .wa-btn{
+    width:100%;
+    text-align:center;
+  }
+}
+/* ===========================
+   ABOUT US – FINAL MOBILE MATCH
+=========================== */
+
+.about-hero{
+  background: var(--sage);
+  padding: 120px 0;
+  text-align:center;
+  color:#f4efe6;
+}
+
+.about-hero-badge{
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  background: rgba(216,177,95,.9);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin: 0 auto 24px;
+  font-size: 32px;
+}
+
+.about-begin{
+  background:#f7f4ee;
+  padding: 70px 0;
+}
+
+.about-begin-inner{
+  display:grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items:center;
+}
+
+.about-begin-media img{
+  width:100%;
+  height:520px;
+  object-fit:cover;
+  border-radius:26px;
+}
+
+.about-journey{
+  background:#f7f4ee;
+  padding: 80px 0;
+}
+
+.timeline .t-card{
+  background:#f2ede3;
+  border-radius:22px;
+  padding: 28px;
+}
+
+.about-beliefs{
+  background:#f7f4ee;
+  padding: 80px 0;
+  text-align:center;
+}
+
+.beliefs-grid{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 26px;
+  margin-top:40px;
+}
+
+.about-artisans{
+  background: linear-gradient(180deg,#5ca0a1,#4f8f91);
+  padding: 110px 0;
+  color:#f4efe6;
+  text-align:center;
+}
+
+.about-join{
+  background: linear-gradient(180deg,#6c2f31,#5e2728);
+  padding: 110px 0;
+  color:#f4efe6;
+  text-align:center;
+}
+
+/* MOBILE */
+@media(max-width:620px){
+  .about-begin-inner{
+    grid-template-columns: 1fr;
+  }
+  .beliefs-grid{
+    grid-template-columns: 1fr;
+  }
+}
+/* ===========================
+   ABOUT US MOBILE FIX (EXACT)
+   paste at VERY bottom
+=========================== */
+
+/* keep section clean */
+.about-begin{
+  background: #f7f4ee;
+  padding: 70px 0 78px;
+}
+
+/* desktop stays 2 columns */
+.about-begin-inner{
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 52px;
+  align-items: start;
+}
+
+/* image styling */
+.about-begin-media{
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 22px 44px rgba(0,0,0,.18);
+}
+
+.about-begin-media img{
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display:block;
+}
+
+/* MOBILE: image first, then text under, with same spacing like screenshot */
+@media (max-width: 620px){
+  .about-begin{
+    padding: 58px 0 66px;
+  }
+
+  .about-begin-inner{
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+  }
+
+  .about-begin-media img{
+    height: 260px !important;  /* looks like your screenshot */
+    border-radius: 22px;
+  }
+
+  .about-begin-text{
+    padding: 0 2px;
+  }
+}
+/* =========================================
+   ABOUT TIMELINE (MAKE IT LIKE YOUR PIC)
+   Paste at VERY BOTTOM of style.css
+========================================= */
+
+.about-journey{
+  background: #f7f4ee;
+}
+
+.timeline{
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  gap: 34px;
+}
+
+/* row layout: left (year+line) + right (card) */
+.t-row{
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+/* left column */
+.t-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6px;
+}
+
+/* year pill */
+.t-year{
+  min-width: 86px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(216,177,95,.95);
+  color: #2b2623;
+  font-weight: 900;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 12px 22px rgba(0,0,0,.10);
+}
+
+/* thin vertical line under year (like pic) */
+.t-line{
+  width: 2px;
+  height: 64px;               /* adjust if you want longer */
+  background: rgba(108,47,49,.28);
+  margin-top: 16px;
+  border-radius: 999px;
+}
+
+.t-line--end{
+  height: 34px;
+}
+
+/* card on the right */
+.t-card{
+  background: rgba(242,237,227,.92);
+  border-radius: 18px;
+  padding: 22px 22px 20px;
+  box-shadow: 0 16px 30px rgba(0,0,0,.10);
+  border: 1px solid rgba(0,0,0,.05);
+  position: relative;
+}
+
+/* soft inner border like your style */
+.t-card-top{
+  position:absolute;
+  inset: 0;
+  border-radius: 18px;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 2px rgba(216,177,95,.22);
+}
+
+.t-card h3{
+  margin: 0 0 8px;
+  font-family:"Playfair Display", serif;
+  font-size: 20px;
+  color: rgba(183,116,104,.95);
+}
+
+.t-card p{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(43,38,35,.72);
+}
+
+/* MOBILE: keep exactly same look */
+@media (max-width: 620px){
+  .timeline{ gap: 26px; }
+
+  .t-row{
+    grid-template-columns: 92px 1fr;
+    gap: 16px;
+  }
+
+  .t-left{ align-items: flex-start; }
+
+  .t-year{
+    min-width: 78px;
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .t-line{
+    margin-left: 34px; /* keeps line centered under pill */
+  }
+}
+/* ===========================
+   PROJECT MODAL (Centered + Softer Colors)
+=========================== */
+.pmodal{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.pmodal.is-open{
+  display: flex;
+}
+
+/* Backdrop: softer brown, less yellow */
+.pmodal-backdrop{
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 120% at 20% 10%, rgba(170,120,70,.18) 0%, rgba(0,0,0,0) 50%),
+    linear-gradient(180deg, rgba(48,30,18,.90) 0%, rgba(24,14,8,.92) 100%);
+  backdrop-filter: blur(2px);
+}
+
+/* Modal card: centered, premium brown */
+.pmodal-card{
+  position: relative;
+  width: min(520px, calc(100% - 28px));
+  border-radius: 26px;
+  overflow: auto;
+  max-height: calc(100vh - 40px);
+  background:
+    radial-gradient(140% 120% at 30% 0%, rgba(180,130,80,.12) 0%, rgba(0,0,0,0) 60%),
+    linear-gradient(180deg, rgba(82,52,32,.94) 0%, rgba(38,22,14,.96) 100%);
+  box-shadow: 0 30px 90px rgba(0,0,0,.45);
+}
+
+/* Hide scrollbar but keep scroll */
+.pmodal-card::-webkit-scrollbar{ width: 0; height: 0; }
+.pmodal-card{ scrollbar-width: none; }
+
+/* Close button */
+.pmodal-close{
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  font-size: 26px;
+  background: rgba(180,130,80,.28);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+/* Image placement */
+.pmodal-img{
+  padding: 70px 18px 0;
+}
+
+.pmodal-img img{
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 18px;
+  display: block;
+}
+
+/* Text layout */
+.pmodal-body{
+  padding: 16px 26px 28px;
+  text-align: center;
+}
+
+.pmodal-cat{
+  font-weight: 800;
+  letter-spacing: .18em;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: rgba(210,162,79,.9);
+  margin-top: 8px;
+}
+
+.pmodal-title{
+  font-family: "Playfair Display", serif;
+  font-weight: 800;
+  font-size: 34px;
+  line-height: 1.06;
+  margin: 10px 0;
+  color: #f6f0e7;
+}
+
+.pmodal-desc{
+  color: rgba(246,240,231,.88);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 38ch;
+  margin: 0 auto;
+}
+/* ===========================
+   ABOUT — VISIT OUR STUDIO (MAP)
+=========================== */
+.visit-studio{
+  background: #f7f4ee;
+  padding: 86px 0 90px;
+}
+
+.visit-inner{
+  text-align:center;
+}
+
+.visit-top{
+  max-width: 980px;
+  margin: 0 auto 44px;
+}
+
+.visit-icon{
+  width: 74px;
+  height: 74px;
+  margin: 0 auto 18px;
+  border-radius: 18px;
+  background: rgba(183,116,104,.18);
+  display:grid;
+  place-items:center;
+  box-shadow: 0 16px 34px rgba(0,0,0,.10);
+}
+
+.visit-icon svg{
+  width: 38px;
+  height: 38px;
+  fill: none;
+  stroke: rgba(183,116,104,.95);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.visit-top h2{
+  margin: 0 0 10px;
+  font-size: 78px;
+  color: #3b2d28;
+}
+
+.visit-top p{
+  margin: 0 auto;
+  font-size: 22px;
+  line-height: 1.7;
+  color: rgba(43,38,35,.70);
+  max-width: 900px;
+}
+
+.visit-grid{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 34px;
+  align-items: stretch;
+  max-width: 1120px;
+  margin: 0 auto;
+  text-align:left;
+}
+
+.visit-map{
+  border-radius: 22px;
+  overflow:hidden;
+  box-shadow: 0 22px 44px rgba(0,0,0,.14);
+  border: 1px solid rgba(0,0,0,.05);
+  background: rgba(242,237,227,.92);
+  min-height: 420px;
+}
+
+.visit-map iframe{
+  width:100%;
+  height:100%;
+  min-height: 420px;
+  border:0;
+  display:block;
+}
+
+.visit-card{
+  background: rgba(242,237,227,.92);
+  border-radius: 22px;
+  padding: 34px 30px;
+  box-shadow: 0 22px 44px rgba(0,0,0,.10);
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+.visit-row{
+  display:grid;
+  grid-template-columns: 64px 1fr;
+  gap: 16px;
+  align-items:flex-start;
+  padding: 18px 0;
+}
+
+.visit-row + .visit-row{
+  border-top: 1px solid rgba(0,0,0,.06);
+}
+
+.visit-row h3{
+  margin: 0 0 6px;
+  font-size: 34px;
+  color: #3b2d28;
+}
+
+.visit-row p{
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.75;
+  color: rgba(43,38,35,.72);
+}
+
+.v-ico{
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display:grid;
+  place-items:center;
+  box-shadow: 0 14px 28px rgba(0,0,0,.10);
+}
+
+.v-ico svg{
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: rgba(43,38,35,.85);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.v-ico-rose{ background: rgba(183,116,104,.35); }
+.v-ico-green{ background: rgba(143,161,127,.45); }
+.v-ico-gold{ background: rgba(216,177,95,.55); }
+.v-ico-teal{ background: rgba(90,163,163,.45); }
+
+/* Responsive */
+@media (max-width: 1050px){
+  .visit-top h2{ font-size: 58px; }
+  .visit-grid{ grid-template-columns: 1fr; }
+  .visit-map{ min-height: 360px; }
+  .visit-map iframe{ min-height: 360px; }
+}
+
+@media (max-width: 620px){
+  .visit-studio{ padding: 64px 0 70px; }
+  .visit-top{ margin-bottom: 26px; }
+  .visit-top h2{ font-size: 48px; }
+  .visit-top p{ font-size: 18px; }
+  .visit-card{ padding: 22px 18px; }
+  .visit-row{ grid-template-columns: 56px 1fr; padding: 14px 0; }
+  .visit-row h3{ font-size: 28px; }
+  .visit-row p{ font-size: 16px; }
+  .v-ico{ width: 48px; height: 48px; border-radius: 14px; }
+  .v-ico svg{ width: 24px; height: 24px; }
+}
+/* ===========================
+   ABOUT — VISIT OUR STUDIO (COMPACT)
+   SAFE OVERRIDES
+=========================== */
+
+/* reduce overall section height */
+.visit-studio{
+  padding: 64px 0 68px; /* was bigger */
+}
+
+/* tighten top spacing */
+.visit-top{
+  margin-bottom: 32px;
+}
+
+/* slightly smaller title */
+.visit-top h2{
+  font-size: 64px; /* was 78px */
+}
+
+/* slightly smaller subtitle */
+.visit-top p{
+  font-size: 20px;
+}
+
+/* tighter grid spacing */
+.visit-grid{
+  gap: 26px;
+}
+
+/* 🔽 MAP SMALLER */
+.visit-map{
+  min-height: 340px; /* was 420px */
+}
+
+.visit-map iframe{
+  min-height: 340px;
+}
+
+/* info card tighter */
+.visit-card{
+  padding: 26px 24px;
+}
+
+/* rows tighter */
+.visit-row{
+  padding: 14px 0;
+}
+
+/* icons slightly smaller */
+.v-ico{
+  width: 48px;
+  height: 48px;
+}
+
+.v-ico svg{
+  width: 24px;
+  height: 24px;
+}
+
+/* headings inside card */
+.visit-row h3{
+  font-size: 30px;
+}
+
+/* text inside card */
+.visit-row p{
+  font-size: 17px;
+}
+
+/* ===========================
+   MOBILE — EVEN MORE COMPACT
+=========================== */
+@media (max-width: 620px){
+
+  .visit-studio{
+    padding: 52px 0 56px;
+  }
+
+  .visit-top{
+    margin-bottom: 22px;
+  }
+
+  .visit-top h2{
+    font-size: 42px;
+  }
+
+  .visit-top p{
+    font-size: 17px;
+  }
+
+  .visit-map{
+    min-height: 260px;
+  }
+
+  .visit-map iframe{
+    min-height: 260px;
+  }
+
+  .visit-card{
+    padding: 20px 16px;
+  }
+
+  .visit-row{
+    grid-template-columns: 44px 1fr;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .v-ico{
+    width: 42px;
+    height: 42px;
+  }
+
+  .visit-row h3{
+    font-size: 24px;
+  }
+
+  .visit-row p{
+    font-size: 15px;
+  }
+}
+/* ===========================
+   CURRENCY DROPDOWN (HEADER)
+=========================== */
+
+/* screen-reader only label */
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+/* header right icons layout */
+.header-icons{
+  display:flex;
+  align-items:center;
+  gap:12px; /* order: currency → cart → menu */
+}
+
+/* currency wrapper */
+.currency-wrap{
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+
+/* dropdown select */
+.currency-select{
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+
+  padding:8px 34px 8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.14);
+
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);
+
+  font-weight:900;
+  letter-spacing:.3px;
+  cursor:pointer;
+  line-height:1;
+
+  box-shadow:0 8px 18px rgba(0,0,0,.10);
+}
+
+/* dropdown arrow */
+.currency-wrap::after{
+  content:"▾";
+  position:absolute;
+  right:12px;
+  pointer-events:none;
+  font-size:12px;
+  opacity:.75;
+}
+
+/* hover / focus */
+.currency-select:hover{
+  box-shadow:0 12px 26px rgba(0,0,0,.16);
+}
+
+.currency-select:focus-visible{
+  outline:3px solid rgba(210,162,79,.45); /* gold accent */
+  outline-offset:2px;
+}
+
+/* ===========================
+   MOBILE FIX — CURRENCY DROPDOWN
+=========================== */
+@media (max-width: 620px){
+
+  /* make header tighter */
+  .header-row{
+    height: 72px !important;
+  }
+
+  /* reduce spacing between icons */
+  .header-icons{
+    gap: 8px !important;
+  }
+
+  /* currency dropdown wrapper */
+  .currency-wrap{
+    max-width: 64px; /* 🔑 keeps it compact */
+  }
+
+  /* dropdown itself */
+  .currency-select{
+    width: 64px;              /* 🔑 smaller width */
+    padding: 8px 22px 8px 10px;/* 🔑 thicker vertically */
+    font-size: 11px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  /* arrow positioning */
+  .currency-wrap::after{
+    right: 8px;
+    font-size: 10px;
+  }
+
+  /* cart + menu stay square */
+  .cart-link,
+  .nav-toggle{
+    width: 44px;
+    height: 44px;
+  }
+}
+.nav-about {
+  text-align: center;
+  line-height: 1.1;
+}
+.zoom-hover {
+  display: inline-block;
+  text-align: center;
+}
+/* ===========================
+   FIX HEADER LOGO PLACEMENT
+   (paste at VERY BOTTOM)
+=========================== */
+
+/* Keep everything perfectly centered in the header */
+.header-row{
+  align-items: center !important;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  min-width: 0;
+}
+
+.brand-logo{
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background:#fff;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  flex: 0 0 auto;
+}
+
+.brand-logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display:block;
+}
+
+.brand-text{
+  line-height: 0.95;
+  min-width: 0;
+}
+
+.brand-text .top,
+.brand-text .bottom{
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 0.95;
+  margin: 0;
+}
+
+/* keep header centered */
+.header-row{
+  align-items:center;
+}
+
+/* phone: stop logo/text from becoming huge and breaking layout */
+@media (max-width: 620px){
+  .brand-logo{
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .brand-text .top,
+  .brand-text .bottom{
+    font-size: 22px;
+    line-height: 0.95;
+  }
+}
+/* stop nav from colliding with brand */
+.header-row{
+  gap: 14px;
+}
+
+.brand{
+  flex: 0 0 auto;
+}
+
+/* nav takes remaining space and can wrap nicely */
+.nav{
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 18px; /* row gap / col gap */
+}
+
+/* keep icons on right always */
+.header-icons{
+  flex: 0 0 auto;
+}
+
+/* optional: slightly smaller nav text so it fits better */
+.nav a{
+  font-size: 14px;
+  padding: 8px 10px;
+}
+/* ===== HERO BADGE CENTER FIX (ALL PAGES) ===== */
+
+.page-hero-inner,
+.about-hero-inner,
+.projects-hero-inner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* force badge to be perfectly centered */
+.page-hero-badge,
+.about-hero-badge,
+.projects-hero .page-hero-badge,
+.painting-hero-badge,
+.page-hero-icon{
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+/* ===========================
+   NAV DROPDOWN (DESKTOP)
+=========================== */
+.nav{
+  display:flex;
+  align-items:center;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+.nav-dd{ position:relative; display:flex; align-items:center; }
+
+.nav-dd-toggle{
+  border: 0;
+  background: transparent;
+  color: rgba(244,239,230,.95);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.nav-dd-caret{ font-size: 12px; opacity:.85; }
+
+.nav-dd-menu{
+  position:absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+
+  background: rgba(242,237,227,.98);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
+
+  padding: 10px;
+  display:none;
+  z-index: 99999;
+}
+
+.nav-dd-menu a{
+  display:block;
+  padding: 10px 12px;
+  border-radius: 12px;
+  text-decoration:none;
+  color: #2b2623;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.nav-dd-menu a:hover{ background: rgba(183,116,104,.15); }
+
+.nav-dd-menu a.active{
+  background: rgba(216,177,95,.85);
+}
+
+@media (min-width: 621px){
+  .nav-dd:hover .nav-dd-menu{ display:block; }
+}
+
+/* mobile: you already hide .nav on phone */
+/* ===========================
+   DROPDOWN STAY OPEN (NO GAP)
+=========================== */
+.nav-dd{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 🔑 invisible bridge so the hover doesn't break */
+.nav-dd::after{
+  content:"";
+  position:absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 14px;      /* bridge the gap */
+}
+
+.nav-dd-menu{
+  top: calc(100% + 6px);  /* smaller gap */
+  display: none;
+}
+
+/* open when hovering button OR menu */
+.nav-dd:hover .nav-dd-menu,
+.nav-dd:focus-within .nav-dd-menu{
+  display: block;
+}
+
+/* divider inside dropdown */
+.nav-dd-sep{
+  height: 1px;
+  background: rgba(0,0,0,.08);
+  margin: 8px 6px;
+}
+.nav-dd.open .nav-dd-menu{ display:block; }
+.nav-dd{ position:relative; }
+
+.nav-dd-btn{
+  border:0;
+  background: transparent;
+  color: rgba(244,239,230,.95);
+  font-weight: 800;
+  font-size: 15px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.nav-dd-menu{
+  position:absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 240px;
+  background: rgba(242,237,227,.96);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
+  padding: 10px;
+  display:none;
+  z-index: 99999;
+}
+
+.nav-dd.is-open .nav-dd-menu{ display:block; }
+
+.nav-dd-menu a{
+  display:block;
+  text-decoration:none;
+  color: #2b2623;
+  font-weight: 800;
+  padding: 12px 12px;
+  border-radius: 14px;
+}
+
+.nav-dd-menu a:hover{
+  background: rgba(183,116,104,.16);
+}
+
+@media (max-width: 620px){
+  .nav-dd{ display:none; } /* mobile uses drawer links */
+}
+/* ===== Projects grid: keep cards centered and clean ===== */
+.projects-grid{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* If you’re using column masonry, this keeps each card centered */
+.project-card{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* If your “squares” are the filter pills, this centers them too */
+.projects-filter-inner{
+  justify-content: center;
+}
+.filter-pills{
+  justify-content: center;
+}
+/* ===========================
+   FIX HEADER ICON ALIGNMENT (FINAL)
+   paste at VERY BOTTOM
+=========================== */
+
+.site-header .header-row{
+  display:flex !important;
+  align-items:center !important;
+}
+
+/* Right side: currency + cart + menu */
+.site-header .header-icons{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:10px !important;
+}
+
+
+.site-header .cart-link,
+.site-header .nav-toggle{
+  width:44px !important;
+  height:44px !important;
+  place-items:center !important;
+}
+
+/* Keep cart svg centered */
+.site-header .cart-link svg{
+  width:22px !important;
+  height:22px !important;
+  display:block !important;
+}
+
+/* Badge stays attached */
+.site-header .cart-badge{
+  top:-6px !important;
+  right:-6px !important;
+}
+/* =========================
+   HERO MOBILE POLISH
+   (paste at VERY BOTTOM)
+========================= */
+@media (max-width: 620px){
+  /* more space under the header */
+  .hero-inner{
+    padding-top: 14px;
+  }
+
+  /* headline slightly smaller + tighter */
+  .hero h1{
+    font-size: 40px;
+    line-height: 1.05;
+  }
+
+  /* improve readability on busy background */
+  .hero h1,
+  .hero p{
+    text-shadow: 0 8px 20px rgba(0,0,0,.35);
+  }
+}
+@media (max-width: 620px){
+  .hero p{
+    opacity: 0.95;
+    font-weight: 500;
+  }
+}
+@media (max-width: 620px){
+  .hero-mouse{
+    display: none;
+  }
+}
+/* footer alignment fix */
+.footer .foot { 
+  text-align: left !important; 
+}
+
+.footer .foot h4{
+  text-align: left !important;
+}
+
+.footer .foot a.zoom-hover{
+  display: block !important;
+  text-align: left !important;
+  margin: 10px 0 !important;
+  padding: 0 !important;
+}
+/* ===========================
+   MOSAIC PAGE (NEW)
+=========================== */
+
+.mosaic-hero{
+  position: relative;
+  min-height: 520px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.mosaic-hero-bg{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(1200px 600px at 50% 30%, rgba(255,255,255,.10), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.18));
+  /* If your site already has a base background color, this will blend nicely */
+}
+
+.mosaic-hero-inner{
+  position: relative;
+  text-align: center;
+  padding: 84px 0;
+  max-width: 980px;
+}
+
+.mosaic-hero-icon{
+  width: 74px;
+  height: 74px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 22px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
+  background: var(--gold);
+}
+
+.mosaic-hero-icon svg{
+  width: 34px;
+  height: 34px;
+  fill: rgba(255,255,255,.92);
+}
+
+.mosaic-hero-title{
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  letter-spacing: .4px;
+  margin: 0 0 14px;
+  font-size: clamp(44px, 6vw, 76px);
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+
+.mosaic-hero-text{
+  margin: 0 auto;
+  max-width: 880px;
+  line-height: 1.7;
+  font-size: clamp(16px, 1.8vw, 22px);
+  color: rgba(255,255,255,.86);
+}
+
+/* PRODUCTS */
+.mosaic-products{
+  padding: 56px 0 10px;
+}
+
+.mosaic-products-grid{
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mosaic-card{
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(255,255,255,.70);
+  box-shadow: 0 18px 45px rgba(0,0,0,.10);
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.mosaic-card-img{
+  position: relative;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.mosaic-featured{
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  background: rgba(210,162,79,.95);
+  color: rgba(0,0,0,.75);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12);
+}
+
+.mosaic-card-body{
+  padding: 22px 22px 20px;
+}
+
+.mosaic-card-body h3{
+  font-family: "Playfair Display", serif;
+  margin: 0 0 8px;
+  font-size: 26px;
+  color: rgba(35,28,25,.92);
+}
+
+.mosaic-desc{
+  margin: 0 0 18px;
+  color: rgba(0,0,0,.60);
+  line-height: 1.65;
+}
+
+.mosaic-price-label{
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: rgba(0,0,0,.52);
+  margin-bottom: 6px;
+}
+
+.mosaic-price{
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--pink-dark);
+  margin-bottom: 18px;
+  font-family: "Playfair Display", serif;
+}
+
+.mosaic-qty-row{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.mosaic-qty-label{
+  font-weight: 700;
+  color: rgba(0,0,0,.62);
+}
+
+.mosaic-qty-btn{
+  width: 42px;
+  height: 38px;
+  border-radius: 12px;
+  border: 0;
+  background: rgba(0,0,0,.10);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.mosaic-qty-num{
+  min-width: 18px;
+  text-align: center;
+  font-weight: 800;
+  color: rgba(0,0,0,.75);
+}
+
+/* Add to cart button (same vibe as your big rounded buttons) */
+.mosaic-add{
+  width: 100%;
+  height: 54px;
+  border-radius: 18px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 16px;
+  color: rgba(255,255,255,.92);
+  background: rgba(178,111,99,.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 16px 34px rgba(0,0,0,.14);
+}
+
+.mosaic-cart-ico svg{
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: rgba(255,255,255,.92);
+  stroke-width: 2;
+}
+
+/* STYLES section */
+.mosaic-styles{
+  position: relative;
+  padding: 84px 0;
+  overflow: hidden;
+  margin-top: 26px;
+}
+
+.mosaic-styles-bg{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 480px at 50% 30%, rgba(255,255,255,.20), transparent 60%),
+    linear-gradient(180deg, rgba(178,111,99,.22), rgba(210,162,79,.10));
+}
+
+.mosaic-section-title{
+  position: relative;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(32px, 4vw, 52px);
+  margin: 0 0 34px;
+  color: rgba(35,28,25,.92);
+}
+
+.mosaic-style-cards{
+  position: relative;
+  display: grid;
+  gap: 26px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mosaic-style-card{
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 22px;
+  padding: 28px 22px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0,0,0,.10);
+}
+
+.mosaic-style-icon{
+  width: 66px;
+  height: 66px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  background: rgba(178,111,99,.92);
+  color: rgba(255,255,255,.95);
+  font-size: 26px;
+}
+
+.mosaic-style-card h3{
+  font-family: "Playfair Display", serif;
+  margin: 0 0 10px;
+  font-size: 26px;
+  color: rgba(35,28,25,.92);
+}
+
+.mosaic-style-card p{
+  margin: 0;
+  color: rgba(0,0,0,.62);
+  line-height: 1.65;
+}
+
+/* PROCESS */
+.mosaic-process{
+  padding: 80px 0 60px;
+}
+
+.mosaic-process-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px;
+  align-items: start;
+}
+
+.mosaic-step{
+  text-align: center;
+  padding: 14px 10px;
+}
+
+.mosaic-step-num{
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  background: rgba(78,154,160,.90); /* teal from your theme */
+  color: rgba(255,255,255,.95);
+  font-weight: 900;
+  font-size: 18px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.12);
+}
+
+.mosaic-step h3{
+  font-family: "Playfair Display", serif;
+  margin: 0 0 10px;
+  font-size: 24px;
+  color: rgba(35,28,25,.92);
+}
+
+.mosaic-step p{
+  margin: 0;
+  color: rgba(0,0,0,.62);
+  line-height: 1.65;
+}
+
+/* RESPONSIVE */
+@media (max-width: 980px){
+  .mosaic-products-grid{ grid-template-columns: 1fr; }
+  .mosaic-style-cards{ grid-template-columns: 1fr; }
+  .mosaic-process-grid{ grid-template-columns: 1fr; }
+  .mosaic-card-img{ height: 260px; }
+  .mosaic-hero{ min-height: 460px; }
+  .mosaic-hero-inner{ padding: 70px 0; }
+}
+/* Show hamburger ONLY on phone */
+.nav-toggle { display: none; }
+
+@media (max-width: 900px){
+  .nav-toggle { display: inline-flex; }
+}
+/* =========================
+   FORCE: Hamburger only on phone
+========================= */
+
+/* Desktop */
+@media (min-width: 901px){
+  .nav-toggle{
+    display: none !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 900px){
+  .nav-toggle{
+    display: inline-flex !important;
+  }
+}
+/* ===========================
+   FINAL HEADER ALIGNMENT (FIX CART FLOAT)
+   paste at VERY BOTTOM
+=========================== */
+
+.site-header .header-row{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  height: 92px !important;
+}
+
+.site-header .brand,
+.site-header .nav,
+.site-header .header-icons{
+  display:flex !important;
+  align-items:center !important;
+}
+
+.site-header .header-icons{
+  margin-left:auto !important;
+  gap: 10px !important;
+}
+
+/* Make cart + menu same box size */
+.site-header .cart-link{
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 14px !important;
+  display:grid !important;
+  place-items:center !important;
+  position: relative !important;
+}
+
+/* nav toggle default hidden (desktop) */
+.site-header .nav-toggle{
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 14px !important;
+  place-items:center !important;
+  position: relative !important;
+  display: none !important;
+}
+
+
+/* Keep cart icon centered */
+.site-header .cart-link svg{
+  width: 24px !important;
+  height: 24px !important;
+  display:block !important;
+}
+
+/* Badge position ONLY */
+.site-header .cart-badge{
+  position:absolute !important;
+  top:-6px !important;
+  right:-6px !important;
+}
+
+/* Mobile: slightly smaller header height */
+@media (max-width: 620px){
+  .site-header .header-row{ height: 78px !important; }
+  .site-header .cart-link,
+  .site-header .nav-toggle{
+    width: 44px !important;
+    height: 44px !important;
+  }
+}
+/* ===========================
+   HEADER FIX (FINAL - CLEAN)
+   paste at VERY BOTTOM
+=========================== */
+
+.site-header .header-row{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  flex-wrap:nowrap !important;
+}
+
+/* keep brand left */
+.site-header .brand{ flex:0 0 auto !important; }
+
+/* nav centered on desktop */
+.site-header .nav{
+  flex: 1 1 auto !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap: 22px !important;
+  min-width: 0 !important;
+}
+
+/* icons always right */
+.site-header .header-icons{
+  flex:0 0 auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap: 10px !important;
+}
+
+/* same size = no “flying” */
+.site-header .cart-link,
+.site-header .nav-toggle{
+  width: 44px !important;
+  height: 44px !important;
+  display:grid !important;
+  place-items:center !important;
+}
+
+.site-header .cart-link svg{
+  width: 22px !important;
+  height: 22px !important;
+  display:block !important;
+}
+
+/* badge stays attached */
+.site-header .cart-badge{
+  top: -6px !important;
+  right: -6px !important;
+}
+
+/* IMPORTANT: menu hidden by default */
+.site-header .nav-toggle{ display:none !important; }
+
+/* PHONE: hide nav links, show menu only */
+@media (max-width: 620px){
+  .site-header .nav{ display:none !important; }
+  .site-header .nav-toggle{ display:grid !important; }
+}
+/* ===========================
+   ART RESTORATION (PAGE ONLY)
+   paste at VERY BOTTOM
+=========================== */
+
+/* HERO */
+.restore-hero{
+  position: relative;
+  min-height: 520px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+
+.restore-hero-bg{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,.10), transparent 55%),
+    linear-gradient(180deg, rgba(108,47,49,.95), rgba(62,25,26,.96));
+}
+
+.restore-hero-inner{
+  position: relative;
+  text-align:center;
+  padding: 92px 0;
+  max-width: 980px;
+  color: #f4efe6;
+}
+
+.restore-hero-badge{
+  width: 74px;
+  height: 74px;
+  border-radius: 18px;
+  background: rgba(216,177,95,.90);
+  display:grid;
+  place-items:center;
+  margin: 0 auto 24px;
+  box-shadow: 0 18px 30px rgba(0,0,0,.22);
+}
+
+.restore-title{
+  font-size: clamp(44px, 6vw, 78px);
+  margin: 0 0 14px;
+  text-shadow: 0 16px 34px rgba(0,0,0,.22);
+}
+
+.restore-sub{
+  margin: 0 auto;
+  max-width: 900px;
+  font-size: 20px;
+  line-height: 1.8;
+  opacity: .92;
+}
+
+/* PRODUCTS SECTION (empty grid, JS fills later) */
+.restore-products{
+  background: #f7f4ee;
+  padding: 52px 0 72px;
+}
+
+/* SERVICES (beige gradient like screenshot) */
+.restore-services{
+  position: relative;
+  padding: 86px 0 94px;
+  overflow:hidden;
+}
+
+.restore-services-bg{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 500px at 50% 20%, rgba(255,255,255,.22), transparent 60%),
+    linear-gradient(180deg, rgba(216,177,95,.18), rgba(183,116,104,.10));
+}
+
+.restore-section-title{
+  position: relative;
+  text-align:center;
+  font-size: clamp(34px, 4.3vw, 58px);
+  margin: 0 0 44px;
+  color: #3b2d28;
+}
+
+.restore-service-grid{
+  position: relative;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 28px;
+}
+
+.restore-service-card{
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 22px;
+  padding: 34px 26px;
+  text-align:center;
+  box-shadow: 0 18px 45px rgba(0,0,0,.10);
+}
+
+.restore-service-icon{
+  width: 66px;
+  height: 66px;
+  border-radius: 999px;
+  display:grid;
+  place-items:center;
+  margin: 0 auto 16px;
+  background: rgba(183,116,104,.92);
+  color: #fff;
+  font-size: 26px;
+}
+
+.restore-service-card h3{
+  margin: 0 0 10px;
+  font-size: 26px;
+  color: #3b2d28;
+}
+
+.restore-service-card p{
+  margin: 0;
+  color: rgba(43,38,35,.72);
+  line-height: 1.65;
+}
+
+/* PROCESS (white section) */
+.restore-process{
+  background: #fbfaf7;
+  padding: 86px 0 92px;
+}
+
+.restore-process-grid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 26px;
+  align-items:start;
+  text-align:center;
+}
+
+.restore-step-num{
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  display:grid;
+  place-items:center;
+  margin: 0 auto 16px;
+  background: rgba(108,47,49,.92);
+  color: #fff;
+  font-weight: 900;
+  box-shadow: 0 16px 40px rgba(0,0,0,.12);
+}
+
+.restore-step h3{
+  margin: 0 0 10px;
+  font-size: 24px;
+  color: #3b2d28;
+}
+
+.restore-step p{
+  margin: 0;
+  color: rgba(43,38,35,.72);
+  line-height: 1.65;
+}
+
+/* STATS (brown section at end) */
+.restore-stats{
+  position: relative;
+  padding: 92px 0 96px;
+  overflow:hidden;
+  color: #f4efe6;
+}
+
+.restore-stats-bg{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.06), transparent 60%),
+    linear-gradient(180deg, rgba(96,72,55,.96), rgba(66,49,38,.96));
+}
+
+.restore-stats .container{ position: relative; }
+
+.restore-stats-title{
+  text-align:center;
+  font-size: clamp(34px, 4.8vw, 58px);
+  margin: 0 0 18px;
+}
+
+.restore-stats-text{
+  max-width: 980px;
+  margin: 0 auto 44px;
+  text-align:center;
+  line-height: 1.75;
+  font-size: 18px;
+  opacity: .92;
+}
+
+.restore-stat-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 26px;
+}
+
+.restore-stat-card{
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 22px;
+  padding: 28px 22px;
+  text-align:center;
+}
+
+.restore-stat-big{
+  font-family: "Playfair Display", serif;
+  font-size: 46px;
+  color: rgba(216,177,95,.95);
+  font-weight: 900;
+}
+
+.restore-stat-small{
+  margin-top: 6px;
+  opacity: .92;
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 1050px){
+  .restore-service-grid{ grid-template-columns: 1fr; }
+  .restore-process-grid{ grid-template-columns: repeat(2, 1fr); }
+  .restore-stat-grid{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px){
+  .restore-hero-inner{ padding: 76px 0; }
+  .restore-sub{ font-size: 17px; }
+  .restore-process-grid{ grid-template-columns: 1fr; }
+}
+/* ===========================
+   ART RESTORATION — COLORS FIX
+   (paste at VERY BOTTOM)
+=========================== */
+.restoration-page{
+  background: #f7f4ee; /* stops the green body background */
+}
+
+/* HERO (maroon gradient like screenshot) */
+.restoration-hero{
+  padding: 120px 0 110px;
+  background:
+    radial-gradient(120% 120% at 50% 10%, rgba(255,255,255,.10) 0%, rgba(0,0,0,0) 55%),
+    linear-gradient(180deg, #6c2f31 0%, #5e2728 100%);
+  color:#f4efe6;
+  box-shadow: var(--shadow-soft);
+}
+.restoration-hero-inner{ text-align:center; max-width: 980px; }
+.restoration-hero-badge{
+  width: 74px; height: 74px; border-radius: 18px;
+  background: rgba(216,177,95,.88);
+  display:grid; place-items:center;
+  margin: 0 auto 22px;
+  box-shadow: 0 18px 30px rgba(0,0,0,.18);
+}
+.restoration-hero-badge svg{ width: 34px; height: 34px; fill: none; stroke: #fff; stroke-width: 2; }
+.restoration-hero-title{
+  font-family:"Playfair Display", serif;
+  font-size: clamp(44px, 6vw, 76px);
+  margin: 0 0 14px;
+  text-shadow: 0 16px 34px rgba(0,0,0,.20);
+}
+.restoration-hero-text{
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.8;
+  opacity: .92;
+}
+
+/* Products area (cream like your screenshot) */
+.restoration-products{
+  background: #f7f4ee;
+  padding: 54px 0 24px;
+}
+
+/* Services section (beige gradient) */
+.restoration-services{
+  position: relative;
+  padding: 84px 0;
+  overflow:hidden;
+}
+.restoration-services-bg{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 500px at 50% 20%, rgba(255,255,255,.20), transparent 60%),
+    linear-gradient(180deg, rgba(210,162,79,.18), rgba(183,116,104,.18));
+}
+.restoration-section-title{
+  position: relative;
+  text-align:center;
+  font-family:"Playfair Display", serif;
+  font-size: clamp(32px, 4vw, 52px);
+  margin: 0 0 34px;
+  color: #3b2d28;
+}
+.restoration-service-grid{
+  position: relative;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 26px;
+}
+.restoration-service-card{
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 22px;
+  padding: 28px 22px;
+  text-align:center;
+  box-shadow: 0 16px 40px rgba(0,0,0,.10);
+}
+.restoration-service-icon{
+  width: 66px; height: 66px; border-radius: 999px;
+  margin: 0 auto 16px;
+  display:grid; place-items:center;
+  background: rgba(183,116,104,.92);
+  color:#fff;
+  font-size: 26px;
+}
+
+/* Process section (white/ivory like screenshot) */
+.restoration-process{
+  background: #fbfaf6;
+  padding: 80px 0 70px;
+}
+.restoration-process-grid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 26px;
+}
+.restoration-step{ text-align:center; padding: 14px 10px; }
+.restoration-step-num{
+  width: 62px; height: 62px; border-radius: 999px;
+  display:grid; place-items:center;
+  margin: 0 auto 16px;
+  background: #6c2f31;
+  color:#fff;
+  font-weight: 900;
+  box-shadow: 0 16px 40px rgba(0,0,0,.12);
+}
+.restoration-step h3{
+  font-family:"Playfair Display", serif;
+  margin: 0 0 10px;
+  font-size: 24px;
+  color: #3b2d28;
+}
+.restoration-step p{ margin:0; color: rgba(43,38,35,.72); line-height:1.65; }
+
+/* Stats section (brown overlay like screenshot) */
+.restoration-stats{
+  position: relative;
+  padding: 90px 0 86px;
+  overflow:hidden;
+  color:#f4efe6;
+}
+.restoration-stats-bg{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
+    linear-gradient(180deg, #6b5b51 0%, #5a4d45 100%);
+}
+.restoration-stats-inner{ position:relative; text-align:left; }
+.restoration-stats-title{
+  font-family:"Playfair Display", serif;
+  font-size: clamp(34px, 5vw, 56px);
+  margin: 0 0 14px;
+}
+.restoration-stats-text{
+  max-width: 980px;
+  line-height: 1.75;
+  opacity:.92;
+  margin: 0 0 34px;
+}
+.restoration-stats-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 22px;
+}
+.restoration-stat-card{
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 18px;
+  padding: 26px 22px;
+  backdrop-filter: blur(4px);
+}
+.restoration-stat-num{
+  font-family:"Playfair Display", serif;
+  font-size: 46px;
+  color: rgba(216,177,95,.95);
+  margin-bottom: 6px;
+}
+.restoration-stat-label{ opacity:.92; font-weight: 700; }
+
+/* Responsive */
+@media (max-width: 980px){
+  .restoration-service-grid{ grid-template-columns: 1fr; }
+  .restoration-process-grid{ grid-template-columns: 1fr; }
+  .restoration-stats-grid{ grid-template-columns: 1fr; }
+}
+/* =========================================
+   🔥 GLOBAL HEADER FIX (FOR ALL PAGES)
+   Makes every header identical everywhere
+========================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--pink); /* your exact brand color */
+  height: 90px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.site-header .container {
+  width: 100%;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+}
+
+/* BRAND */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.brand-text .top,
+.brand-text .bottom {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1;
+  color: white;
+}
+
+.brand-text .top {
+  font-size: 26px;
+}
+
+.brand-text .bottom {
+  font-size: 26px;
+}
+
+/* NAV LINKS */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.nav a,
+.nav-dd-btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: white;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.nav a.active {
+  font-weight: 800;
+}
+
+/* DROPDOWN */
+.nav-dd-menu {
+  background: white;
+  border-radius: 12px;
+  padding: 12px 0;
+}
+
+.nav-dd-menu a {
+  font-weight: 500;
+  color: #2a2320;
+  padding: 10px 22px;
+  display: block;
+}
+
+/* CART + ICONS */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cart-link svg {
+  width: 22px;
+  height: 22px;
+  stroke: white;
+}
+
+/* REMOVE ANY PAGE-SPECIFIC HEADER BACKGROUNDS */
+.mosaic-hero + .site-header,
+body[class*="-page"] .site-header {
+  background: #b26f63 !important;
+}
+/* ===========================
+   PRODUCT IMAGE FIX (NO CUT)
+   Works for <img> AND background-image
+   Paste at VERY BOTTOM
+=========================== */
+
+/* 1) If your JS uses <div class="pimg"><img ...></div> */
+.pimg{
+  height: 210px;            /* keep same card height */
+  overflow: hidden;
+  border-radius: 22px 22px 0 0;
+  background: rgba(0,0,0,.05);  /* nice behind empty space */
+  display: grid;
+  place-items: center;
+}
+
+.pimg img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;      /* ✅ NO CROP */
+  display: block;
+}
+
+/* 2) If your JS uses background-image on .pimg */
+.pimg{
+  background-size: contain !important;   /* ✅ NO CROP */
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+/* ============================
+   FORCE CENTER: "Our Collections" + cards row
+   paste at VERY BOTTOM
+============================ */
+
+/* Center the title block */
+.section.collections .section-title{
+  max-width: 900px !important;
+  margin: 0 auto 30px auto !important;
+  text-align: center !important;
+}
+
+/* Center the 3 cards row (desktop) */
+.section.collections .grid-3{
+  display: grid !important;
+  grid-template-columns: repeat(3, 360px) !important; /* fixed card width */
+  justify-content: center !important;                /* ✅ centers the whole grid */
+  gap: 26px !important;
+}
+
+/* Tablet */
+@media (max-width: 1050px){
+  .section.collections .grid-3{
+    grid-template-columns: repeat(2, 360px) !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 620px){
+  .section.collections .grid-3{
+    grid-template-columns: 1fr !important;
+  }
+}
+/* ============================
+   FIX COLLECTION CARD ICON POSITION
+   Paste at VERY BOTTOM
+============================ */
+
+/* Make sure image container is positioned properly */
+.card-img{
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 22px 22px 0 0 !important;
+}
+
+/* Perfect top-right position */
+.badge-circle{
+  position: absolute !important;
+  top: 16px !important;
+  right: 16px !important;
+
+  width: 52px !important;
+  height: 52px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border-radius: 50% !important;
+  background: rgba(216,177,95,.92) !important;
+
+  box-shadow: 0 12px 24px rgba(0,0,0,.15) !important;
+  z-index: 5 !important;
+}
+
+/* Keep icon centered inside circle */
+.badge-circle svg{
+  width: 22px !important;
+  height: 22px !important;
+}
+/* FORCE Featured Works title to match Our Collections title exactly */
+.featured .section-title h2{
+  color: #3b2d28 !important;
+}
+
+.featured .section-title p{
+  color: rgba(43,38,35,.70) !important;
+}
+/* FORCE all section titles to use the exact same color */
+.section-title h2{
+  color: #3b2d28 !important;
+}
+.section-title p{
+  color: rgba(43,38,35,.70) !important;
+}
+.about-artisans{
+  background: var(--teal); /* keeps your light sage background */
+  padding: 100px 0;
+}
+
+.about-artisans .container{
+  max-width: 760px;   /* narrower = cleaner */
+  margin: 0 auto;
+}
+
+.about-artisans p{
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--text);
+  text-align: left;
+  margin: 0 auto;
+}
+
+
+/* Title */
+.about-artisans h2{
+  font-family: "Playfair Display", serif;
+  font-size: 64px;
+  margin-bottom: 32px;
+  color: var(--text);   /* dark brown */
+}
+/* =========================
+   ARTISTIC HERO TYPE
+========================= */
+
+.hero h1{
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(44px, 6vw, 92px);
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+  color: #f2ede3;                 /* keep your creamy white */
+  text-shadow: 0 10px 30px rgba(0,0,0,.18);
+  max-width: 1100px;
+  margin: 0 auto 18px auto;
+}
+
+.hero h1 em{
+  font-family: var(--font-art);
+  font-style: normal;             /* makes it look “designed” not italic */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.hero p{
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(242,237,227,.88);
+  max-width: 780px;
+  margin: 0 auto;
+}
+/* FIX HERO CUTTING */
+.hero{
+  min-height: calc(100vh - 90px); /* 90px = navbar height (adjust if needed) */
+  padding: 140px 20px 90px;       /* top / sides / bottom */
+  display: flex;
+  align-items: center;
+}
+
+.hero .container,
+.hero .hero-content{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* safer headline size so it never overflows */
+.hero h1{
+  font-size: clamp(34px, 5vw, 80px);
+  line-height: 1.06;
+  margin: 0 auto 16px;
+  max-width: 1100px;
+}
+
+/* keep subtitle + buttons visible */
+.hero p{
+  margin: 0 auto 22px;
+  max-width: 780px;
+}
+
+/* MOBILE adjustments */
+@media (max-width: 700px){
+  .hero{
+    min-height: calc(100vh - 70px);
+    padding: 110px 16px 70px;
+  }
+  .hero h1{
+    font-size: clamp(30px, 9vw, 52px);
+  }
+}
+/* ===============================
+   FOOTER SAME AS HEADER (GOLD)
+=============================== */
+
+.footer{
+  background: var(--pink) !important; /* same gold as header */
+  color: #f4efe6 !important;
+}
+
+.footer h4,
+.footer a,
+.foot-brand{
+  color: #ffffff !important;
+}
+
+/* remove dark brown footer bottom line */
+.footer-bottom{
+  border-top: none !important;
+}
+/* Fix About hero text */
+.about-hero h1,
+.about-hero p,
+.page-hero h1,
+.page-hero p {
+  color: #2b2623 !important;
+  text-shadow: none !important;
+}
+/* Remove hero separator line */
+.about-hero,
+.page-hero {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.about-hero::after,
+.page-hero::after {
+  display: none !important;
+}
+/* ===========================
+   OUR PROJECTS – TEXT ONLY DARK BROWN
+=========================== */
+
+:root{
+  --brown:#2b2623;
+  --ivory:#D8D6CF;
+}
+
+/* HERO background stays ivory (do nothing to background) */
+
+/* Make only hero text dark brown */
+.projects-hero h1,
+.projects-hero p{
+  color: var(--brown) !important;
+}
+
+
+/* ===========================
+   FILTER BAR – SAME GOLD AS HEADER
+=========================== */
+
+/* Make filter bar same as header */
+.projects-filter{
+  background: var(--pink) !important;   /* your header gold */
+}
+
+/* Filter label + icon dark brown */
+.projects-filter .filter-label{
+  color: var(--brown) !important;
+  font-weight: 800;
+}
+
+.projects-filter .filter-icon svg{
+  stroke: var(--brown) !important;
+}
+
+/* Active pill (All) */
+.filter-pills .pill-btn.is-active{
+  background: var(--brown) !important;
+  color: var(--ivory) !important;
+}
+.reasons h2{
+  color: #2b2623 !important;
+}
+/* ===========================
+   STAINED GLASS – REMOVE TEAL
+   MAKE HERO IVORY
+=========================== */
+
+.page-hero--teal{
+  background: #D8D6CF !important;  /* your ivory */
+}
+
+/* Make text dark brown for contrast */
+.page-hero--teal h1,
+.page-hero--teal p{
+  color: #2b2623 !important;
+}
+/* FORCE STAINED GLASS HERO TO IVORY (kills teal + overlays) */
+.page-hero.page-hero--teal,
+section.page-hero.page-hero--teal{
+  background: #D8D6CF !important;
+  background-image: none !important;
+}
+
+.page-hero.page-hero--teal::before,
+.page-hero.page-hero--teal::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* Text color */
+.page-hero.page-hero--teal h1,
+.page-hero.page-hero--teal p,
+.page-hero.page-hero--teal .h-font{
+  color: #2b2623 !important;
+}
+/* ===========================
+   ICONOGRAPHY PAGE — FORCE TEXT DARK BROWN
+=========================== */
+
+.page-iconography h1,
+.page-iconography h2,
+.page-iconography h3,
+.page-iconography p,
+.page-iconography .h-font{
+  color:#2b2623 !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+}
+
+/* If you had a “hero overlay” making it pale */
+.page-iconography .page-hero,
+.page-iconography .projects-hero,
+.page-iconography section{
+  color:#2b2623 !important;
+}
+
+/* Cards text too */
+.page-iconography .card,
+.page-iconography .feature-card,
+.page-iconography .reason-card{
+  color:#2b2623 !important;
+}
+.page-iconography .card p,
+.page-iconography .feature-card p,
+.page-iconography .reason-card p{
+  color:#2b2623 !important;
+  opacity:1 !important;
+}
+/* ICONOGRAPHY PAGE — DARK BROWN TEXT (NOT FOOTER) */
+.page-iconography :is(.page-hero, .page-products, .process, .reasons, .projects-wrap, .projects-hero, .about-hero, main) 
+  :is(h1,h2,h3,p){
+  color:#2b2623 !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+}
+
+/* keep footer text normal */
+.page-iconography .footer,
+.page-iconography .footer p,
+.page-iconography .footer a{
+  color: inherit !important;
+  opacity: 1 !important;
+}
+/* ===========================
+   MOSAIC HERO — MAKE IVORY
+=========================== */
+
+/* Remove background layer */
+.mosaic-hero-bg{
+  display:none !important;
+}
+
+/* Make hero ivory */
+.mosaic-hero{
+  background:#D8D6CF !important;
+}
+
+/* Dark brown text */
+.mosaic-hero-title,
+.mosaic-hero-text{
+  color:#2b2623 !important;
+  text-shadow:none !important;
+}
+/* ===========================
+   MOSAIC STYLES — MAKE IVORY
+=========================== */
+
+/* Remove gradient background layer */
+.mosaic-styles-bg{
+  display: none !important;
+}
+
+/* Make section ivory */
+.mosaic-styles{
+  background: #D8D6CF !important;
+}
+
+/* Make title dark brown */
+.mosaic-section-title{
+  color: #2b2623 !important;
+}
+
+/* Make cards text dark brown */
+.mosaic-style-card h3,
+.mosaic-style-card p{
+  color: #2b2623 !important;
+}
+/* ✅ Restoration header = EXACT same as other pages */
+body.restoration-page .site-header{
+  background: var(--pink) !important;
+}
+/* ===== RESTORATION SERVICES → FORCE IVORY ===== */
+
+.restoration-services,
+.restoration-services-bg{
+  background: #D8D6CF !important;   /* your ivory */
+}
+/* ===== RESTORATION STATS → FORCE IVORY ===== */
+
+.restoration-stats,
+.restoration-stats-bg{
+  background: #D8D6CF !important;   /* your ivory */
+}
+/* ===========================
+   OUR PROJECTS - PUBLICATIONS PANEL
+=========================== */
+.projects-filter-inner{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.pubs-panel{
+  flex: 1;
+  min-width: 260px;
+  max-width: 380px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.45);
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+}
+
+.pubs-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.pubs-title{
+  font-weight: 900;
+}
+
+.pubs-clear{
+  border: 0;
+  background: rgba(0,0,0,.08);
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.pubs-list{
+  display:grid;
+  gap:8px;
+}
+
+.pubs-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  cursor:pointer;
+  background: rgba(255,255,255,.6);
+  border: 1px solid rgba(0,0,0,.06);
+  transition: transform .12s ease;
+}
+
+.pubs-item:hover{
+  transform: translateY(-1px);
+}
+
+.pubs-item.is-active{
+  outline: 2px solid rgba(0,0,0,.18);
+}
+
+.pubs-name{
+  font-weight: 800;
+}
+
+.pubs-count{
+  opacity:.75;
+  font-weight: 900;
+}
+
+.pubs-empty{
+  opacity:.7;
+  font-size:14px;
+}
+
+@media (max-width: 820px){
+  .pubs-panel{ width: 100%; max-width: none; }
+}
+/* OUR PROJECTS - PUBLICATIONS PANEL */
+.projects-filter-inner{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.pubs-panel{
+  flex: 1;
+  min-width: 260px;
+  max-width: 380px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.45);
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+}
+
+.pubs-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.pubs-title{ font-weight: 900; }
+
+.pubs-clear{
+  border: 0;
+  background: rgba(0,0,0,.08);
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.pubs-list{ display:grid; gap:8px; }
+
+.pubs-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  cursor:pointer;
+  background: rgba(255,255,255,.6);
+  border: 1px solid rgba(0,0,0,.06);
+  transition: transform .12s ease;
+}
+
+.pubs-item:hover{ transform: translateY(-1px); }
+.pubs-item.is-active{ outline: 2px solid rgba(0,0,0,.18); }
+
+.pubs-name{ font-weight: 800; }
+.pubs-count{ opacity:.75; font-weight: 900; }
+.pubs-empty{ opacity:.7; font-size:14px; }
+
+@media (max-width: 820px){
+  .pubs-panel{ width: 100%; max-width: none; }
+}
+/* ✅ Make card images NOT crop (projects + products) */
+.project-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* ✅ no crop */
+  background: rgba(0,0,0,.03);
+}
+
+/* ✅ Product card image is background -> contain */
+.pimg{
+  background-size: contain !important; /* ✅ no crop */
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+/* ✅ Modal base (same style vibe as your project modal) */
+.pmodal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+}
+.pmodal.is-open{ display:block; }
+
+.pmodal-backdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+}
+
+.pmodal-card{
+  position: relative;
+  width: min(820px, 92vw);
+  margin: 8vh auto 0;
+  background: #2b2623;
+  color: #f2ede3;
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  outline: none;
+}
+
+.pmodal-close{
+  position:absolute;
+  right: 14px;
+  top: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.25);
+  background: transparent;
+  color: #f2ede3;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.pmodal-media{
+  width: 100%;
+  height: 320px;              /* adjust if you want */
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.pmodal-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;        /* ✅ no crop in modal */
+}
+
+.pmodal-cat{
+  margin-top: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #d8b15f;
+  font-size: 12px;
+}
+
+.pmodal-title{
+  margin: 6px 0 10px;
+  font-size: 28px;
+}
+
+.pmodal-desc{
+  white-space: pre-line;      /* ✅ this makes Enter become a new line */
+  color: rgba(242,237,227,.9);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.pmodal-price{
+  display:flex;
+  gap: 10px;
+  align-items: baseline;
+}
+/* ===========================
+   FORCE CENTER PROJECT FILTER (OVERRIDE ALL)
+   paste at VERY BOTTOM
+=========================== */
+
+.projects-filter .projects-filter-inner{
+  width: 100% !important;
+  max-width: var(--container) !important;
+  margin: 0 auto !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;  /* ✅ centers the whole group */
+  gap: 28px !important;
+  flex-wrap: nowrap !important;         /* ✅ keep ONE LINE */
+}
+
+/* left label stays in the same row */
+.projects-filter .filter-left{
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+}
+
+/* pills row */
+.projects-filter .filter-pills{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px !important;
+  flex: 0 0 auto !important;
+  flex-wrap: nowrap !important;         /* ✅ keep ONE LINE */
+  margin: 0 !important;
+}
+
+/* if pills still wrap because of size, shrink slightly */
+.projects-filter .pill-btn{
+  padding: 10px 16px !important;
+  font-size: 13px !important;
+  white-space: nowrap !important;
+}
+
+/* small screens: allow wrap (otherwise it will overflow) */
+@media (max-width: 700px){
+  .projects-filter .projects-filter-inner{
+    flex-wrap: wrap !important;
+  }
+  .projects-filter .filter-pills{
+    flex-wrap: wrap !important;
+  }
+}
+/* ✅ PRODUCT MODAL show/hide (matches your JS .is-open) */
+.pmodal { 
+  display: none; 
+}
+.pmodal.is-open { 
+  display: block; 
+}
+/* optional: lock scroll when modal open */
+body.modal-open { overflow: hidden; }
+/* ===========================
+   ✅ PROJECTS IMAGE = NO CROP
+   paste at VERY BOTTOM
+=========================== */
+
+/* If projects use <img> */
+.projects-grid .project-card img,
+.project-card img{
+  width: 100% !important;
+  height: 340px !important;          /* change 340 if you want taller */
+  object-fit: contain !important;     /* ✅ NO CROP */
+  background: rgba(0,0,0,.04) !important;
+  display: block !important;
+}
+
+/* If projects use background-image instead of <img> */
+.project-card{
+  background-size: contain !important;   /* ✅ NO CROP */
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+/* ===========================
+   GLOBAL BACKGROUND IMAGE
+=========================== */
+
+/* ===== GLOBAL BACKGROUND IMAGE (REPLACES IVORY/SAGE/TEAL) ===== */
+:root{
+  --site-bg: url("./images/ivory.png"); /* <-- change file name if different */
+}
+
+/* prevent that red strip / sideways move */
+html, body{
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* make the whole site use the picture */
+body{
+  background-image: var(--site-bg) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+/* make all your “ivory sections” transparent so the pic shows */
+.section,
+.collections,
+.featured,
+.process,
+.page-products,
+.page-hero,
+.about-hero,
+.about-begin,
+.about-journey,
+.about-beliefs,
+.projects-wrap,
+.cart-body,
+.empty,
+.visit-studio,
+.mosaic-products,
+.mosaic-styles,
+.restore-products,
+.restoration-products{
+  background: transparent !important;
+}
+
+/* ✅ BRIGHTER BOXES / CARDS */
+.card,
+.pcard,
+.project-card,
+.about-card,
+.reason-card,
+.process-card,
+.learn-card,
+.belief-card{
+  background: rgba(255,255,255,0.78) !important;  /* brighter */
+  border: 1px solid rgba(0,0,0,0.06) !important;
+}
+/* 🔥 KILL ANY SECTION BACKGROUND / GRADIENT LAYERS */
+section, .section,
+.collections, .featured, .process, .page-products, .projects-wrap,
+.about-hero, .about-begin, .about-journey, .about-beliefs,
+.visit-studio, .restore-products, .restoration-products,
+.mosaic-products, .mosaic-styles {
+  background-color: transparent !important;
+  background-image: none !important;
+  background: transparent !important;
+}
+
+/* 🔥 KILL ::before/::after OVERLAYS THAT COVER THE IMAGE */
+section::before, section::after,
+.section::before, .section::after,
+.page-hero::before, .page-hero::after,
+.about-hero::before, .about-hero::after,
+.projects-hero::before, .projects-hero::after {
+  content: none !important;
+  display: none !important;
+}
+/* ===== FINAL: FORCE BACKGROUND IMAGE VISIBLE ===== */
+html{
+  background: url("./images/ivory.png") center/cover no-repeat fixed !important;
+}
+
+body{
+  background: transparent !important; /* html holds the image */
+}
+
+/* make ALL page sections transparent */
+body :is(
+  section, .section,
+  .collections, .featured, .process,
+  .page-products, .projects-wrap,
+  .about-hero, .about-begin, .about-journey, .about-beliefs,
+  .visit-studio, .cart-body, .empty,
+  .mosaic-products, .mosaic-styles,
+  .restore-products, .restoration-products,
+  .cta
+){
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* remove overlays that cover backgrounds */
+body :is(
+  section, .section, .page-hero, .about-hero, .projects-hero
+)::before,
+body :is(
+  section, .section, .page-hero, .about-hero, .projects-hero
+)::after{
+  content: none !important;
+  display: none !important;
+}
+/* 🔥 FORCE DARK BROWN TEXT */
+body,
+h1, h2, h3, h4, h5, h6,
+p,
+.section-title,
+.hero-title,
+.cta h2,
+.cta p,
+.about-hero h1,
+.about-hero p,
+.collections h2,
+.featured h2,
+.projects-wrap h2{
+  color: #2b2623 !important;
+}
+/* ✅ FORCE FOOTER TEXT LIGHT (works with .footer class) */
+.footer,
+.footer *{
+  color: #f4efe6 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+/* keep headings gold if you want */
+.footer h4{
+  color: #d8b15f !important;
+}
+
+/* make icons/buttons text light too */
+.footer .social,
+.footer .wa-btn,
+.footer .admin-btn{
+  color: #f4efe6 !important;
+}
+/* =========================================
+   ✅ FOOTER TEXT = LIGHT (NOT DARK BROWN)
+   Paste at VERY BOTTOM (LAST THING)
+========================================= */
+
+footer,
+footer * ,
+.footer,
+.footer *,
+.site-footer,
+.site-footer *,
+#footer,
+#footer *{
+  color: #f4efe6 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+/* footer headings stay gold */
+footer h4,
+.footer h4,
+.site-footer h4,
+#footer h4{
+  color: #d8b15f !important;
+}
+
+/* links */
+footer a,
+.footer a,
+.site-footer a,
+#footer a{
+  color: #f4efe6 !important;
+}
+
+/* icons + svg inside footer */
+footer svg,
+.footer svg,
+.site-footer svg,
+#footer svg{
+  stroke: #f4efe6 !important;
+  fill: #f4efe6 !important;
+}
+
+/* footer background stays gold like header */
+footer,
+.footer,
+.site-footer,
+#footer{
+  background: var(--pink) !important;
+}
+/* ===== FORCE FOOTER TEXT WHITE (OVERRIDE EVERYTHING) ===== */
+footer.footer,
+footer.footer *{
+  color: #fff !important;
+}
+
+/* links also white */
+footer.footer a{
+  color: #fff !important;
+}
+
+/* if your social buttons / admin button text is not white */
+footer.footer button{
+  color: #fff !important;
+}
+/* ===== REMOVE LINES FROM FILTER SECTION ===== */
+
+.filter-section,
+.projects-filter,
+.filter-bar,
+.filter-wrap {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* remove pseudo-element lines */
+.filter-section::before,
+.filter-section::after,
+.projects-filter::before,
+.projects-filter::after,
+.filter-bar::before,
+.filter-bar::after {
+  content: none !important;
+  display: none !important;
+}
+/* ===== REMOVE TOP GRADIENT LINE IN OUR WORK ===== */
+
+.projects-hero,
+.projects-hero::before,
+.projects-hero::after{
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  content: none !important;
+}
+
+/* also remove any border if exists */
+.projects-hero{
+  border-top: none !important;
+}
+.page-hero.page-hero--teal{
+  background-image: url("images/stained-hero.jpg") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-color: transparent !important;
+}
+
+/* if any overlay exists */
+.page-hero.page-hero--teal::before,
+.page-hero.page-hero--teal::after{
+  content: none !important;
+  display: none !important;
+}
+/* ===== CLEAN FOOTER LOGO (NO CROP) ===== */
+footer img {
+  width: 65px;       /* change size here */
+  height: auto;      /* keeps proportions */
+  object-fit: contain;  /* prevents cropping */
+  display: block;
+}
+/* ===== HERO LUCIDA HANDWRITING ===== */
+.hero h1 {
+  font-family: "Lucida Handwriting", cursive;
+  font-weight: normal;
+
+  font-size: 46px;
+  line-height: 1.35;
+  letter-spacing: 0.5px;
+  max-width: 850px;
+}
+/* ===== VINER HAND ON ALL INNER PAGES ===== */
+.inner-page .hero h1,
+.inner-page .hero h2 {
+  font-family: "Viner Hand ITC", cursive;
+  font-weight: normal;
+}
+/* ===== VINER HAND ON ALL HERO TITLES EXCEPT HOME ===== */
+
+/* Apply to all hero titles */
+.mosaic-hero-title,
+.page-hero h1,
+.hero h1 {
+  font-family: "Viner Hand ITC", cursive;
+  font-weight: normal;
+}
+
+/* BUT reset Home hero back */
+.home-page .hero h1 {
+  font-family: "Lucida Handwriting", cursive;
+}
+/* ===== VINER HAND ON ALL HERO TITLES (EXCEPT HOME) ===== */
+body:not(.home-page) .hero h1,
+body:not(.home-page) .page-hero h1,
+body:not(.home-page) .mosaic-hero-title,
+body:not(.home-page) .about-hero h1,
+body:not(.home-page) .projects-hero h1 {
+  font-family: "Viner Hand ITC", cursive !important;
+  font-weight: normal !important;
+}
+/* ===== CTA TITLE - LUCIDA HANDWRITING ONLY ===== */
+.cta h2 {
+  font-family: "Lucida Handwriting", cursive !important;
+  font-weight: normal !important;
+}
+/* ===== END SECTION TITLES (ABOVE FOOTER) - LUCIDA ONLY ===== */
+.cta h2,
+.about-join h2 {
+  font-family: "Lucida Handwriting", cursive !important;
+  font-weight: normal !important;
+}
+/* ============================
+   HOME HERO SLIDER
+   ============================ */
+   .hero-slider{
+    position: relative;
+    min-height: clamp(520px, 78vh, 820px);
+    overflow: hidden;
+    border-bottom: 0; /* keep clean */
+  }
+  
+  .hero-slider-viewport{
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  
+  .hero-slider-track{
+    height: 100%;
+    display: flex;
+    will-change: transform;
+    transform: translate3d(0,0,0);
+    transition: transform 900ms cubic-bezier(.22,.61,.36,1);
+  }
+  
+  .hero-slide{
+    flex: 0 0 100%;
+    height: 100%;
+    background-image: var(--bg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: saturate(1.03);
+  }
+  
+  /* soft overlay like your screenshot (doesn't change site palette) */
+  .hero-slider-overlay{
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(1200px 700px at 10% 15%, rgba(0,0,0,.18), transparent 55%),
+      linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,.28));
+    pointer-events: none;
+  }
+  
+  .hero-slider-content{
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding-top: clamp(90px, 12vh, 140px);
+    padding-bottom: 70px;
+    text-align: center;
+    display: grid;
+    place-items: center;
+    gap: 18px;
+  }
+  
+  /* Title/subtitle (keeps your fonts unless you changed them) */
+  .hero-slider-title{
+    max-width: 1100px;
+    margin: 0;
+  }
+  
+  .hero-slider-sub{
+    max-width: 900px;
+    margin: 0;
+    opacity: .92;
+  }
+  
+  /* Dots */
+  .hero-slider-controls{
+    margin-top: 8px;
+    display: grid;
+    place-items: center;
+    gap: 10px;
+  }
+  
+  .hero-dots{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero-dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(255,255,255,.55);
+    cursor: pointer;
+    transition: transform 220ms ease, background 220ms ease, width 220ms ease;
+  }
+  
+  .hero-dot.is-active{
+    background: rgba(255,255,255,.92);
+    width: 26px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 900px){
+    .hero-slider{
+      min-height: 520px;
+    }
+    .hero-slider-title{
+      max-width: 92%;
+    }
+    .hero-slider-sub{
+      max-width: 92%;
+    }
+  }
+  
+  @media (max-width: 600px){
+    .hero-slider{
+      min-height: 540px;
+    }
+    .hero-slider-content{
+      padding-top: 110px;
+    }
+  }
+  /* =========================================
+   HOME HERO BACKGROUND SLIDER (SAFE)
+   Keeps your hero text/fonts/buttons as-is
+========================================= */
+
+.hero{
+  position: relative;
+  overflow: hidden;
+}
+
+/* The sliding background container */
+.hero-slider-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Each background slide */
+.hero-bg-slide{
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 900ms ease, transform 1400ms ease;
+  will-change: opacity, transform;
+}
+
+.hero-bg-slide.is-active{
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Keep your existing overlay above the images */
+.hero .hero-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Keep your content above everything */
+.hero .hero-inner,
+.hero .container{
+  position: relative;
+  z-index: 2;
+}
+
+/* Dots (optional) */
+#heroDots{
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hero-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(255,255,255,.55);
+  cursor: pointer;
+  transition: width 200ms ease, background 200ms ease;
+}
+
+.hero-dot.is-active{
+  width: 26px;
+  background: rgba(255,255,255,.95);
+}
+/* ===== REMOVE OLD HERO BACKGROUND SAFELY ===== */
+.hero {
+  background: none !important;
+  background-image: none !important;
+}
+.hero-bg {
+  background: none !important;
+}
+/* CLEAN TEXT APPEAR (FADE ONLY) */
+.hero h1, .hero p, .hero .hero-actions{
+  opacity: 0;
+  animation: heroFade 0.8s ease forwards;
+}
+.hero p{ animation-delay: .15s; }
+.hero .hero-actions{ animation-delay: .3s; }
+
+@keyframes heroFade{ to{ opacity: 1; } }
+/* ===============================
+   HERO PREMIUM TEXT STYLE
+   =============================== */
+
+.hero-text-box{
+  background: rgba(0,0,0,0.35); /* soft dark overlay */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  padding: 40px 50px;
+  border-radius: 18px;
+
+  max-width: 900px;
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+/* Make text white like your screenshot */
+.hero-text-box h1,
+.hero-text-box p{
+  color: #ffffff;
+}
+
+/* Improve readability */
+.hero-text-box h1{
+  line-height: 1.4;
+}
+
+.hero-text-box p{
+  margin-top: 15px;
+  opacity: 0.9;
+}
+/* ===== HERO WHITE TEXT ===== */
+.hero h1,
+.hero p {
+  color: #ffffff !important;
+}
+
+/* if your hero uses another class like home-hero */
+.home-hero h1,
+.home-hero p {
+  color: #ffffff !important;
+}
+/* Spacing under hero text */
+.cart-hero .cart-sub {
+  margin-bottom: 30px !important;
+}
+
+/* Spacing above Browse button */
+.empty p {
+  margin-bottom: 25px !important;
+}
+/* Remove divider line under cart hero */
+.cart-hero {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove any top border on next section */
+.cart-body {
+  border-top: none !important;
+}
+/* ===== CART HERO DARK BROWN ===== */
+
+.cart-hero {
+  background: #2b2623 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Make text white on dark background */
+.cart-hero,
+.cart-hero h1,
+.cart-hero .cart-sub,
+.cart-hero .backlink {
+  color: #ffffff !important;
+}
+
+/* Cart icon next to title = white */
+.cart-title svg {
+  stroke: #ffffff !important;
+}
+/* ===== CART HERO TEXT BROWN ===== */
+
+.cart-hero h1,
+.cart-hero .cart-sub,
+.cart-hero .backlink {
+  color: #2b2623 !important;
+}
+
+/* Cart icon next to title brown */
+.cart-title svg {
+  stroke: #2b2623 !important;
+}
+/* ===== PAINTING STYLE CARDS WHITE ===== */
+
+.painting-style-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+
+/* Keep text dark brown */
+.painting-style-card h3,
+.painting-style-card p {
+  color: #2b2623 !important;
+}
+/* ===== CERAMIC COLLECTION CARDS WHITE ===== */
+
+.ceramic-collections .collection-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+
+/* Keep text dark brown */
+.ceramic-collections .collection-card h3,
+.ceramic-collections .collection-card p {
+  color: #2b2623 !important;
+}
+/* ================================
+   ART RESTORATION HERO FIX (ONLY)
+   ================================ */
+   body.restoration-page .restoration-hero-title{
+    font-family: 'Playfair Display', serif !important; /* same font you already load */
+    font-weight: 700 !important;
+    letter-spacing: .5px;
+  }
+  
+  /* remove the line / separator under hero (often border or shadow) */
+  body.restoration-page .restoration-hero{
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  /* sometimes the next section adds a top border/line */
+  body.restoration-page .restoration-products,
+  body.restoration-page .restoration-services{
+    border-top: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  /* kill the gap that can look like a “line” */
+  body.restoration-page .restoration-products{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  body.restoration-page .restoration-hero-title,
+  body.restoration-page .page-hero h1,
+  body.restoration-page .hero h1{
+  font-family: "Viner Hand ITC", "Comic Sans MS", cursive !important;
+  font-weight: normal !important;
+}
+/* =========================================
+   RESTORATION SERVICES BACKGROUND FIX
+   ========================================= */
+
+   body.restoration-page .restoration-services{
+    background: transparent !important;
+  }
+  
+  /* if there is an overlay div creating the grey */
+  body.restoration-page .restoration-services-bg{
+    display: none !important;
+  }
+  /* =========================================
+   RESTORATION STATS BACKGROUND FIX
+   ========================================= */
+
+body.restoration-page .restoration-stats{
+  background: transparent !important;
+}
+
+/* remove grey overlay layer */
+body.restoration-page .restoration-stats-bg{
+  display: none !important;
+}
+/* =========================================
+   RESTORATION STATS CARD FIX
+   ========================================= */
+
+   body.restoration-page .restoration-stat-card{
+    background: #ffffff !important;   /* pure white box */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  }
+  
+  /* gold numbers stay gold */
+  body.restoration-page .restoration-stat-num{
+    color: #d8b15f !important;  /* your gold */
+  }
+  
+  /* labels dark brown */
+  body.restoration-page .restoration-stat-label{
+    color: #2b2623 !important;  /* your dark brown */
+  }
+  
+  /* paragraph text dark brown */
+  body.restoration-page .restoration-stats-text{
+    color: #2b2623 !important;
+  }
+/* ===============================
+   FOLLOW US — CLEAN ICONS (NO BOX)
+   =============================== */
+
+/* container (row) */
+.footer .social-row{
+  display:flex !important;
+  justify-content:flex-start;     /* like your screenshot */
+  align-items:center !important;
+  gap:38px !important;            /* spacing between icons */
+  margin-top:14px;
+}
+
+/* each icon link */
+.footer .social-row .social{
+  width:auto !important;
+  height:auto !important;
+  background: transparent !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  line-height:0 !important;
+  text-decoration:none !important;
+  color: rgba(235, 242, 255, 0.92) !important; /* clean light icon color */
+}
+
+/* make SVG icons clean + same size */
+.footer .social-row .social svg{
+  width:44px !important;
+  height:44px !important;
+  display:block !important;
+  fill: currentColor !important;
+  stroke: none !important;
+}
+
+/* if you use FontAwesome <i> icons */
+.footer .social-row .social i{
+  font-size:44px !important;
+  line-height:1 !important;
+  color: currentColor !important;
+}
+
+/* hover effect (subtle) */
+.footer .social-row .social:hover{
+  opacity:1 !important;
+  transform: translateY(-1px);
+}
+
+/* optional: keyboard focus */
+.footer .social-row .social:focus-visible{
+  outline: 2px solid rgba(216,177,95,.9);
+  outline-offset: 6px;
+  border-radius: 10px;
+}
+/* =========================
+   WHATSAPP BUTTON — LARGE VERSION
+   ========================= */
+/* ===============================
+   NUCLEAR WHATSAPP BUTTON OVERRIDE
+   =============================== */
+
+   footer .wa-btn,
+   .footer .wa-btn,
+   footer a.wa-btn{
+     all: unset !important;
+   
+     display: inline-flex !important;
+     align-items: center !important;
+     justify-content: center !important;
+     gap: 16px !important;
+   
+     padding: 36px 100px !important;   /* THICK */
+     border-radius: 100px !important;
+   
+     background: #d8b15f !important;
+     color: #ffffff !important;
+   
+     font-size: 24px !important;
+     font-weight: 700 !important;
+     font-family: inherit !important;
+   
+     text-decoration: none !important;
+     cursor: pointer !important;
+   
+     box-shadow: 0 30px 60px rgba(0,0,0,.28) !important;
+   }
+   /* ===== WhatsApp text fix ===== */
+   /* ===== FORCE WhatsApp button text to behave ===== */
+footer a.wa-btn,
+footer .wa-btn,
+.footer a.wa-btn,
+.footer .wa-btn{
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+
+  height: 70px !important;          /* thick */
+  padding: 0 30px !important;
+  border-radius: 999px !important;
+
+  font-size: 20px !important;       /* text size */
+  font-weight: 800 !important;
+  line-height: 1 !important;
+
+  white-space: nowrap !important;   /* NO WRAP */
+  text-align: center !important;
+}
+
+footer .wa-btn br,
+.footer .wa-btn br{
+  display:none !important;          /* if you have <br> inside */
+}
+/* ===== CENTER WHATSAPP CONTENT PERFECTLY ===== */
+
+.footer .wa-btn{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+
+  padding: 14px 40px !important;   /* smaller box */
+  border-radius: 999px !important;
+
+  font-size: 18px !important;
+  font-weight: 700 !important;
+
+  white-space: nowrap !important;
+}
+
+/* Fix emoji alignment */
+.footer .wa-btn span,
+.footer .wa-btn{
+  line-height: 1 !important;
+}
+/* FIX: modal title + description not visible on dark background */
+.pmodal-title {
+  color: #fff !important;
+}
+
+.pmodal-desc {
+  color: rgba(255, 255, 255, 0.85) !important;
+  white-space: pre-line; /* keeps line breaks */
+}
+/* ===============================
+   HEADER TITLE TRUE ALIGN FIX
+================================= */
+
+.site-header .brand{
+  display:flex !important;
+  align-items:flex-start !important; /* align from top */
+  gap:25px !important;
+}
+
+.site-header .brand-text .top{
+  font-size: clamp(28px, 3.5vw, 48px) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  transform: translateY(5px) !important;
+}
+.site-header .brand-text .top{
+  font-size: clamp(18px, 2vw, 28px) !important;
+  line-height: 1 !important;
+}
+/* ===============================
+   ABOUT HERO LOGO BOX (LIKE HEADER)
+================================= */
+
+.about-hero-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.about-logo{
+  width: 90px;
+  height: 90px;
+  background: #ffffff;        /* white clean box */
+  border-radius: 26px;        /* same rounded style */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  margin-bottom: 30px;
+}
+
+.about-logo img{
+  width: 75%;
+  height: auto;
+  object-fit: contain;
+}
+/* ===============================
+   CTA SECTION – SMALLER TEXT
+================================= */
+
+.cta h2{
+  font-size: clamp(24px, 3vw, 40px) !important;
+  line-height: 1.2 !important;
+}
+
+.cta p{
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  max-width: 650px;
+  margin: 15px auto 0 auto;
+}
+
+.cta .btn{
+  font-size: 14px !important;
+  padding: 10px 20px !important;
+}
+
+.cta{
+  padding: 70px 20px !important; /* slightly less tall section */
+}
+/* =================================
+   GLOBAL CLEAN SPACING SYSTEM
+================================= */
+
+/* Section spacing */
+section{
+  padding: 90px 20px;
+}
+
+/* Reduce spacing on small screens */
+@media (max-width: 768px){
+  section{
+    padding: 70px 18px;
+  }
+}
+
+/* Headings spacing */
+h1, h2, h3{
+  margin-bottom: 20px;
+}
+
+/* Paragraph spacing */
+p{
+  margin-bottom: 18px;
+}
+
+/* Buttons spacing */
+.btn{
+  margin-top: 20px;
+}
+
+/* Prevent sections sticking to footer */
+section:last-of-type{
+  padding-bottom: 100px;
+}
+/* ===============================
+   CTA CENTER FIX
+================================= */
+
+.cta .container{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta h2{
+  text-align: center;
+}
+
+.cta p{
+  text-align: center;
+  max-width: 700px;
+  margin: 15px auto 25px auto;
+}
+
+.cta .join-actions{
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+/* ===============================
+   ABOUT PAGE – SMALLER INFO BOXES
+================================= */
+
+.visit-card,
+.about-card,
+.studio-info,
+.address-card{
+  max-width: 420px;   /* smaller width */
+  padding: 30px 28px !important; /* less inside space */
+  border-radius: 22px;
+}
+
+/* Reduce spacing inside sections */
+.visit-card h3,
+.about-card h3,
+.studio-info h3,
+.address-card h3{
+  font-size: 22px !important;
+  margin-bottom: 10px;
+}
+
+.visit-card p,
+.about-card p,
+.studio-info p,
+.address-card p{
+  font-size: 15px !important;
+  line-height: 1.6;
+}
+/* ===============================
+   VISIT CARD ICON COLORS
+================================= */
+
+/* GOLD (first 2 rows) */
+.visit-row:nth-child(1) .v-ico,
+.visit-row:nth-child(2) .v-ico{
+  background: var(--gold) !important;
+  color: #fff;
+}
+
+/* GREEN (last 2 rows) */
+.visit-row:nth-child(3) .v-ico,
+.visit-row:nth-child(4) .v-ico{
+  background: #A8B29A !important; /* chalk green */
+  color: #fff;
+}
+
+/* Make icons white */
+.v-ico svg{
+  fill: white;
+}
+/* =================================
+   GLOBAL MAIN TITLES SMALLER
+================================= */
+
+h1{
+  font-size: clamp(28px, 4vw, 48px) !important;
+  line-height: 1.1 !important;
+}
+
+.h-font{
+  font-size: clamp(28px, 4vw, 48px) !important;
+}
+/* =========================================
+   MOBILE HEADER FIX ONLY
+========================================= */
+
+@media (max-width: 600px){
+
+  /* Logo container */
+  .site-header .brand-logo{
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  /* Prevent logo cropping */
+  .site-header .brand-logo img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important; /* ✅ no crop */
+    display: block;
+  }
+
+  /* Align brand properly */
+  .site-header .brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Move title slightly LOWER */
+  .site-header .brand-text .top{
+    font-size: 18px !important;   /* better size for phone */
+    transform: translateY(8px);   /* increase to 6–7px if needed */
+    line-height: 1;
+  }
+}
+@media (max-width: 600px){
+
+  /* Stop vertical centering */
+  .site-header .brand{
+    align-items: flex-start !important;
+  }
+
+  /* Add controlled spacing from top */
+  .site-header .brand-text{
+    margin-top: 8px; /* increase to 10px if needed */
+  }
+
+}
+/* ===== ABOUT PAGE MAIN TITLES ONLY ===== */
+
+/* Hero title (Our Story) */
+.about-hero h1{
+  font-size: 48px;
+}
+
+/* Section titles */
+.about-begin h2,
+.about-beliefs > .container > h2,
+.about-artisans h2,
+.visit-top h2,
+.cta h2{
+  font-size: 36px;
+}
+/* =========================================
+   MOBILE NAV FINAL STRUCTURE (CLEAN)
+========================================= */
+@media (max-width: 900px){
+
+  .mobile-nav{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+  }
+
+  .mobile-nav.is-open{
+    display: block;
+  }
+
+  .mobile-nav-backdrop{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.4);
+  }
+
+  .mobile-nav-panel{
+    position: absolute;
+    left: 50%;
+    top: 74px;
+    transform: translateX(-50%);
+    width: min(92vw, 360px);
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  }
+
+  .mobile-nav-head{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    margin-bottom: 10px;
+  }
+
+  .mobile-nav-title{
+    font-weight:700;
+    color:#2b2623;
+  }
+
+  .mobile-nav-close{
+    width:36px;
+    height:36px;
+    border-radius:12px;
+    border:1px solid rgba(0,0,0,.15);
+    background:#fff;
+    font-size:22px;
+  }
+
+  .mobile-nav-links{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+
+  .mobile-nav-links a,
+  .mobile-nav-links button{
+    display:block;
+    width:100%;
+    text-align:left;
+    padding:12px 14px;
+    border-radius:14px;
+    font-weight:600;
+    color:#2b2623;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    transition: all .18s ease;
+  }
+
+  .mobile-nav-links a:hover,
+  .mobile-nav-links button:hover{
+    background: rgba(43,38,35,.06);
+  }
+
+  /* ACTIVE PAGE GOLD GLOW */
+  .mobile-nav-links a.active{
+    background:#d8b15f;
+    color:#2b2623;
+    font-weight:800;
+    box-shadow:
+      0 8px 22px rgba(216,177,95,.4),
+      0 0 25px rgba(216,177,95,.3);
+  }
+
+  /* COLLECTION DROPDOWN */
+  .mobile-collections-items{
+    display:none;
+    flex-direction:column;
+    margin-left:10px;
+    gap:4px;
+  }
+
+  .mobile-collections-items a{
+    font-weight:500;
+    padding:10px 14px;
+  }
+
+  .mobile-collections.open .mobile-collections-items{
+    display:flex;
+  }
+
+}
+/* ===========================
+   MOBILE NAV (clean + collections dropdown + gold active)
+   paste at END of style.css
+=========================== */
+@media (max-width: 900px){
+
+  /* mobile menu container */
+  .mobile-nav{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+  }
+  .mobile-nav.is-open{ display:block; }
+
+  .mobile-nav-backdrop{
+    position:absolute;
+    inset:0;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(2px);
+  }
+
+  /* panel */
+  .mobile-nav-panel{
+    position:absolute;
+    left:50%;
+    top:72px;
+    transform: translateX(-50%);
+    width: min(92vw, 380px);
+    background:#fff;
+    border-radius:18px;
+    box-shadow: 0 18px 55px rgba(0,0,0,.22);
+    padding: 14px;
+  }
+
+  .mobile-nav-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 6px 6px 10px;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    margin-bottom: 8px;
+  }
+
+  .mobile-nav-title{
+    font-weight: 800;
+    color:#2b2623;
+  }
+
+  .mobile-nav-close{
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,.12);
+    background: #fff;
+    color:#2b2623;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  /* list */
+  .mobile-nav-links{
+    display:flex;
+    flex-direction:column;
+    gap: 4px;
+    padding: 6px;
+  }
+
+  .mobile-nav-links a,
+  .mobile-nav-links button{
+    width:100%;
+    text-align:left;
+    border:0;
+    background: transparent;
+    padding: 12px 12px;
+    border-radius: 12px;
+    color:#2b2623;
+    text-decoration:none;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.2;
+    cursor:pointer;
+  }
+
+  .mobile-nav-links a:hover,
+  .mobile-nav-links button:hover{
+    background: rgba(43,38,35,.06);
+  }
+
+  /* collections button */
+  .mnav-dd-btn{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-weight: 800;
+  }
+
+  .mnav-caret{
+    opacity:.7;
+    font-size: 14px;
+  }
+
+  /* dropdown box inside mobile menu */
+  .mnav-dd{
+    margin-top: 6px;
+    padding: 6px;
+    border-radius: 14px;
+    background: rgba(0,0,0,.03);
+    display:flex;
+    flex-direction:column;
+    gap: 4px;
+  }
+
+  .mnav-dd-link{
+    padding: 11px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+
+  /* ACTIVE = GOLD GLOW (like your desktop) */
+  .mobile-nav-links a.is-active,
+  .mobile-nav-links button.is-active{
+    background: #d8b15f;
+    color:#2b2623;
+    font-weight: 800;
+    box-shadow: 0 10px 22px rgba(216,177,95,.35);
+  }
+
+  /* optional: show "open" state slightly */
+  .mnav-dd-btn.is-open{
+    background: rgba(216,177,95,.18);
+  }
+}
+@media (max-width: 900px){
+
+  /* hide the collections items until opened */
+  .m-collections-items{
+    display:none;
+    margin-top:8px;
+    padding: 10px 10px;
+    border-radius: 14px;
+    background: rgba(0,0,0,.03);
+  }
+
+  .m-collections.is-open .m-collections-items{
+    display:block;
+  }
+
+  /* make collections "button" look like a dropdown control */
+  .m-collections-btn{
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,.14);
+    background: #fff;
+    color:#2b2623;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .m-collections-caret{
+    transition: transform .18s ease;
+    opacity:.8;
+  }
+
+  .m-collections.is-open .m-collections-caret{
+    transform: rotate(180deg);
+  }
+
+  /* collections links inside dropdown */
+  .m-collections-items a{
+    display:block;
+    padding: 10px 10px;
+    border-radius: 12px;
+    text-decoration:none;
+    color:#2b2623;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .m-collections-items a:hover{
+    background: rgba(43,38,35,.06);
+  }
+
+  /* gold highlight for active item inside dropdown */
+  .m-collections-items a.is-active{
+    background: #d8b15f;
+    font-weight: 800;
+  }
+}
+/* ✅ Never show mobile drawer on desktop */
+@media (min-width: 901px){
+  .mobile-nav{ display:none !important; }
+}
+@media (max-width: 900px){
+
+  .mnav-dd-btn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 12px;
+    border-radius: 12px;
+    background: rgba(43,38,35,.06);
+    border: 0;
+    color:#2b2623;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .mnav-dd-btn .mnav-caret{
+    transition: transform .2s ease;
+  }
+  .mnav-dd-btn.is-open .mnav-caret{
+    transform: rotate(180deg);
+  }
+
+  .mnav-dd{
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: max-height .25s ease, opacity .2s ease, transform .2s ease;
+    border-radius: 14px;
+    background: rgba(43,38,35,.04);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .mnav-dd.is-open{
+    max-height: 420px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 8px 6px;
+  }
+
+  .mnav-dd a{
+    display:block;
+    padding: 10px 10px;
+    border-radius: 12px;
+    color:#2b2623;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .mnav-dd a:hover{
+    background: rgba(43,38,35,.06);
+  }
+
+  .mnav-link.is-active,
+  .mnav-dd a.is-active{
+    background: #d8b15f;
+    color:#2b2623;
+    font-weight: 800;
+    box-shadow: 0 8px 22px rgba(216,177,95,.35);
+  }
+}
+/* ===========================
+   OUR WORK (our-projects) — MOBILE CARDS
+   paste at END of style.css
+=========================== */
+@media (max-width: 900px){
+
+  /* make the filter pills not overflow */
+  .filter-row,
+  .filter-wrap,
+  #filterPills{
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    justify-content: center;
+  }
+
+  /* grid becomes 1 column cards */
+  #projectsGrid{
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    padding: 0 10px !important;
+  }
+
+  /* card look */
+  .project-card{
+    background: #fff !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    box-shadow: 0 14px 35px rgba(0,0,0,.12) !important;
+    border: 1px solid rgba(43,38,35,.08) !important;
+    transform: none !important;
+  }
+
+  /* image stays clean */
+  .project-card img{
+    width: 100% !important;
+    height: 230px !important;        /* card image height */
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  /* if you have title/desc under image later, it will look nice */
+  .project-card .pmeta,
+  .project-card .card-body{
+    padding: 12px 12px 14px !important;
+  }
+
+  /* optional: reduce page title spacing if it’s too tall */
+  .projects-hero,
+  .projects-header,
+  .ourwork-hero{
+    padding: 28px 0 !important;
+  }
+}
+.pcard-hint{
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #b99552;
+}
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.card-img{
+  position: relative;
+  width: 100%;
+  height: 220px;      /* change if you want taller/shorter */
+  overflow: hidden;
+  border-radius: 18px; /* match your design */
+}
+
+.card-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.badge-circle{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+}
+.card-img {
+  width: 100%;
+  height: 220px;        /* keep your card height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #f2ede3;  /* optional background if image doesn't fill */
+}
+
+.card-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;  /* THIS prevents cropping */
+}
+/* Make whole card clickable (Option A) */
+.card-link{
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.card-link:visited{ color: inherit; }
+/* Gold "Explore ..." text inside clickable cards */
+.card .card-cta{
+  color: var(--gold);
+  font-weight: 700;
+  display: inline-block;
+  margin-top: 10px;
+}
+.card:hover .card-cta{
+  text-decoration: underline;
+}
+.btn-gold {
+  display: inline-block;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #d8b15f, #c89c3d);
+  color: #2b2623;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  background: linear-gradient(135deg, #e6c278, #d8b15f);
+}
+.page-hero-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 24px;
+  overflow: hidden;              /* VERY IMPORTANT */
+  margin: 0 auto 20px auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.page-hero-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;             /* This fills the box */
+  display: block;
+}
+.about-begin-media {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.about-begin-media img {
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* prevents cropping */
+  display: block;
+}
+/* ===== FIX MOBILE WIDTH (container is too narrow) ===== */
+@media (max-width: 768px){
+  .container{
+    width: calc(100% - 24px) !important;   /* full phone width */
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;            /* remove big side padding */
+    padding-right: 0 !important;
+  }
+
+  /* In case the about section itself adds extra side padding */
+  .about-begin{
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}
+/* ✅ HARD MOBILE OVERRIDES (fix tiny centered layout) */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body{
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px){
+  /* Force ALL containers to be responsive */
+  .container{
+    width: 100% !important;         /* kills fixed width like 1200px */
+    max-width: 100% !important;
+    padding-left: 16px !important;  /* normal phone padding */
+    padding-right: 16px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Make this section full width */
+  .about-begin{
+    width: 100% !important;
+  }
+
+  .about-begin-inner{
+    width: 100% !important;
+  }
+
+  .about-begin-media{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .about-begin-media img{
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+}
