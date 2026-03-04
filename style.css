@@ -7330,3 +7330,22 @@ body.is-ready footer{
     background-attachment: scroll; /* important for phones */
   }
 }
+/* ===== FINAL MOBILE NAV FIX (paste at VERY BOTTOM) ===== */
+.mobile-nav{ z-index: 999999 !important; }
+
+.mobile-nav-backdrop{
+  z-index: 0 !important;
+}
+
+.mobile-nav-panel{
+  z-index: 1 !important;
+}
+
+.mobile-nav-panel,
+.mobile-nav-panel *{
+  pointer-events: auto !important;
+}
+
+.mobile-nav-backdrop{
+  pointer-events: auto !important;
+}
