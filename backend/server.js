@@ -14,6 +14,7 @@ import { sendLoginCode } from "./mailer.js";
 dotenv.config();
 
 const app = express();
+app.set("trust proxy", 1); // ✅ ADD THIS LINE (Render needs it)
 const PORT = process.env.PORT || 5000;
 
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5500";
@@ -29,9 +30,19 @@ const DEV_PRINT_LOGIN_CODE = false;
 /* ===========================
    MIDDLEWARE
 =========================== */
+const allowedOrigins = [
+  process.env.FRONTEND_ORIGIN,
+  "http://localhost:5500",
+  "http://127.0.0.1:5500",
+];
+
 app.use(
   cors({
-    origin: FRONTEND_ORIGIN,
+    origin: (origin, cb) => {
+      if (!origin) return cb(null, true); // allow Postman / server-to-server
+      if (allowedOrigins.includes(origin)) return cb(null, true);
+      return cb(new Error("CORS blocked: " + origin));
+    },
     credentials: true,
   })
 );
