@@ -7321,3 +7321,12 @@ body.is-ready .hero,
 body.is-ready footer{
   visibility:visible;
 }
+@media (max-width: 768px){
+  body{
+    background-image: url("images/ivory.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll; /* important for phones */
+  }
+}
