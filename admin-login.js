@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://artshop-backend.onrender.com";
 
 const form = document.getElementById("adminLoginForm");
 const note = document.getElementById("loginNote");
