@@ -1,4 +1,51 @@
 /* ===========================
+   PAGE LOADER + TRANSITIONS (SAFE + FAST)
+   - NEVER keeps body hidden forever
+   - Hides loader on DOM ready (not waiting for images)
+=========================== */
+(function () {
+  const loader = document.getElementById("pageLoader");
+
+  function showPage() {
+    document.body.classList.add("is-ready");
+    if (loader) loader.classList.add("hide");
+  }
+
+  function showLoader() {
+    if (loader) loader.classList.remove("hide");
+    document.body.classList.remove("is-ready");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => showPage());
+  setTimeout(showPage, 1200);
+  window.addEventListener("error", showPage);
+  window.addEventListener("unhandledrejection", showPage);
+
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+
+    const href = a.getAttribute("href");
+    if (!href) return;
+
+    if (
+      a.target === "_blank" ||
+      href.startsWith("#") ||
+      href.startsWith("http") ||
+      href.startsWith("mailto:") ||
+      href.startsWith("tel:") ||
+      href.startsWith("javascript:")
+    )
+      return;
+
+    const current = (window.location.pathname.split("/").pop() || "").toLowerCase();
+    if (href.toLowerCase() === current) return;
+
+    showLoader();
+  });
+})();
+
+/* ===========================
    GLOBAL PAGE LOADER (SAFE)
    - Works on every page that has #pageLoader
    - Never gets stuck (fallback)
