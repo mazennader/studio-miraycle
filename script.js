@@ -44,6 +44,7 @@
     showLoader();
   });
 })();
+
 /* ===========================
    GLOBAL PAGE LOADER (SAFE)
    - Works on every page that has #pageLoader
@@ -93,6 +94,7 @@
     showLoader();
   });
 })();
+
 /* ===========================
    CONFIG / API
 =========================== */
@@ -115,10 +117,10 @@ const CURRENCY = {
   // 1 USD = rate
   rates: {
     USD: 1,
-    GBP: 0.79,    // <-- change if needed
-    EUR: 0.92,    // <-- change if needed
-    AED: 3.6725,  // <-- common peg rate (adjust if you want)
-    LBP: 90000,   // <-- change if needed
+    GBP: 0.79,
+    EUR: 0.92,
+    AED: 3.6725,
+    LBP: 90000,
   },
 
   symbols: {
@@ -161,7 +163,6 @@ function formatNumber(n, decimals) {
  * - Else try to parse its current text and save as data-usd once
  */
 function applyCurrencyToDOM(root = document) {
-  // default USD unless user selected something right now
   const select = document.getElementById("currencySelect");
   const currency = (select && CURRENCY.list.includes(select.value)) ? select.value : "USD";
 
@@ -174,7 +175,6 @@ function applyCurrencyToDOM(root = document) {
   els.forEach((el) => {
     if (el.classList.contains("no-currency")) return;
 
-    // Ensure we have USD stored
     if (!el.dataset.usd) {
       const raw = (el.textContent || "").replace(/,/g, "").trim();
       const numMatch = raw.match(/-?\d+(\.\d+)?/);
@@ -191,7 +191,6 @@ function applyCurrencyToDOM(root = document) {
     el.dataset.currency = currency;
   });
 
-  // ✅ keep dropdown label synced (if present)
   if (select && select.value !== currency) select.value = currency;
 }
 
@@ -200,10 +199,7 @@ function ensureCurrencyDropdown() {
   const select = document.getElementById("currencySelect");
   if (!select) return;
 
-  // ✅ Force order + options
   select.innerHTML = CURRENCY.list.map((c) => `<option value="${c}">${c}</option>`).join("");
-
-  // ✅ Default to USD on reload
   select.value = "USD";
 
   select.addEventListener("change", () => {
@@ -214,145 +210,21 @@ function ensureCurrencyDropdown() {
 /* ===========================
    ✅ Updated money() helper
    - Keeps USD base output
-   NOTE: We keep return as string to NOT break existing code
 =========================== */
 function money(n) {
   const v = Number(n || 0);
   return `$${v.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 }
 
-
 /* ===========================
-   MOBILE MENU (DRAWER)
+   MOBILE MENU (DRAWER) - FIXED (NO DUPES / NO CRASH)
 =========================== */
 function setupMobileMenu() {
   const toggle = $("#navToggle");
   const drawer = $("#mobileNav");
   const linksWrap = $("#mobileNavLinks");
-  const desktopNav = document.querySelector("nav.nav");
 
   if (!toggle || !drawer) return;
-
-  // ===========================
-// MOBILE NAV (Home / About / Our Work + Collections dropdown)
-// ===========================
-document.addEventListener("DOMContentLoaded", () => {
-  const mobileLinks = document.getElementById("mobileNavLinks");
-  if (!mobileLinks) return;
-
-  // helper: normalize path
-  const currentPath = (location.pathname.split("/").pop() || "").toLowerCase();
-
-  // pick desktop nav container (you have id sometimes)
-  const desktopNav =
-    document.getElementById("desktopNav") || document.querySelector(".nav");
-
-  // get the 3 main links (Home, About, Our Work)
-    // ✅ get the 3 main links by TEXT, not by "home" keyword
-    const allDesktopLinks = Array.from(desktopNav?.querySelectorAll("a") || []);
-
-    const homeA  = allDesktopLinks.find(a => /home/i.test(a.textContent || "")) || allDesktopLinks.find(a => (a.getAttribute("href")||"").includes("index"));
-    const aboutA = allDesktopLinks.find(a => /about/i.test(a.textContent || "")) || allDesktopLinks.find(a => (a.getAttribute("href")||"").includes("about-us"));
-    const workA  = allDesktopLinks.find(a => /(work|projects)/i.test(a.textContent || "")) || allDesktopLinks.find(a => (a.getAttribute("href")||"").includes("our-projects"));
-  
-    const homeHref  = homeA?.getAttribute("href")  || "index.html";
-    const aboutHref = aboutA?.getAttribute("href") || "about-us.html";
-    const workHref  = workA?.getAttribute("href")  || "our-projects.html";
-  
-    // build mobile HTML (correct)
-    mobileLinks.innerHTML = `
-      <a class="mnav-link" href="${homeHref}">Home</a>
-      <a class="mnav-link" href="${aboutHref}">About Us</a>
-      <a class="mnav-link" href="${workHref}">Our Work</a>
-  
-      <button class="mnav-dd-btn" type="button" aria-expanded="false">
-        Collections <span class="mnav-caret">▾</span>
-      </button>
-  
-      <div class="mnav-dd">
-        ${collectionLinks.map(a => {
-          const href = a.getAttribute("href") || "#";
-          const text = (a.textContent || "").trim();
-          return `<a class="mnav-dd-link" href="${href}">${text}</a>`;
-        }).join("")}
-      </div>
-    `;
-  // get Collections links from dropdown menu (works with both class names you used)
-  const ddMenu =
-    desktopNav?.querySelector(".nav-dd-menu") ||
-    desktopNav?.querySelector(".nav-dd-menu[role='menu']");
-
-  const collectionLinks = Array.from(ddMenu?.querySelectorAll("a") || []);
-
-  // build mobile HTML
-  mobileLinks.innerHTML = `
-    <a class="mnav-link" href="${mainLinks[0]?.getAttribute("href") || "Home.html"}">Home</a>
-    <a class="mnav-link" href="${mainLinks[1]?.getAttribute("href") || "about-us.html"}">About Us</a>
-    <a class="mnav-link" href="${mainLinks[2]?.getAttribute("href") || "our-projects.html"}">Our Work</a>
-
-    <button class="mnav-dd-btn" type="button" aria-expanded="false">
-      Collections <span class="mnav-caret">▾</span>
-    </button>
-
-    <div class="mnav-dd">
-      ${collectionLinks
-        .map(a => {
-          const href = a.getAttribute("href") || "#";
-          const text = (a.textContent || "").trim();
-          return `<a class="mnav-dd-link" href="${href}">${text}</a>`;
-        })
-        .join("")}
-    </div>
-  `;
-
-  // ACTIVE (gold) highlight based on current URL
-  const allMobileAnchors = mobileLinks.querySelectorAll("a");
-  allMobileAnchors.forEach(a => {
-    const href = (a.getAttribute("href") || "").toLowerCase();
-    const file = href.split("/").pop();
-    if (file && file === currentPath) a.classList.add("is-active");
-  });
-
-  // if a collections item is active -> open dropdown + highlight button too
-  const dd = mobileLinks.querySelector(".mnav-dd");
-  const ddBtn = mobileLinks.querySelector(".mnav-dd-btn");
-  
-  function setOpen(open){
-    if (!dd || !ddBtn) return;
-    dd.classList.toggle("is-open", open);
-    ddBtn.classList.toggle("is-open", open);
-    ddBtn.setAttribute("aria-expanded", open ? "true" : "false");
-  }
-  
-  // click button = toggle
-  ddBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setOpen(!dd.classList.contains("is-open"));
-  });
-  
-  // click outside = close
-  document.addEventListener("click", (e) => {
-    if (!drawer.classList.contains("is-open")) return;
-    if (ddBtn && ddBtn.contains(e.target)) return;
-    if (dd && dd.contains(e.target)) return;
-    setOpen(false);
-  });
-  
-  // ESC = close
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") setOpen(false);
-  });
-  
-  // if active link inside collections -> open by default
-  const activeInside = dd?.querySelector("a.is-active");
-  if (activeInside) {
-    ddBtn?.classList.add("is-active");
-    setOpen(true);
-  } else {
-    setOpen(false);
-  }
-});
 
   function openMenu() {
     drawer.classList.add("is-open");
@@ -367,25 +239,111 @@ document.addEventListener("DOMContentLoaded", () => {
     toggle.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
   }
-  // ✅ If you leave phone width (like closing DevTools), close the mobile menu
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 900) closeMenu();
-});
 
+  // ✅ Build the mobile links ONCE (safe)
+  document.addEventListener("DOMContentLoaded", () => {
+    const mobileLinks = document.getElementById("mobileNavLinks");
+    if (!mobileLinks) return;
+
+    const currentPath = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+
+    const desktopNav =
+      document.getElementById("desktopNav") ||
+      document.querySelector("nav.nav") ||
+      document.querySelector(".nav");
+
+    const homeHref =
+      desktopNav?.querySelector('a[href="index.html"], a[href="./index.html"], a[href*="index"]')
+        ?.getAttribute("href") || "index.html";
+
+    const aboutHref =
+      desktopNav?.querySelector('a[href*="about-us"]')?.getAttribute("href") || "about-us.html";
+
+    const workHref =
+      desktopNav?.querySelector('a[href*="our-projects"]')?.getAttribute("href") ||
+      "our-projects.html";
+
+    const ddMenu =
+      desktopNav?.querySelector(".nav-dd-menu") ||
+      desktopNav?.querySelector(".nav-dd-menu[role='menu']") ||
+      document.querySelector(".nav-dd-menu");
+
+    const collectionLinks = Array.from(ddMenu?.querySelectorAll("a") || []);
+
+    mobileLinks.innerHTML = `
+      <a class="mnav-link" href="${homeHref}">Home</a>
+      <a class="mnav-link" href="${aboutHref}">About Us</a>
+      <a class="mnav-link" href="${workHref}">Our Work</a>
+
+      <button class="mnav-dd-btn" type="button" aria-expanded="false">
+        Collections <span class="mnav-caret">▾</span>
+      </button>
+
+      <div class="mnav-dd">
+        ${collectionLinks
+          .map((a) => {
+            const href = a.getAttribute("href") || "#";
+            const text = (a.textContent || "").trim();
+            return `<a class="mnav-dd-link" href="${href}">${text}</a>`;
+          })
+          .join("")}
+      </div>
+    `;
+
+    // Active highlight
+    mobileLinks.querySelectorAll("a").forEach((a) => {
+      const href = (a.getAttribute("href") || "").toLowerCase();
+      const file = href.split("/").pop();
+      if (file === currentPath) a.classList.add("is-active");
+    });
+
+    // Dropdown toggle
+    const dd = mobileLinks.querySelector(".mnav-dd");
+    const ddBtn = mobileLinks.querySelector(".mnav-dd-btn");
+
+    function setOpen(open) {
+      if (!dd || !ddBtn) return;
+      dd.classList.toggle("is-open", open);
+      ddBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    ddBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(!dd.classList.contains("is-open"));
+    });
+
+    // click outside closes dropdown (only when drawer open)
+    document.addEventListener("click", (e) => {
+      if (!drawer.classList.contains("is-open")) return;
+      if (ddBtn && ddBtn.contains(e.target)) return;
+      if (dd && dd.contains(e.target)) return;
+      setOpen(false);
+    });
+
+    // if active link is inside collections -> open dropdown automatically
+    const activeInside = dd?.querySelector("a.is-active");
+    if (activeInside) setOpen(true);
+  });
+
+  // Toggle drawer
   toggle.addEventListener("click", () => {
     const open = drawer.classList.contains("is-open");
     open ? closeMenu() : openMenu();
   });
 
+  // Close when clicking backdrop / X
   drawer.addEventListener("click", (e) => {
     const close = e.target.closest("[data-close='1']");
     if (close) closeMenu();
   });
 
+  // ESC closes
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeMenu();
   });
 
+  // Clicking a link closes drawer
   if (linksWrap) {
     linksWrap.addEventListener("click", (e) => {
       const a = e.target.closest("a");
@@ -393,6 +351,11 @@ window.addEventListener("resize", () => {
       closeMenu();
     });
   }
+
+  // Leaving mobile width closes drawer
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900) closeMenu();
+  });
 }
 
 /* ===========================
@@ -651,7 +614,7 @@ function isInteriorPage() {
 
 function makeProductCard(p) {
   const card = document.createElement("div");
-  const interiorMode = isInteriorPage();          // ✅ portfolio mode only on interior-design.html
+  const interiorMode = isInteriorPage();
 
   card.className = "pcard zoom-hover";
 
@@ -660,7 +623,6 @@ function makeProductCard(p) {
     ? `<div class="pill" style="left:auto;right:12px;">Out of stock</div>`
     : ``;
 
-  // ✅ hide price for Interior Design category always
   const hidePrice = isInteriorDesign(p.category);
 
   card.innerHTML = `
@@ -671,13 +633,10 @@ function makeProductCard(p) {
 
     <div class="pbody">
       <div class="pname">${p.name}</div>
-      <div class="pdesc">
-  ${String(p.desc || "").split("\n")[0] || ""}
-</div>
-<div class="pcard-hint">Click the card to see details</div>
+      <div class="pdesc">${String(p.desc || "").split("\n")[0] || ""}</div>
+      <div class="pcard-hint">Click the card to see details</div>
 
       ${
-        // ✅ price only if NOT interior category
         hidePrice
           ? ``
           : `
@@ -687,7 +646,6 @@ function makeProductCard(p) {
       }
 
       ${
-        // ✅ portfolio mode: remove qty + add to cart
         interiorMode
           ? ``
           : `
@@ -720,7 +678,6 @@ function makeProductCard(p) {
   pimg.style.backgroundPosition = "center";
   setBgLazy(pimg, p.img || "");
 
-  // ✅ portfolio mode: no listeners for qty/cart
   if (!interiorMode) {
     let qty = 1;
     const qnum = card.querySelector(".qnum");
@@ -766,22 +723,21 @@ function makeProductCard(p) {
       });
     }
   }
+
   // ✅ Click card opens modal (but buttons still work)
-card.addEventListener("click", (e) => {
-  // if clicking on quantity/add-to-cart buttons, do nothing
-  if (e.target.closest("button") || e.target.closest("a")) return;
+  card.addEventListener("click", (e) => {
+    if (e.target.closest("button") || e.target.closest("a")) return;
 
-  const hidePrice = isInteriorDesign(p.category); // your rule
-  openProductModal({
-    title: p.name,
-    desc: p.desc,
-    img: p.img,
-    category: p.category,
-    price: p.price,
-    hidePrice,
+    const hidePrice2 = isInteriorDesign(p.category);
+    openProductModal({
+      title: p.name,
+      desc: p.desc,
+      img: p.img,
+      category: p.category,
+      price: p.price,
+      hidePrice: hidePrice2,
+    });
   });
-});
-
 
   observeReveal(card);
   return card;
@@ -976,7 +932,6 @@ Phone:`;
 =========================== */
 let __pubFilter = "";
 
-// turns "Vogue, Elle\nArchitect Digest" into ["Vogue","Elle","Architect Digest"]
 function splitPublications(value) {
   if (Array.isArray(value)) return value.map((x) => String(x).trim()).filter(Boolean);
 
@@ -989,9 +944,8 @@ function splitPublications(value) {
 function buildPublicationsPanel(projects) {
   const listEl = document.getElementById("pubsList");
   const clearBtn = document.getElementById("pubsClear");
-  if (!listEl) return; // not on our-projects page
+  if (!listEl) return;
 
-  // count publications
   const counts = new Map();
 
   projects.forEach((p) => {
@@ -1001,14 +955,12 @@ function buildPublicationsPanel(projects) {
 
   const items = Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
 
-  // if none exist
   if (!items.length) {
     listEl.innerHTML = `<div class="pubs-empty">No publications yet</div>`;
     if (clearBtn) clearBtn.style.display = "none";
     return;
   }
 
-  // draw the list
   listEl.innerHTML = items
     .slice(0, 30)
     .map(([pub, count]) => {
@@ -1022,7 +974,6 @@ function buildPublicationsPanel(projects) {
     })
     .join("");
 
-  // clear button
   if (clearBtn) {
     clearBtn.style.display = __pubFilter ? "" : "none";
     clearBtn.onclick = () => {
@@ -1032,7 +983,6 @@ function buildPublicationsPanel(projects) {
     };
   }
 
-  // click any publication to filter
   listEl.onclick = (e) => {
     const item = e.target.closest(".pubs-item");
     if (!item) return;
@@ -1148,39 +1098,35 @@ function openProjectModal({ title, desc, img, category, publications, pdfUrl }) 
   if (descEl) descEl.textContent = desc || "";
   if (catEl) catEl.textContent = (category || "PROJECT").toUpperCase();
 
-  // ✅ Publications (optional)
-    // ✅ Publications / PDF (only for Publications category)
-   // ✅ Publications text (normal projects) + PDF button (Publications category)
-const pubsWrap = document.getElementById("pmodalPubs");
-const pubsText = document.getElementById("pmodalPubsText");
-const pdfBtn = document.getElementById("pmodalPdfBtn");
+  // Publications / PDF
+  const pubsWrap = document.getElementById("pmodalPubs");
+  const pubsText = document.getElementById("pmodalPubsText");
+  const pdfBtn = document.getElementById("pmodalPdfBtn");
 
-const pubs = String(publications || "").trim();
-const isPubCategory = String(category || "").trim().toLowerCase() === "publications";
-const pdf = String(pdfUrl || "").trim();
+  const pubs = String(publications || "").trim();
+  const isPubCategory = String(category || "").trim().toLowerCase() === "publications";
+  const pdf = String(pdfUrl || "").trim();
 
-// Default hide PDF button
-if (pdfBtn) {
-  pdfBtn.style.display = "none";
-  pdfBtn.href = "#";
-}
-
-// Normal projects: show publications list if any
-if (pubsWrap && pubsText) {
-  if (!isPubCategory && pubs) {
-    pubsText.textContent = pubs;
-    pubsWrap.style.display = "";
-  } else {
-    pubsText.textContent = "";
-    pubsWrap.style.display = "none";
+  if (pdfBtn) {
+    pdfBtn.style.display = "none";
+    pdfBtn.href = "#";
   }
-}
 
-// Publications category: show ONE PDF button if pdf_url exists
-if (isPubCategory && pdfBtn && pdf) {
-  pdfBtn.href = pdf;
-  pdfBtn.style.display = "inline-flex";
-}
+  if (pubsWrap && pubsText) {
+    if (!isPubCategory && pubs) {
+      pubsText.textContent = pubs;
+      pubsWrap.style.display = "";
+    } else {
+      pubsText.textContent = "";
+      pubsWrap.style.display = "none";
+    }
+  }
+
+  if (isPubCategory && pdfBtn && pdf) {
+    pdfBtn.href = pdf;
+    pdfBtn.style.display = "inline-flex";
+  }
+
   if (imgEl) {
     if (img) {
       imgEl.src = img;
@@ -1293,6 +1239,7 @@ function setupNavDropdown() {
     if (!dd.contains(e.target)) closeDD();
   });
 }
+
 function openProductModal({ title, desc, img, category, price, hidePrice }) {
   const modal = document.getElementById("productModal");
   if (!modal) return;
@@ -1307,7 +1254,7 @@ function openProductModal({ title, desc, img, category, price, hidePrice }) {
 
   if (catEl) catEl.textContent = (category || "").toUpperCase();
   if (titleEl) titleEl.textContent = title || "";
-  if (descEl) descEl.textContent = desc || ""; // ✅ new lines preserved with CSS pre-line
+  if (descEl) descEl.textContent = desc || "";
 
   if (imgEl) {
     imgEl.src = img || "";
@@ -1322,7 +1269,7 @@ function openProductModal({ title, desc, img, category, price, hidePrice }) {
       priceEl.textContent = money(price);
       priceEl.dataset.usd = String(Number(price || 0));
       priceEl.classList.add("price");
-      applyCurrencyToDOM(modal); // ✅ keep currency working inside modal
+      applyCurrencyToDOM(modal);
     }
   }
 
@@ -1336,7 +1283,6 @@ function openProductModal({ title, desc, img, category, price, hidePrice }) {
     document.body.style.overflow = "";
   }
 
-  // cleanup
   if (modal.__cleanup) modal.__cleanup();
 
   function onClick(e) {
@@ -1356,37 +1302,32 @@ function openProductModal({ title, desc, img, category, price, hidePrice }) {
 
   setTimeout(() => (card || modal).focus?.(), 0);
 }
+
 function hidePublicationsPillIfNotProjects() {
   const pubPill = document.querySelector(".pill-btn[data-filter='publications']");
   if (!pubPill) return;
 
   const currentPage = window.location.pathname.split("/").pop().toLowerCase();
-
-  // Change this if your projects file name is different
   if (currentPage !== "our-projects.html") {
     pubPill.style.display = "none";
   }
 }
+
 /* =========================================
    HOME HERO BACKGROUND SLIDER (AUTOPLAY)
-   - Smooth fade
-   - Auto changes
-   - Dots clickable
-   - Pauses on hover (pro feel)
 ========================================= */
 (function () {
   const bg = document.getElementById("heroBg");
-  if (!bg) return; // only runs on Home
+  if (!bg) return;
 
   const slides = Array.from(bg.querySelectorAll(".hero-bg-slide"));
   if (slides.length < 2) return;
 
   const dotsWrap = document.getElementById("heroDots");
-  const intervalMs = 5000; // 5 seconds exactly
+  const intervalMs = 5000;
   let index = 0;
   let timer = null;
 
-  // Build dots if container exists
   let dots = [];
   if (dotsWrap) {
     dotsWrap.innerHTML = "";
@@ -1430,14 +1371,12 @@ function hidePublicationsPillIfNotProjects() {
     start();
   }
 
-  // Pause on hover
   const hero = document.getElementById("homeHero") || bg.closest(".hero");
   if (hero) {
     hero.addEventListener("mouseenter", stop);
     hero.addEventListener("mouseleave", start);
   }
 
-  // Start
   render();
   start();
 })();
@@ -1450,7 +1389,6 @@ function hidePublicationsPillIfNotProjects() {
   setupMobileMenu();
   setupReveal();
 
-  // ✅ currency: dropdown + apply once on load
   ensureCurrencyDropdown();
   applyCurrencyToDOM(document);
 
@@ -1463,7 +1401,6 @@ function hidePublicationsPillIfNotProjects() {
   setupProjectsFilter();
   setupProjectClicks();
   hidePublicationsPillIfNotProjects();
-
 
   await setupFooterWhatsApp();
 
