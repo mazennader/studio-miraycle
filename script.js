@@ -248,18 +248,35 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("desktopNav") || document.querySelector(".nav");
 
   // get the 3 main links (Home, About, Our Work)
-  const mainLinks = Array.from(desktopNav?.querySelectorAll('a[data-nav="1"], a') || [])
-    .filter(a => a.getAttribute("href"))
-    .filter(a => {
-      const href = (a.getAttribute("href") || "").toLowerCase();
-      return (
-        href.includes("home") ||
-        href.includes("about-us") ||
-        href.includes("our-projects")
-      );
-    })
-    .slice(0, 3);
+    // ✅ get the 3 main links by TEXT, not by "home" keyword
+    const allDesktopLinks = Array.from(desktopNav?.querySelectorAll("a") || []);
 
+    const homeA  = allDesktopLinks.find(a => /home/i.test(a.textContent || "")) || allDesktopLinks.find(a => (a.getAttribute("href")||"").includes("index"));
+    const aboutA = allDesktopLinks.find(a => /about/i.test(a.textContent || "")) || allDesktopLinks.find(a => (a.getAttribute("href")||"").includes("about-us"));
+    const workA  = allDesktopLinks.find(a => /(work|projects)/i.test(a.textContent || "")) || allDesktopLinks.find(a => (a.getAttribute("href")||"").includes("our-projects"));
+  
+    const homeHref  = homeA?.getAttribute("href")  || "index.html";
+    const aboutHref = aboutA?.getAttribute("href") || "about-us.html";
+    const workHref  = workA?.getAttribute("href")  || "our-projects.html";
+  
+    // build mobile HTML (correct)
+    mobileLinks.innerHTML = `
+      <a class="mnav-link" href="${homeHref}">Home</a>
+      <a class="mnav-link" href="${aboutHref}">About Us</a>
+      <a class="mnav-link" href="${workHref}">Our Work</a>
+  
+      <button class="mnav-dd-btn" type="button" aria-expanded="false">
+        Collections <span class="mnav-caret">▾</span>
+      </button>
+  
+      <div class="mnav-dd">
+        ${collectionLinks.map(a => {
+          const href = a.getAttribute("href") || "#";
+          const text = (a.textContent || "").trim();
+          return `<a class="mnav-dd-link" href="${href}">${text}</a>`;
+        }).join("")}
+      </div>
+    `;
   // get Collections links from dropdown menu (works with both class names you used)
   const ddMenu =
     desktopNav?.querySelector(".nav-dd-menu") ||
