@@ -44,7 +44,55 @@
     showLoader();
   });
 })();
+/* ===========================
+   GLOBAL PAGE LOADER (SAFE)
+   - Works on every page that has #pageLoader
+   - Never gets stuck (fallback)
+=========================== */
+(function () {
+  const loader = document.getElementById("pageLoader");
 
+  function hideLoader() {
+    if (!loader) return;
+    loader.classList.add("is-hidden");
+    document.documentElement.classList.add("page-ready");
+  }
+
+  function showLoader() {
+    if (!loader) return;
+    loader.classList.remove("is-hidden");
+    document.documentElement.classList.remove("page-ready");
+  }
+
+  // Ensure it starts visible (in case cached navigation)
+  showLoader();
+
+  // Hide when DOM is ready (fast)
+  document.addEventListener("DOMContentLoaded", hideLoader);
+
+  // Extra safety: hide even if something fails
+  window.addEventListener("load", hideLoader);
+  window.addEventListener("error", hideLoader);
+  window.addEventListener("unhandledrejection", hideLoader);
+  setTimeout(hideLoader, 1500);
+
+  // Optional: show loader on internal link navigation
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+
+    const href = a.getAttribute("href") || "";
+    const target = a.getAttribute("target");
+
+    // ignore: new tab, downloads, hashes, external links
+    if (target === "_blank") return;
+    if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
+    if (href.startsWith("http") && !href.includes(location.host)) return;
+
+    // if it's a normal page navigation, show loader
+    showLoader();
+  });
+})();
 /* ===========================
    CONFIG / API
 =========================== */

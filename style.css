@@ -7227,3 +7227,97 @@ html, body{
     object-fit: contain !important;
   }
 }
+/* ===========================
+   PAGE LOADER (LOGO + SPINNER)
+=========================== */
+.page-loader{
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  background: var(--ivory, #DCDAD6); /* fallback to your ivory */
+  transition: opacity .25s ease, visibility .25s ease;
+}
+
+.page-loader.is-hidden{
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-inner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 14px 30px rgba(0,0,0,.12);
+}
+
+.loader-logo{
+  width: 84px;
+  height: 84px;
+  border-radius: 18px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+.loader-logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.loader-spinner{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 4px solid rgba(0,0,0,.14);
+  border-top-color: rgba(0,0,0,.55);
+  animation: loaderSpin .9s linear infinite;
+}
+
+@keyframes loaderSpin{
+  to{ transform: rotate(360deg); }
+}
+/* loader visible by default */
+.page-loader{
+  position:fixed; inset:0;
+  z-index:99999;
+  display:grid; place-items:center;
+  background: var(--ivory, #DCDAD6);
+}
+
+/* hidden when JS adds .hide */
+.page-loader.hide{
+  opacity:0;
+  pointer-events:none;
+  visibility:hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+
+/* OPTIONAL: if you want the page hidden until ready */
+body:not(.is-ready){
+  overflow:hidden;
+}
+body:not(.is-ready) .site-header,
+body:not(.is-ready) main,
+body:not(.is-ready) .hero,
+body:not(.is-ready) footer{
+  visibility:hidden;
+}
+body.is-ready .site-header,
+body.is-ready main,
+body.is-ready .hero,
+body.is-ready footer{
+  visibility:visible;
+}
