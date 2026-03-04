@@ -15,3 +15,19 @@
 /mosaic-art            /mosaic-art.html            200
 /iconography              /iconography.html            200
 /workshops             /lessons.html                   200
+
+# ---------- REDIRECT .html TO CLEAN URL ----------
+/about-us.html        /about            301
+/our-projects.html    /our-work         301
+/cart.html            /cart             301
+/admin-login.html     /admin            301
+/admin-dashboard.html /studio-control   301
+
+/art-restoration.html /restoration      301
+/painting.html        /painting         301
+/stained-glass.html   /stained-glass    301
+/ceramic-art.html     /ceramic          301
+/interior-design.html /interior-design  301
+/mosaic-art.html      /mosaic-art       301
+/iconography.html     /iconography      301
+/lessons.html         /workshops        301
