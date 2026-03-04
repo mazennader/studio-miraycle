@@ -31,7 +31,8 @@ const DEV_PRINT_LOGIN_CODE = false;
    MIDDLEWARE
 =========================== */
 const allowedOrigins = [
-  process.env.FRONTEND_ORIGIN,
+  "https://artshop-frontend.onrender.com",
+  "https://artshop-frontend.onrender.com",
   "http://localhost:5500",
   "http://127.0.0.1:5500",
 ];
