@@ -446,7 +446,7 @@ document.addEventListener("click", async (e) => {
 });
 document.getElementById("btnLogout").addEventListener("click", async () => {
   try {
-    await fetch("/api/admin/logout", {
+    await fetch(`${API_BASE}/api/admin/logout`, {
       method: "POST",
       credentials: "include"
     });
