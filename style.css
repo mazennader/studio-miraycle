@@ -7366,3 +7366,8 @@ body.is-ready footer{
   }
 
 }
+.hero-author{
+  margin-top: 10px;
+  opacity: .9;
+  font-size: 0.98rem;
+}
