@@ -7349,3 +7349,20 @@ body.is-ready footer{
 .mobile-nav-backdrop{
   pointer-events: auto !important;
 }
+/* ==========================
+   FORCE smaller section titles on phones
+========================== */
+@media (max-width: 768px){
+
+  .section-title h2{
+    font-size: 30px !important;
+    line-height: 1.15 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .section-title p{
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+  }
+
+}
