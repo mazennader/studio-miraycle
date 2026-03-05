@@ -53,7 +53,7 @@ app.use(cors({
 }));
 
 // ✅ IMPORTANT: reply to preflight
-app.options("*", cors());
+app.options("/*", cors());
 
 app.use(express.json());
 app.use(cookieParser());
