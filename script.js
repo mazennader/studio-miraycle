@@ -98,7 +98,7 @@
 /* ===========================
    CONFIG / API
 =========================== */
-const API_BASE = "https://artshop-backend.onrender.com";
+const API_BASE = "https://api.studio-miraycle.com/";
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
