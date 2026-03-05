@@ -361,17 +361,26 @@ function setupMobileMenu() {
 /* ===========================
    FETCH JSON (NO CACHE)
 =========================== */
+/* ===========================
+   FETCH JSON (NO CACHE)
+=========================== */
 async function fetchJSON(path, opts = {}) {
   const url = `${API_BASE}${path}${path.includes("?") ? "&" : "?"}_=${Date.now()}`;
 
+  const method = (opts.method || "GET").toUpperCase();
+
+  // ✅ Only add Content-Type when NOT GET/HEAD
+  const headers = { ...(opts.headers || {}) };
+  if (method !== "GET" && method !== "HEAD") {
+    headers["Content-Type"] = "application/json";
+  }
+
   const res = await fetch(url, {
     ...opts,
+    method,
     credentials: "include",
     cache: "no-store",
-    headers: {
-      "Content-Type": "application/json",
-      ...(opts.headers || {}),
-    },
+    headers,
   });
 
   if (!res.ok) {

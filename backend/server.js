@@ -32,23 +32,28 @@ const DEV_PRINT_LOGIN_CODE = false;
 =========================== */
 app.set("trust proxy", 1);
 
-const allowedOrigins = [
-  process.env.FRONTEND_ORIGIN,
+const allowedOrigins = new Set([
+  "https://studio-miraycle.com",
+  "https://www.studio-miraycle.com",
   "https://artshop-frontend.onrender.com",
   "http://localhost:5500",
   "http://127.0.0.1:5500",
-];
+  (process.env.FRONTEND_ORIGIN || "").replace(/\/$/, ""),
+]);
 
-app.use(
-  cors({
-    origin: (origin, cb) => {
-      if (!origin) return cb(null, true);
-      if (allowedOrigins.includes(origin)) return cb(null, true);
-      return cb(null, false);
-    },
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true); // curl/postman/no-origin
+    const clean = origin.replace(/\/$/, "");
+    return cb(null, allowedOrigins.has(clean));
+  },
+  credentials: true,
+  methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization"],
+}));
+
+// ✅ IMPORTANT: reply to preflight
+app.options("*", cors());
 
 app.use(express.json());
 app.use(cookieParser());
