@@ -1,4 +1,4 @@
-const API_BASE = "https://api.studio-miraycle.com/";
+const API_BASE = "https://api.studio-miraycle.com";
 
 const form = document.getElementById("adminLoginForm");
 const note = document.getElementById("loginNote");
