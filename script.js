@@ -1019,7 +1019,7 @@ async function renderProjects(filter) {
 function setupProjectClicks() {
   const grid = $("#projectsGrid");
   if (!grid) return;
-
+ 
   grid.addEventListener("click", (e) => {
     const card = e.target.closest(".project-card");
     if (!card) return;
