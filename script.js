@@ -851,6 +851,7 @@ async function renderCartPage() {
         <h3>Order Summary</h3>
         <div class="row"><span>Subtotal</span><span id="sub"></span></div>
         <div class="row"><span>Total</span><span class="total" id="total"></span></div>
+        <div class="delivery-note">+ delivery fees</div>
         <button class="checkout zoom-hover" id="waCheckout">Checkout WhatsApp</button>
         <div class="smallnote">You'll be redirected to WhatsApp to complete your order</div>
       </aside>
