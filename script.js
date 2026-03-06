@@ -24,23 +24,25 @@
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a");
     if (!a) return;
-
-    const href = a.getAttribute("href");
+  
+    const href = a.getAttribute("href") || "";
+    const target = a.getAttribute("target");
+  
     if (!href) return;
-
+  
     if (
-      a.target === "_blank" ||
+      target === "_blank" ||
       href.startsWith("#") ||
-      href.startsWith("http") ||
       href.startsWith("mailto:") ||
       href.startsWith("tel:") ||
       href.startsWith("javascript:")
-    )
-      return;
-
-    const current = (window.location.pathname.split("/").pop() || "").toLowerCase();
-    if (href.toLowerCase() === current) return;
-
+    ) return;
+  
+    const current = window.location.pathname.split("/").pop();
+    const dest = href.split("/").pop();
+  
+    if (current === dest) return;
+  
     showLoader();
   });
 })();
@@ -73,20 +75,6 @@
   window.addEventListener("error", hideLoader);
   window.addEventListener("unhandledrejection", hideLoader);
   setTimeout(hideLoader, 1500);
-
-  document.addEventListener("click", (e) => {
-    const a = e.target.closest("a");
-    if (!a) return;
-
-    const href = a.getAttribute("href") || "";
-    const target = a.getAttribute("target");
-
-    if (target === "_blank") return;
-    if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
-    if (href.startsWith("http") && !href.includes(location.host)) return;
-
-    showLoader();
-  });
 })();
 
 /* ===========================
@@ -478,11 +466,9 @@ function scrollToProducts() {
   const grid = document.getElementById("featuredGrid");
   if (!grid) return;
 
-  const y = grid.getBoundingClientRect().top + window.pageYOffset - 80;
-
-  window.scrollTo({
-    top: y,
+  grid.scrollIntoView({
     behavior: "smooth",
+    block: "start"
   });
 }
 
@@ -769,6 +755,7 @@ async function renderFeatured(page = 1) {
     if (phone) {
       buildPager(pagerMount, safePage, pages, (newPage) => {
         renderFeatured(newPage);
+        scrollToProducts();
       });
     } else {
       pagerMount.innerHTML = "";
