@@ -1014,8 +1014,6 @@ async function renderProjects(filter) {
   });
 
   grid.appendChild(frag);
-
-  setupReveal();
 }
 
 function setupProjectClicks() {
@@ -1367,7 +1365,5 @@ function hidePublicationsPillIfNotProjects() {
   window.addEventListener("resize", () => {
     if ($("#featuredGrid")) renderFeatured(currentFeaturedPage);
   });
-
-  setupReveal();
   setupNavDropdown();
 })();
