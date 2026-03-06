@@ -652,6 +652,7 @@ function makeProductCard(p) {
           : `
             <div class="label">PRICE</div>
             <div class="price" data-usd="${Number(p.price || 0)}">${money(p.price)}</div>
+             <div class="delivery-note">+ delivery fees</div>
           `
       }
 
@@ -834,7 +835,7 @@ async function renderCartPage() {
       <div class="empty reveal in">
         <h2>Your cart is empty</h2>
         <p>Add some products first</p>
-        <a class="btn btn-gold zoom-hover" href="Home.html">Browse</a>
+        <a class="btn btn-gold zoom-hover" href="index.html">Browse</a>
       </div>
     `;
     return;
