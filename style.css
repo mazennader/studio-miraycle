@@ -7371,3 +7371,14 @@ body.is-ready footer{
   opacity: .9;
   font-size: 0.98rem;
 }
+.price-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.delivery-note{
+  font-size:12px;
+  opacity:.7;
+  line-height:1.2;
+}
