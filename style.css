@@ -7423,3 +7423,8 @@ h3{
   font-size: 18px !important;
   line-height: 1.2 !important;
 } 
+.ceramic-collections .collection-card h3,
+.ceramic-collections .collection-card .h-font{
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+}
