@@ -24,12 +24,12 @@
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a");
     if (!a) return;
-  
+
     const href = a.getAttribute("href") || "";
     const target = a.getAttribute("target");
-  
+
     if (!href) return;
-  
+
     if (
       target === "_blank" ||
       href.startsWith("#") ||
@@ -37,12 +37,12 @@
       href.startsWith("tel:") ||
       href.startsWith("javascript:")
     ) return;
-  
+
     const current = window.location.pathname.split("/").pop();
     const dest = href.split("/").pop();
-  
+
     if (current === dest) return;
-  
+
     showLoader();
   });
 })();
@@ -133,7 +133,7 @@ function formatNumber(n, decimals) {
 
 function applyCurrencyToDOM(root = document) {
   const select = document.getElementById("currencySelect");
-  const currency = (select && CURRENCY.list.includes(select.value)) ? select.value : "USD";
+  const currency = select && CURRENCY.list.includes(select.value) ? select.value : "USD";
 
   const rate = CURRENCY.rates[currency] || 1;
   const symbol = CURRENCY.symbols[currency] || "";
@@ -402,7 +402,7 @@ function setupReveal() {
           }
         });
       },
-      { threshold: 0.01 }
+      { threshold: 0.15 }
     );
   }
 
@@ -468,8 +468,23 @@ function scrollToProducts() {
 
   grid.scrollIntoView({
     behavior: "smooth",
-    block: "start"
+    block: "start",
   });
+}
+
+function preloadImages(urls = []) {
+  const clean = [...new Set(urls.filter(Boolean))];
+  return Promise.all(
+    clean.map(
+      (url) =>
+        new Promise((resolve) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = resolve;
+          img.src = url;
+        })
+    )
+  );
 }
 
 /* ===========================
@@ -572,7 +587,7 @@ function makeProductCard(p) {
   const card = document.createElement("div");
   const interiorMode = isInteriorPage();
 
-  card.className = "pcard zoom-hover reveal";
+  card.className = "pcard zoom-hover";
 
   const featuredPill = p.featured ? `<div class="pill">Featured</div>` : ``;
   const stockPill = p.out_of_stock
@@ -632,7 +647,9 @@ function makeProductCard(p) {
   pimg.style.backgroundColor = "rgba(0,0,0,.05)";
   pimg.style.backgroundSize = "cover";
   pimg.style.backgroundPosition = "center";
-  setBgLazy(pimg, p.img || "");
+  if (p.img) {
+    pimg.style.backgroundImage = `url('${p.img}')`;
+  }
 
   if (!interiorMode) {
     let qty = 1;
@@ -694,7 +711,6 @@ function makeProductCard(p) {
     });
   });
 
-  observeReveal(card);
   return card;
 }
 
@@ -740,6 +756,8 @@ async function renderFeatured(page = 1) {
   const start = (safePage - 1) * perPage;
   const end = start + perPage;
   const visible = list.slice(start, end);
+
+  await preloadImages(visible.map((p) => p.img));
 
   const CHUNK = 12;
   for (let i = 0; i < visible.length; i += CHUNK) {
@@ -944,7 +962,7 @@ function buildPublicationsPanel(projects) {
     if (!item) return;
 
     const pub = item.dataset.pub || "";
-    __pubFilter = (__pubFilter === pub) ? "" : pub;
+    __pubFilter = __pubFilter === pub ? "" : pub;
 
     const activeBtn = document.querySelector("#filterPills .pill-btn.is-active");
     renderProjects(activeBtn?.dataset?.filter || "all");
@@ -1019,7 +1037,7 @@ async function renderProjects(filter) {
 function setupProjectClicks() {
   const grid = $("#projectsGrid");
   if (!grid) return;
- 
+
   grid.addEventListener("click", (e) => {
     const card = e.target.closest(".project-card");
     if (!card) return;
@@ -1365,5 +1383,6 @@ function hidePublicationsPillIfNotProjects() {
   window.addEventListener("resize", () => {
     if ($("#featuredGrid")) renderFeatured(currentFeaturedPage);
   });
+
   setupNavDropdown();
 })();
