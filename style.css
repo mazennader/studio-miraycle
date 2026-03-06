@@ -7435,13 +7435,14 @@ h3{
   font-size: 14px !important;
   line-height: 1.4 !important;
 }
-/* INTERIOR PAGE - WHY CHOOSE CARDS */
-.reasons .reason-card h3,
-.reasons .reason-card .h-font{
-  font-size: 20px !important;
-  line-height: 1.2 !important;
+/* INTERIOR REASONS CARDS - FORCE SMALLER TITLES */
+.reasons .reason-card h3.h-font{
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  margin: 14px 0 10px !important;
 }
 
 .reasons .reason-card p{
-  font-size: 14px !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
 }
