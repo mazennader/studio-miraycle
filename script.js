@@ -65,19 +65,15 @@
     document.documentElement.classList.remove("page-ready");
   }
 
-  // Ensure it starts visible (in case cached navigation)
   showLoader();
 
-  // Hide when DOM is ready (fast)
   document.addEventListener("DOMContentLoaded", hideLoader);
 
-  // Extra safety: hide even if something fails
   window.addEventListener("load", hideLoader);
   window.addEventListener("error", hideLoader);
   window.addEventListener("unhandledrejection", hideLoader);
   setTimeout(hideLoader, 1500);
 
-  // Optional: show loader on internal link navigation
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a");
     if (!a) return;
@@ -85,12 +81,10 @@
     const href = a.getAttribute("href") || "";
     const target = a.getAttribute("target");
 
-    // ignore: new tab, downloads, hashes, external links
     if (target === "_blank") return;
     if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
     if (href.startsWith("http") && !href.includes(location.host)) return;
 
-    // if it's a normal page navigation, show loader
     showLoader();
   });
 })();
@@ -105,16 +99,10 @@ const $$ = (s) => document.querySelectorAll(s);
 
 /* ===========================
    ✅ CURRENCY SWITCHER (SAFE)
-   - Base is USD
-   - Converts displayed .price elements
-   - Stores original USD in data-usd (one time)
-   - ✅ Order: USD, GBP, EUR, AED, LBP
-   - ✅ Always defaults to USD on reload (no localStorage saving)
 =========================== */
 const CURRENCY = {
   list: ["USD", "GBP", "EUR", "AED", "LBP"],
 
-  // 1 USD = rate
   rates: {
     USD: 1,
     GBP: 0.79,
@@ -142,14 +130,12 @@ const CURRENCY = {
   key: "site_currency",
 };
 
-/* ✅ Always USD on reload */
 function getCurrency() {
   return "USD";
 }
 
-/* ✅ Keep function to not break code, but do NOT persist */
 function setCurrency(c) {
-  // no-op (intentionally not saving)
+  // no-op
 }
 
 function formatNumber(n, decimals) {
@@ -157,11 +143,6 @@ function formatNumber(n, decimals) {
   return fixed.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-/**
- * Convert ALL .price elements on the page
- * - If element has data-usd, use it
- * - Else try to parse its current text and save as data-usd once
- */
 function applyCurrencyToDOM(root = document) {
   const select = document.getElementById("currencySelect");
   const currency = (select && CURRENCY.list.includes(select.value)) ? select.value : "USD";
@@ -194,7 +175,6 @@ function applyCurrencyToDOM(root = document) {
   if (select && select.value !== currency) select.value = currency;
 }
 
-/* ✅ Dropdown handler (safe) */
 function ensureCurrencyDropdown() {
   const select = document.getElementById("currencySelect");
   if (!select) return;
@@ -207,17 +187,13 @@ function ensureCurrencyDropdown() {
   });
 }
 
-/* ===========================
-   ✅ Updated money() helper
-   - Keeps USD base output
-=========================== */
 function money(n) {
   const v = Number(n || 0);
   return `$${v.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 }
 
 /* ===========================
-   MOBILE MENU (DRAWER) - FIXED (NO DUPES / NO CRASH)
+   MOBILE MENU (DRAWER)
 =========================== */
 function setupMobileMenu() {
   const toggle = $("#navToggle");
@@ -240,7 +216,6 @@ function setupMobileMenu() {
     document.body.style.overflow = "";
   }
 
-  // ✅ Build the mobile links ONCE (safe)
   document.addEventListener("DOMContentLoaded", () => {
     const mobileLinks = document.getElementById("mobileNavLinks");
     if (!mobileLinks) return;
@@ -290,14 +265,12 @@ function setupMobileMenu() {
       </div>
     `;
 
-    // Active highlight
     mobileLinks.querySelectorAll("a").forEach((a) => {
       const href = (a.getAttribute("href") || "").toLowerCase();
       const file = href.split("/").pop();
       if (file === currentPath) a.classList.add("is-active");
     });
 
-    // Dropdown toggle
     const dd = mobileLinks.querySelector(".mnav-dd");
     const ddBtn = mobileLinks.querySelector(".mnav-dd-btn");
 
@@ -313,7 +286,6 @@ function setupMobileMenu() {
       setOpen(!dd.classList.contains("is-open"));
     });
 
-    // click outside closes dropdown (only when drawer open)
     document.addEventListener("click", (e) => {
       if (!drawer.classList.contains("is-open")) return;
       if (ddBtn && ddBtn.contains(e.target)) return;
@@ -321,29 +293,24 @@ function setupMobileMenu() {
       setOpen(false);
     });
 
-    // if active link is inside collections -> open dropdown automatically
     const activeInside = dd?.querySelector("a.is-active");
     if (activeInside) setOpen(true);
   });
 
-  // Toggle drawer
   toggle.addEventListener("click", () => {
     const open = drawer.classList.contains("is-open");
     open ? closeMenu() : openMenu();
   });
 
-  // Close when clicking backdrop / X
   drawer.addEventListener("click", (e) => {
     const close = e.target.closest("[data-close='1']");
     if (close) closeMenu();
   });
 
-  // ESC closes
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeMenu();
   });
 
-  // Clicking a link closes drawer
   if (linksWrap) {
     linksWrap.addEventListener("click", (e) => {
       const a = e.target.closest("a");
@@ -352,7 +319,6 @@ function setupMobileMenu() {
     });
   }
 
-  // Leaving mobile width closes drawer
   window.addEventListener("resize", () => {
     if (window.innerWidth > 900) closeMenu();
   });
@@ -361,15 +327,11 @@ function setupMobileMenu() {
 /* ===========================
    FETCH JSON (NO CACHE)
 =========================== */
-/* ===========================
-   FETCH JSON (NO CACHE)
-=========================== */
 async function fetchJSON(path, opts = {}) {
   const url = `${API_BASE}${path}${path.includes("?") ? "&" : "?"}_=${Date.now()}`;
 
   const method = (opts.method || "GET").toUpperCase();
 
-  // ✅ Only add Content-Type when NOT GET/HEAD
   const headers = { ...(opts.headers || {}) };
   if (method !== "GET" && method !== "HEAD") {
     headers["Content-Type"] = "application/json";
@@ -398,7 +360,6 @@ async function fetchJSON(path, opts = {}) {
 
 /* ===========================
    CART (sessionStorage)
-   ✅ Clears when tab/browser is closed
 =========================== */
 function getCart() {
   return JSON.parse(sessionStorage.getItem("artisan_cart") || "[]");
@@ -513,7 +474,6 @@ function isPhone() {
   return window.matchMedia("(max-width: 620px)").matches;
 }
 
-/* ✅ NEW: scroll to products top when changing page */
 function scrollToProducts() {
   const grid = document.getElementById("featuredGrid");
   if (!grid) return;
@@ -532,6 +492,7 @@ function scrollToProducts() {
 let __productsCache = null;
 let __projectsCache = null;
 let __configCache = null;
+let currentFeaturedPage = 1;
 
 function normalizeProduct(p) {
   return {
@@ -606,7 +567,7 @@ function buildPager(mount, page, pages, onChange) {
 }
 
 /* ===========================
-   RENDER PRODUCTS (DESKTOP ALL, PHONE PAGED)
+   RENDER PRODUCTS
 =========================== */
 function normCat(x) {
   return String(x || "").trim().toLowerCase();
@@ -625,7 +586,7 @@ function makeProductCard(p) {
   const card = document.createElement("div");
   const interiorMode = isInteriorPage();
 
-  card.className = "pcard zoom-hover";
+  card.className = "pcard zoom-hover reveal";
 
   const featuredPill = p.featured ? `<div class="pill">Featured</div>` : ``;
   const stockPill = p.out_of_stock
@@ -733,7 +694,6 @@ function makeProductCard(p) {
     }
   }
 
-  // ✅ Click card opens modal (but buttons still work)
   card.addEventListener("click", (e) => {
     if (e.target.closest("button") || e.target.closest("a")) return;
 
@@ -789,6 +749,7 @@ async function renderFeatured(page = 1) {
 
   const pages = Math.max(1, Math.ceil(list.length / perPage));
   const safePage = Math.min(Math.max(1, page), pages);
+  currentFeaturedPage = safePage;
 
   const start = (safePage - 1) * perPage;
   const end = start + perPage;
@@ -808,7 +769,6 @@ async function renderFeatured(page = 1) {
     if (phone) {
       buildPager(pagerMount, safePage, pages, (newPage) => {
         renderFeatured(newPage);
-        scrollToProducts();
       });
     } else {
       pagerMount.innerHTML = "";
@@ -937,7 +897,7 @@ Phone:`;
 }
 
 /* ===========================
-   PUBLICATIONS PANEL (RIGHT SIDE)
+   PUBLICATIONS PANEL
 =========================== */
 let __pubFilter = "";
 
@@ -1005,7 +965,7 @@ function buildPublicationsPanel(projects) {
 }
 
 /* ===========================
-   OUR PROJECTS (FILTER + GRID)
+   OUR PROJECTS
 =========================== */
 async function renderProjects(filter) {
   const grid = $("#projectsGrid");
@@ -1071,7 +1031,6 @@ async function renderProjects(filter) {
   setupReveal();
 }
 
-/* ✅ Click projects to open modal */
 function setupProjectClicks() {
   const grid = $("#projectsGrid");
   if (!grid) return;
@@ -1091,7 +1050,9 @@ function setupProjectClicks() {
   });
 }
 
-/* ✅ MODAL (FIXED: closes correctly + no aria-hidden focus warning) */
+/* ===========================
+   PROJECT MODAL
+=========================== */
 function openProjectModal({ title, desc, img, category, publications, pdfUrl }) {
   const modal = document.getElementById("projectModal");
   if (!modal) return;
@@ -1107,7 +1068,6 @@ function openProjectModal({ title, desc, img, category, publications, pdfUrl }) 
   if (descEl) descEl.textContent = desc || "";
   if (catEl) catEl.textContent = (category || "PROJECT").toUpperCase();
 
-  // Publications / PDF
   const pubsWrap = document.getElementById("pmodalPubs");
   const pubsText = document.getElementById("pmodalPubsText");
   const pdfBtn = document.getElementById("pmodalPdfBtn");
@@ -1249,6 +1209,9 @@ function setupNavDropdown() {
   });
 }
 
+/* ===========================
+   PRODUCT MODAL
+=========================== */
 function openProductModal({ title, desc, img, category, price, hidePrice }) {
   const modal = document.getElementById("productModal");
   if (!modal) return;
@@ -1297,6 +1260,7 @@ function openProductModal({ title, desc, img, category, price, hidePrice }) {
   function onClick(e) {
     if (e.target.closest("[data-close='1']")) close();
   }
+
   function onKey(e) {
     if (e.key === "Escape") close();
   }
@@ -1414,7 +1378,7 @@ function hidePublicationsPillIfNotProjects() {
   await setupFooterWhatsApp();
 
   window.addEventListener("resize", () => {
-    if ($("#featuredGrid")) renderFeatured(1);
+    if ($("#featuredGrid")) renderFeatured(currentFeaturedPage);
   });
 
   setupReveal();
