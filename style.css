@@ -7418,21 +7418,8 @@ h3{
 .pmodal-title{
   font-size: 22px;
 }
-.process-card h3{
-  font-size: clamp(18px, 1.8vw, 28px);
-  line-height: 1.15;
-  margin: 16px 0 8px;
-}
-
-.process-card p{
-  font-size: 15px;
-  line-height: 1.35;
-}
+.process-card h3,
 .process-card .h-font{
-  font-size: 20px;
-  line-height: 1.2;
-}
-
-.process-card p{
-  font-size: 13px;
+  font-size: 18px !important;
+  line-height: 1.2 !important;
 }
