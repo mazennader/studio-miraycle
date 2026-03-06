@@ -25,23 +25,21 @@
     const a = e.target.closest("a");
     if (!a) return;
 
-    const href = a.getAttribute("href") || "";
-    const target = a.getAttribute("target");
-
+    const href = a.getAttribute("href");
     if (!href) return;
 
     if (
-      target === "_blank" ||
+      a.target === "_blank" ||
       href.startsWith("#") ||
+      href.startsWith("http") ||
       href.startsWith("mailto:") ||
       href.startsWith("tel:") ||
       href.startsWith("javascript:")
-    ) return;
+    )
+      return;
 
-    const current = window.location.pathname.split("/").pop();
-    const dest = href.split("/").pop();
-
-    if (current === dest) return;
+    const current = (window.location.pathname.split("/").pop() || "").toLowerCase();
+    if (href.toLowerCase() === current) return;
 
     showLoader();
   });
@@ -67,14 +65,34 @@
     document.documentElement.classList.remove("page-ready");
   }
 
+  // Ensure it starts visible (in case cached navigation)
   showLoader();
 
+  // Hide when DOM is ready (fast)
   document.addEventListener("DOMContentLoaded", hideLoader);
 
+  // Extra safety: hide even if something fails
   window.addEventListener("load", hideLoader);
   window.addEventListener("error", hideLoader);
   window.addEventListener("unhandledrejection", hideLoader);
   setTimeout(hideLoader, 1500);
+
+  // Optional: show loader on internal link navigation
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+
+    const href = a.getAttribute("href") || "";
+    const target = a.getAttribute("target");
+
+    // ignore: new tab, downloads, hashes, external links
+    if (target === "_blank") return;
+    if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
+    if (href.startsWith("http") && !href.includes(location.host)) return;
+
+    // if it's a normal page navigation, show loader
+    showLoader();
+  });
 })();
 
 /* ===========================
@@ -87,10 +105,16 @@ const $$ = (s) => document.querySelectorAll(s);
 
 /* ===========================
    ✅ CURRENCY SWITCHER (SAFE)
+   - Base is USD
+   - Converts displayed .price elements
+   - Stores original USD in data-usd (one time)
+   - ✅ Order: USD, GBP, EUR, AED, LBP
+   - ✅ Always defaults to USD on reload (no localStorage saving)
 =========================== */
 const CURRENCY = {
   list: ["USD", "GBP", "EUR", "AED", "LBP"],
 
+  // 1 USD = rate
   rates: {
     USD: 1,
     GBP: 0.79,
@@ -118,12 +142,14 @@ const CURRENCY = {
   key: "site_currency",
 };
 
+/* ✅ Always USD on reload */
 function getCurrency() {
   return "USD";
 }
 
+/* ✅ Keep function to not break code, but do NOT persist */
 function setCurrency(c) {
-  // no-op
+  // no-op (intentionally not saving)
 }
 
 function formatNumber(n, decimals) {
@@ -131,9 +157,14 @@ function formatNumber(n, decimals) {
   return fixed.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+/**
+ * Convert ALL .price elements on the page
+ * - If element has data-usd, use it
+ * - Else try to parse its current text and save as data-usd once
+ */
 function applyCurrencyToDOM(root = document) {
   const select = document.getElementById("currencySelect");
-  const currency = select && CURRENCY.list.includes(select.value) ? select.value : "USD";
+  const currency = (select && CURRENCY.list.includes(select.value)) ? select.value : "USD";
 
   const rate = CURRENCY.rates[currency] || 1;
   const symbol = CURRENCY.symbols[currency] || "";
@@ -163,6 +194,7 @@ function applyCurrencyToDOM(root = document) {
   if (select && select.value !== currency) select.value = currency;
 }
 
+/* ✅ Dropdown handler (safe) */
 function ensureCurrencyDropdown() {
   const select = document.getElementById("currencySelect");
   if (!select) return;
@@ -175,13 +207,17 @@ function ensureCurrencyDropdown() {
   });
 }
 
+/* ===========================
+   ✅ Updated money() helper
+   - Keeps USD base output
+=========================== */
 function money(n) {
   const v = Number(n || 0);
   return `$${v.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 }
 
 /* ===========================
-   MOBILE MENU (DRAWER)
+   MOBILE MENU (DRAWER) - FIXED (NO DUPES / NO CRASH)
 =========================== */
 function setupMobileMenu() {
   const toggle = $("#navToggle");
@@ -204,6 +240,7 @@ function setupMobileMenu() {
     document.body.style.overflow = "";
   }
 
+  // ✅ Build the mobile links ONCE (safe)
   document.addEventListener("DOMContentLoaded", () => {
     const mobileLinks = document.getElementById("mobileNavLinks");
     if (!mobileLinks) return;
@@ -253,12 +290,14 @@ function setupMobileMenu() {
       </div>
     `;
 
+    // Active highlight
     mobileLinks.querySelectorAll("a").forEach((a) => {
       const href = (a.getAttribute("href") || "").toLowerCase();
       const file = href.split("/").pop();
       if (file === currentPath) a.classList.add("is-active");
     });
 
+    // Dropdown toggle
     const dd = mobileLinks.querySelector(".mnav-dd");
     const ddBtn = mobileLinks.querySelector(".mnav-dd-btn");
 
@@ -274,6 +313,7 @@ function setupMobileMenu() {
       setOpen(!dd.classList.contains("is-open"));
     });
 
+    // click outside closes dropdown (only when drawer open)
     document.addEventListener("click", (e) => {
       if (!drawer.classList.contains("is-open")) return;
       if (ddBtn && ddBtn.contains(e.target)) return;
@@ -281,24 +321,29 @@ function setupMobileMenu() {
       setOpen(false);
     });
 
+    // if active link is inside collections -> open dropdown automatically
     const activeInside = dd?.querySelector("a.is-active");
     if (activeInside) setOpen(true);
   });
 
+  // Toggle drawer
   toggle.addEventListener("click", () => {
     const open = drawer.classList.contains("is-open");
     open ? closeMenu() : openMenu();
   });
 
+  // Close when clicking backdrop / X
   drawer.addEventListener("click", (e) => {
     const close = e.target.closest("[data-close='1']");
     if (close) closeMenu();
   });
 
+  // ESC closes
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeMenu();
   });
 
+  // Clicking a link closes drawer
   if (linksWrap) {
     linksWrap.addEventListener("click", (e) => {
       const a = e.target.closest("a");
@@ -307,6 +352,7 @@ function setupMobileMenu() {
     });
   }
 
+  // Leaving mobile width closes drawer
   window.addEventListener("resize", () => {
     if (window.innerWidth > 900) closeMenu();
   });
@@ -315,11 +361,15 @@ function setupMobileMenu() {
 /* ===========================
    FETCH JSON (NO CACHE)
 =========================== */
+/* ===========================
+   FETCH JSON (NO CACHE)
+=========================== */
 async function fetchJSON(path, opts = {}) {
   const url = `${API_BASE}${path}${path.includes("?") ? "&" : "?"}_=${Date.now()}`;
 
   const method = (opts.method || "GET").toUpperCase();
 
+  // ✅ Only add Content-Type when NOT GET/HEAD
   const headers = { ...(opts.headers || {}) };
   if (method !== "GET" && method !== "HEAD") {
     headers["Content-Type"] = "application/json";
@@ -348,6 +398,7 @@ async function fetchJSON(path, opts = {}) {
 
 /* ===========================
    CART (sessionStorage)
+   ✅ Clears when tab/browser is closed
 =========================== */
 function getCart() {
   return JSON.parse(sessionStorage.getItem("artisan_cart") || "[]");
@@ -462,29 +513,17 @@ function isPhone() {
   return window.matchMedia("(max-width: 620px)").matches;
 }
 
+/* ✅ NEW: scroll to products top when changing page */
 function scrollToProducts() {
   const grid = document.getElementById("featuredGrid");
   if (!grid) return;
 
-  grid.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-}
+  const y = grid.getBoundingClientRect().top + window.pageYOffset - 80;
 
-function preloadImages(urls = []) {
-  const clean = [...new Set(urls.filter(Boolean))];
-  return Promise.all(
-    clean.map(
-      (url) =>
-        new Promise((resolve) => {
-          const img = new Image();
-          img.onload = resolve;
-          img.onerror = resolve;
-          img.src = url;
-        })
-    )
-  );
+  window.scrollTo({
+    top: y,
+    behavior: "smooth",
+  });
 }
 
 /* ===========================
@@ -568,7 +607,7 @@ function buildPager(mount, page, pages, onChange) {
 }
 
 /* ===========================
-   RENDER PRODUCTS
+   RENDER PRODUCTS (DESKTOP ALL, PHONE PAGED)
 =========================== */
 function normCat(x) {
   return String(x || "").trim().toLowerCase();
@@ -647,9 +686,7 @@ function makeProductCard(p) {
   pimg.style.backgroundColor = "rgba(0,0,0,.05)";
   pimg.style.backgroundSize = "cover";
   pimg.style.backgroundPosition = "center";
-  if (p.img) {
-    pimg.style.backgroundImage = `url('${p.img}')`;
-  }
+  setBgLazy(pimg, p.img || "");
 
   if (!interiorMode) {
     let qty = 1;
@@ -697,6 +734,7 @@ function makeProductCard(p) {
     }
   }
 
+  // ✅ Click card opens modal (but buttons still work)
   card.addEventListener("click", (e) => {
     if (e.target.closest("button") || e.target.closest("a")) return;
 
@@ -711,6 +749,7 @@ function makeProductCard(p) {
     });
   });
 
+  observeReveal(card);
   return card;
 }
 
@@ -756,8 +795,6 @@ async function renderFeatured(page = 1) {
   const start = (safePage - 1) * perPage;
   const end = start + perPage;
   const visible = list.slice(start, end);
-
-  await preloadImages(visible.map((p) => p.img));
 
   const CHUNK = 12;
   for (let i = 0; i < visible.length; i += CHUNK) {
@@ -902,7 +939,7 @@ Phone:`;
 }
 
 /* ===========================
-   PUBLICATIONS PANEL
+   PUBLICATIONS PANEL (RIGHT SIDE)
 =========================== */
 let __pubFilter = "";
 
@@ -962,7 +999,7 @@ function buildPublicationsPanel(projects) {
     if (!item) return;
 
     const pub = item.dataset.pub || "";
-    __pubFilter = __pubFilter === pub ? "" : pub;
+    __pubFilter = (__pubFilter === pub) ? "" : pub;
 
     const activeBtn = document.querySelector("#filterPills .pill-btn.is-active");
     renderProjects(activeBtn?.dataset?.filter || "all");
@@ -970,7 +1007,7 @@ function buildPublicationsPanel(projects) {
 }
 
 /* ===========================
-   OUR PROJECTS
+   OUR PROJECTS (FILTER + GRID)
 =========================== */
 async function renderProjects(filter) {
   const grid = $("#projectsGrid");
@@ -1032,8 +1069,11 @@ async function renderProjects(filter) {
   });
 
   grid.appendChild(frag);
+
+  setupReveal();
 }
 
+/* ✅ Click projects to open modal */
 function setupProjectClicks() {
   const grid = $("#projectsGrid");
   if (!grid) return;
@@ -1053,9 +1093,7 @@ function setupProjectClicks() {
   });
 }
 
-/* ===========================
-   PROJECT MODAL
-=========================== */
+/* ✅ MODAL (FIXED: closes correctly + no aria-hidden focus warning) */
 function openProjectModal({ title, desc, img, category, publications, pdfUrl }) {
   const modal = document.getElementById("projectModal");
   if (!modal) return;
@@ -1071,6 +1109,7 @@ function openProjectModal({ title, desc, img, category, publications, pdfUrl }) 
   if (descEl) descEl.textContent = desc || "";
   if (catEl) catEl.textContent = (category || "PROJECT").toUpperCase();
 
+  // Publications / PDF
   const pubsWrap = document.getElementById("pmodalPubs");
   const pubsText = document.getElementById("pmodalPubsText");
   const pdfBtn = document.getElementById("pmodalPdfBtn");
@@ -1212,9 +1251,6 @@ function setupNavDropdown() {
   });
 }
 
-/* ===========================
-   PRODUCT MODAL
-=========================== */
 function openProductModal({ title, desc, img, category, price, hidePrice }) {
   const modal = document.getElementById("productModal");
   if (!modal) return;
@@ -1263,7 +1299,6 @@ function openProductModal({ title, desc, img, category, price, hidePrice }) {
   function onClick(e) {
     if (e.target.closest("[data-close='1']")) close();
   }
-
   function onKey(e) {
     if (e.key === "Escape") close();
   }
@@ -1384,5 +1419,6 @@ function hidePublicationsPillIfNotProjects() {
     if ($("#featuredGrid")) renderFeatured(currentFeaturedPage);
   });
 
+  setupReveal();
   setupNavDropdown();
 })();
