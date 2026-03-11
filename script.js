@@ -614,12 +614,14 @@ function normCat(x) {
 }
 
 function isInteriorDesign(cat) {
-  return normCat(cat) === "interior design";
+  const c = normCat(cat);
+  return c === "interior design" || c === "art restoration";
 }
 
 function isInteriorPage() {
   const grid = document.getElementById("featuredGrid");
-  return normCat(grid?.dataset?.category) === "interior design";
+  const c = normCat(grid?.dataset?.category);
+  return c === "interior design" || c === "art restoration";
 }
 
 function makeProductCard(p) {
