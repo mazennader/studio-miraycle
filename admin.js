@@ -80,7 +80,8 @@ let CURRENT_IMAGE_URL = "";
    HELPERS
 =========================== */
 function isInterior(cat) {
-  return String(cat).trim().toLowerCase() === "interior design";
+  const c = String(cat).trim().toLowerCase();
+  return c === "interior design" || c === "art restoration";
 }
 
 function isPublicationSelected() {
