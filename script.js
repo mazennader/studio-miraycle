@@ -1018,16 +1018,14 @@ async function renderProjects(filter) {
   if (!grid) return;
 
   const map = {
-    all: null,
     interior: "Interior Design",
     glass: "Stained Glass",
     painting: "Painting",
     ceramic: "Ceramic Art",
     publications: "Publications",
   };
-
+  
   const cat = map[filter] ?? null;
-
   let list = [];
   try {
     list = await getProjects();
@@ -1037,7 +1035,9 @@ async function renderProjects(filter) {
     return;
   }
 
-  if (cat) {
+  if (filter === "all") {
+    list = list.filter((p) => normCat(p.category || p.cat) !== "publications");
+  } else if (cat) {
     const want = normCat(cat);
     list = list.filter((p) => normCat(p.category || p.cat) === want);
   }
